@@ -1,0 +1,62 @@
+.section {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
+  padding: 24px 24px 22px;
+  border: 1px solid var(--border-subtle);
+}
+
+.title {
+  margin: 0 0 14px;
+  font-size: 1.35rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 60%),
+    #020617;
+  padding: 10px 14px 10px;
+}
+
+.mainLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.institution {
+  font-weight: 500;
+}
+
+.period {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.degree {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 0.93rem;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 20px 18px 18px;
+  }
+
+  .mainLine {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
