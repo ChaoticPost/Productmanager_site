@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Header from '../Header/Header';
+import BottomNav from '../BottomNav/BottomNav';
 import Footer from '../Footer/Footer';
 import { SectionId } from '../../types/sections';
 import styles from './Layout.module.css';
@@ -19,9 +19,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className={styles.layout}>
-      <Header onNavigate={handleNavigate} />
       <main className={styles.main}>{children}</main>
       <Footer />
+      <BottomNav onNavigate={handleNavigate} />
     </div>
   );
 };

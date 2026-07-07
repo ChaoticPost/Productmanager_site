@@ -9,7 +9,7 @@
   max-width: 1120px;
   width: 100%;
   margin: 0 auto;
-  padding: 96px 24px 40px;
+  padding: 48px 24px 120px;
   gap: var(--section-spacing);
   display: flex;
   flex-direction: column;

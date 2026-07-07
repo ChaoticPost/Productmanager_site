@@ -10,6 +10,7 @@
   --border-subtle: rgba(148, 163, 184, 0.35);
   --radius-lg: 18px;
   --radius-pill: 999px;
+  --nav-bar-bg: #e3644e;
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
   --section-spacing: 4.5rem;
 }
@@ -37,7 +38,8 @@ main {
 }
 
 section {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 32px;
+  scroll-margin-bottom: 120px;
 }
 
 a {
