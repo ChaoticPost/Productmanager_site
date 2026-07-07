@@ -35,8 +35,19 @@ const projectPreviews = [
   { id: 'job-portal', title: 'Job Portal' },
 ];
 
-const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Open' }) => (
-  <button type="button" className={styles.arrowButton} onClick={onClick} aria-label={label}>
+const ArrowButton: React.FC<{
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  label?: string;
+}> = ({ onClick, label = 'Open' }) => (
+  <button
+    type="button"
+    className={styles.arrowButton}
+    onClick={(event) => {
+      event.stopPropagation();
+      onClick?.(event);
+    }}
+    aria-label={label}
+  >
     <HugeIcon icon={ArrowUpRight01Icon} size={15} />
   </button>
 );
@@ -116,7 +127,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
         <div className={`${styles.grid} ${isMobile ? styles.gridMobile : ''}`}>
         <article className={`${styles.tile} ${styles.hero}`}>
           <h1 className={styles.heroTitle}>
-            Hi, I&apos;m <span className={styles.heroName}>Daria</span>
+            Hi, I&apos;m <span className={styles.heroName}>Tamer</span>
             <span className={styles.heroDash}> ⎯</span>
           </h1>
           <p className={styles.heroSubtitle}>
@@ -160,19 +171,19 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
 
         <article
           className={`${styles.tile} ${styles.about}`}
-          onClick={() => navigate('job')}
+          onClick={() => navigate('about')}
           role="button"
           tabIndex={0}
           onKeyDown={(event) => {
             if (event.key === 'Enter' || event.key === ' ') {
               event.preventDefault();
-              navigate('job');
+              navigate('about');
             }
           }}
         >
           <p className={styles.tileEyebrow}>{copy.aboutEyebrow}</p>
           <p className={styles.aboutText}>{copy.aboutText}</p>
-          <ArrowButton onClick={() => navigate('job')} label="Go to about" />
+          <ArrowButton onClick={() => navigate('about')} label="Go to about" />
         </article>
 
         <button

@@ -13,14 +13,15 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) => {
-  const isHome = currentView === 'intro';
+  const isBentoView = currentView === 'intro' || currentView === 'about';
+  const showBack = currentView !== 'intro';
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
 
   useEffect(() => {
-    if (!isHome) {
+    if (!isBentoView) {
       document.body.style.overflow = '';
       return;
     }
@@ -38,19 +39,19 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) =>
       media.removeEventListener('change', updateOverflow);
       document.body.style.overflow = '';
     };
-  }, [isHome]);
+  }, [isBentoView]);
 
   return (
-    <div className={`${styles.layout} ${isHome ? styles.layoutHome : ''}`}>
-      {isHome && <DotCursor />}
-      {!isHome && (
+    <div className={`${styles.layout} ${isBentoView ? styles.layoutHome : ''}`}>
+      {currentView === 'intro' && <DotCursor />}
+      {showBack && (
         <button type="button" className={styles.backButton} onClick={() => onNavigate('intro')}>
           <HugeIcon icon={ArrowLeft01Icon} size={16} />
           Home
         </button>
       )}
-      <main className={`${styles.main} ${isHome ? styles.mainHome : ''}`}>{children}</main>
-      {!isHome && <Footer />}
+      <main className={`${styles.main} ${isBentoView ? styles.mainHome : ''}`}>{children}</main>
+      {!isBentoView && <Footer />}
     </div>
   );
 };

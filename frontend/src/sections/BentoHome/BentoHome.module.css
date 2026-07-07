@@ -26,7 +26,7 @@
   width: 100%;
   height: 100%;
   gap: var(--bento-gap);
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.06fr) minmax(0, 1.06fr) minmax(0, 1.32fr) minmax(0, 0.98fr);
   grid-template-rows: minmax(0, 0.82fr) minmax(0, 1.22fr) minmax(0, 0.88fr);
   grid-template-areas:
     'hero hero project1 project2 socials'
@@ -170,11 +170,13 @@ button.tile {
 .photo {
   grid-area: photo;
   padding: 0;
-  width: 100%;
   height: 100%;
-  min-height: 0;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 3 / 4;
+  justify-self: start;
   align-self: stretch;
-  justify-self: stretch;
+  background: transparent;
 }
 
 .photoImage {
@@ -183,6 +185,7 @@ button.tile {
   object-fit: cover;
   object-position: center top;
   display: block;
+  border-radius: inherit;
 }
 
 /* About */
@@ -191,9 +194,9 @@ button.tile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 28px 32px;
-  cursor: pointer;
+  height: 100%;
   min-height: 0;
+  cursor: pointer;
 }
 
 .tileEyebrow {
@@ -212,16 +215,15 @@ button.tile {
   letter-spacing: -0.02em;
   font-weight: 500;
   color: var(--bento-text-main);
-  max-width: 22ch;
+  max-width: 17ch;
 }
 
 /* Laptop */
 .laptop {
   grid-area: laptop;
   padding: 0;
-  width: 100%;
   height: 100%;
-  min-height: 0;
+  align-self: stretch;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -240,7 +242,7 @@ button.tile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 28px 24px;
+  height: 100%;
   min-height: 0;
 }
 
@@ -251,7 +253,7 @@ button.tile {
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--bento-text-main);
-  max-width: 11ch;
+  max-width: 13ch;
 }
 
 /* Newsletter */
@@ -585,12 +587,18 @@ button.tile {
 }
 
 .gridMobile .photo {
-  width: 100%;
+  grid-area: photo;
+  width: 52%;
+  height: auto;
   max-height: none;
-  min-height: 280px;
-  aspect-ratio: 3 / 4;
+  min-height: 0;
   padding: 0;
-  justify-self: stretch;
+  justify-self: center;
+}
+
+.gridMobile .about {
+  grid-area: about;
+  height: auto;
 }
 
 .gridMobile .heroTitle {
