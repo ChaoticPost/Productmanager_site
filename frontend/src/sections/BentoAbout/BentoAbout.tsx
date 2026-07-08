@@ -4,6 +4,7 @@ import {
   ArrowLeft01Icon,
   ArrowRight01Icon,
   Copy01Icon,
+  Download01Icon,
   aboutStackIconMap,
 } from '../../components/icons/iconMap';
 import { Lang } from '../BentoHome/bentoCopy';
@@ -183,8 +184,22 @@ const BentoAbout: React.FC = () => {
               <span className={styles.copyButtonIcon} aria-hidden="true">
                 <HugeIcon icon={Copy01Icon} size={16} />
               </span>
-              <span>{emailCopied ? copy.copied : copy.copyEmail}</span>
+              <span className={styles.copyButtonLabel}>{emailCopied ? copy.copied : copy.copyEmail}</span>
             </button>
+          </article>
+
+          <article className={`${styles.tile} ${styles.download}`}>
+            <h3 className={styles.downloadTitle}>{copy.downloadTitle}</h3>
+            <a
+              href="/resume.pdf"
+              download={copy.downloadFileName}
+              className={styles.downloadButton}
+            >
+              <span className={styles.downloadButtonIcon} aria-hidden="true">
+                <HugeIcon icon={Download01Icon} size={16} />
+              </span>
+              <span className={styles.downloadButtonLabel}>{copy.downloadPdf}</span>
+            </a>
           </article>
         </div>
       </div>

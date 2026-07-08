@@ -167,19 +167,19 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
 
         <article
           className={`${styles.tile} ${styles.about}`}
-          onClick={() => navigate('job')}
+          onClick={() => navigate('about')}
           role="button"
           tabIndex={0}
           onKeyDown={(event) => {
             if (event.key === 'Enter' || event.key === ' ') {
               event.preventDefault();
-              navigate('job');
+              navigate('about');
             }
           }}
         >
           <p className={styles.tileEyebrow}>{copy.aboutEyebrow}</p>
           <p className={styles.aboutText}>{copy.aboutText}</p>
-          <ArrowButton onClick={() => navigate('job')} label="Go to about" />
+          <ArrowButton onClick={() => navigate('about')} label="Go to about" />
         </article>
 
         <button
@@ -200,7 +200,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
         <article className={`${styles.tile} ${styles.resources}`}>
           <p className={styles.tileEyebrow}>{copy.resourcesEyebrow}</p>
           <p className={styles.resourcesText}>{copy.resourcesText}</p>
-          <ArrowButton onClick={() => navigate('education')} label="Go to resources" />
+          <ArrowButton onClick={() => navigate('resources')} label="Go to resources" />
         </article>
 
         <article className={`${styles.tile} ${styles.newsletter}`}>

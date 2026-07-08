@@ -14,14 +14,24 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) => {
   const isBentoView = currentView === 'intro' || currentView === 'about';
+  const isResourcesFlow = currentView === 'resources' || currentView === 'resource-detail';
+  const isFullBleedView = isBentoView || isResourcesFlow;
+  const showDotCursor = isBentoView || isResourcesFlow;
   const showBack = currentView !== 'intro';
+  const backTarget: SectionId = currentView === 'resource-detail' ? 'resources' : 'intro';
+  const backLabel = currentView === 'resource-detail' ? 'Resources' : 'Home';
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
 
   useEffect(() => {
-    if (!isBentoView) {
+    if (!isFullBleedView) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    if (isResourcesFlow) {
       document.body.style.overflow = '';
       return;
     }
@@ -39,19 +49,29 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) =>
       media.removeEventListener('change', updateOverflow);
       document.body.style.overflow = '';
     };
-  }, [isBentoView]);
+  }, [isFullBleedView, isResourcesFlow]);
 
   return (
-    <div className={`${styles.layout} ${isBentoView ? styles.layoutHome : ''}`}>
-      {currentView === 'intro' && <DotCursor />}
+    <div
+      className={`${styles.layout} ${isFullBleedView ? styles.layoutHome : ''} ${
+        isResourcesFlow ? styles.layoutResources : ''
+      }`}
+    >
+      {showDotCursor && <DotCursor />}
       {showBack && (
-        <button type="button" className={styles.backButton} onClick={() => onNavigate('intro')}>
+        <button type="button" className={styles.backButton} onClick={() => onNavigate(backTarget)}>
           <HugeIcon icon={ArrowLeft01Icon} size={16} />
-          Home
+          {backLabel}
         </button>
       )}
-      <main className={`${styles.main} ${isBentoView ? styles.mainHome : ''}`}>{children}</main>
-      {!isBentoView && <Footer />}
+      <main
+        className={`${styles.main} ${isFullBleedView ? styles.mainHome : ''} ${
+          isResourcesFlow ? styles.mainResources : ''
+        }`}
+      >
+        {children}
+      </main>
+      {!isFullBleedView && <Footer />}
     </div>
   );
 };

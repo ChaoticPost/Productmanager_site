@@ -27,6 +27,9 @@ export const aboutCopy: Record<
     contactTitle: string;
     copyEmail: string;
     copied: string;
+    downloadTitle: string;
+    downloadPdf: string;
+    downloadFileName: string;
     galleryPrev: string;
     galleryNext: string;
   }
@@ -35,7 +38,7 @@ export const aboutCopy: Record<
     pageTitle: 'Кто я?',
     myStory: 'Моя история',
     storyText:
-      'Я вырос в Каире, Египет, и с детства увлекался искусством. Позже меня затянуло в веб-дизайн, а затем в UX и продуктовый дизайн.',
+      'Я родилась и выросла в Каире, Египет. С детства меня увлекало искусство и дизайн — яркие цвета и детали вокруг вдохновляли меня. Позже я ушла в веб-дизайн, а затем глубже погрузилась в UX и продуктовый дизайн.',
     whatIDoNow: 'Чем занимаюсь сейчас',
     whatIDoNowText: 'Сейчас я Design Lead в',
     companyName: 'mano',
@@ -43,7 +46,7 @@ export const aboutCopy: Record<
     skills: [
       {
         title: 'Digital Design',
-        text: 'Простые методы для решения задач и создания сильных решений для вашего бренда.',
+        text: 'Инновационные методы решения задач и сильные решения для лучшего пользовательского опыта.',
       },
       {
         title: 'Product Strategy',
@@ -68,6 +71,9 @@ export const aboutCopy: Record<
     contactTitle: 'Есть проект?',
     copyEmail: 'Скопировать email',
     copied: 'Скопировано!',
+    downloadTitle: 'Резюме',
+    downloadPdf: 'Скачать PDF',
+    downloadFileName: 'resume.pdf',
     galleryPrev: 'Предыдущее фото',
     galleryNext: 'Следующее фото',
   },
@@ -75,7 +81,7 @@ export const aboutCopy: Record<
     pageTitle: "What I'm about?",
     myStory: 'My story',
     storyText:
-      'I grew up in Cairo, Egypt, and have been passionate about art since childhood. Later, I got into web design, then UX and product design.',
+      'I was born and raised in Cairo, Egypt. Ever since I was a child, I have had a passion for art and design. I was captivated by the vibrant colors and intricate details of the things around me, which inspired me to learn web design, where I delved deeper into the world of UX and product design.',
     whatIDoNow: 'What I do now',
     whatIDoNowText: "Today I'm a Design Lead at",
     companyName: 'mano',
@@ -83,7 +89,7 @@ export const aboutCopy: Record<
     skills: [
       {
         title: 'Digital Design',
-        text: 'Providing straightforward methods to solve problems and build impactful solutions for your brand.',
+        text: 'Providing innovative problem-solving methods and impactful solutions to ensure a better experience.',
       },
       {
         title: 'Product Strategy',
@@ -108,6 +114,9 @@ export const aboutCopy: Record<
     contactTitle: 'Have a project in mind?',
     copyEmail: 'Copy email',
     copied: 'Copied!',
+    downloadTitle: 'Resume',
+    downloadPdf: 'Download PDF',
+    downloadFileName: 'resume.pdf',
     galleryPrev: 'Previous photo',
     galleryNext: 'Next photo',
   },

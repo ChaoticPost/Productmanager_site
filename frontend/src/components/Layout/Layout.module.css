@@ -75,6 +75,16 @@
   opacity: 0.85;
 }
 
+.mainResources {
+  overflow-y: auto;
+  height: 100%;
+  padding-top: max(56px, env(safe-area-inset-top, 0px));
+}
+
+.layoutResources {
+  overflow: hidden;
+}
+
 @media (max-width: 639px) {
   .layoutHome {
     height: auto;

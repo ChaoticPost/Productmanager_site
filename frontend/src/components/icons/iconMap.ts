@@ -8,6 +8,7 @@ import {
   Mail01Icon,
   ArrowUpRight01Icon,
   Copy01Icon,
+  Download01Icon,
   Moon02Icon,
   Sun02Icon,
   ArrowLeft01Icon,
@@ -20,6 +21,7 @@ import {
   SlackIcon,
   ChatGptIcon,
   ArrowRight01Icon,
+  Tick01Icon,
 } from '@hugeicons/core-free-icons';
 
 export const socialIconMap: Record<string, IconSvgElement> = {
@@ -37,20 +39,21 @@ export const stackIconMap = [
 ] as const;
 
 export const aboutStackIconMap = [
-  { id: 'framer', label: 'Framer', icon: FramerIcon },
-  { id: 'notion', label: 'Notion', icon: Notion01Icon },
-  { id: 'todoist', label: 'Todoist', icon: Task01Icon },
   { id: 'arc', label: 'Arc Browser', icon: ArcBrowserIcon },
   { id: 'slack', label: 'Slack', icon: SlackIcon },
   { id: 'chatgpt', label: 'ChatGPT', icon: ChatGptIcon },
+  { id: 'framer', label: 'Framer', icon: FramerIcon },
+  { id: 'figma', label: 'Figma', icon: FigmaIcon },
 ] as const;
 
 export {
   ArrowUpRight01Icon,
   Copy01Icon,
+  Download01Icon,
   Moon02Icon,
   Sun02Icon,
   ArrowLeft01Icon,
   ArrowRight01Icon,
+  Tick01Icon,
   Home01Icon,
 };

@@ -28,11 +28,12 @@
   height: 100%;
   gap: var(--bento-gap);
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr) minmax(0, 0.95fr);
-  grid-template-rows: minmax(0, 1fr) minmax(0, 0.72fr) minmax(0, 0.88fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 0.72fr) minmax(0, 0.46fr) minmax(0, 0.46fr);
   grid-template-areas:
     'story story skills'
     'story story stack'
-    'experience gallery contact';
+    'experience gallery contact'
+    'experience gallery download';
 }
 
 .tile {
@@ -201,7 +202,7 @@
 
 .experienceItem {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, max-content) 1fr auto;
   align-items: center;
   gap: 12px;
 }
@@ -211,9 +212,6 @@
   line-height: 1.4;
   color: var(--bento-text-main);
   font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .experienceLine {
@@ -283,6 +281,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   gap: 14px;
 }
 
@@ -291,15 +290,16 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1.35;
+  color: var(--bento-text-main);
   letter-spacing: -0.01em;
 }
 
 .copyButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 8px;
-  width: 100%;
+  width: fit-content;
   height: 48px;
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
@@ -309,6 +309,8 @@
   font-size: 15px;
   font-weight: 500;
   line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
   transition: background-color 0.15s ease;
 }
@@ -326,6 +328,69 @@
   height: 16px;
 }
 
+.copyButtonLabel {
+  white-space: nowrap;
+  text-align: left;
+}
+
+.download {
+  grid-area: download;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.downloadTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--bento-text-main);
+  letter-spacing: -0.01em;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  height: 48px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 0 16px;
+  background: var(--bento-button-bg);
+  color: var(--bento-text-main);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.downloadButton:hover {
+  background: var(--bento-button-hover);
+}
+
+.downloadButtonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.downloadButtonLabel {
+  white-space: nowrap;
+  text-align: left;
+}
+
 .gridMobile {
   height: auto;
   grid-template-columns: minmax(0, 1fr);
@@ -336,7 +401,8 @@
     'stack'
     'experience'
     'gallery'
-    'contact';
+    'contact'
+    'download';
   gap: 12px;
 }
 
