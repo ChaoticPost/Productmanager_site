@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   min-height: 100%;
-  padding: 4px 8px 96px;
+  padding: 4px 8px 24px;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.02), transparent 38%),
     #0c0c0c;
@@ -109,51 +109,6 @@
   outline-offset: 2px;
 }
 
-.floatingActions {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.floatingPrimary,
-.floatingSecondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  padding: 12px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  text-decoration: none;
-  box-shadow: var(--shadow-soft);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  background: #ffffff;
-  color: #111111;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-}
-
-.framerMark {
-  font-size: 11px;
-  line-height: 1;
-  opacity: 0.8;
-}
-
-.floatingPrimary:hover,
-.floatingSecondary:hover,
-.floatingPrimary:focus-visible,
-.floatingSecondary:focus-visible {
-  opacity: 0.92;
-  transform: translateY(-1px);
-}
-
 @media (max-width: 900px) {
   .grid {
     gap: 20px;
@@ -162,23 +117,11 @@
 
 @media (max-width: 720px) {
   .section {
-    padding-bottom: 120px;
+    padding-bottom: 24px;
   }
 
   .grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 18px;
-  }
-
-  .floatingActions {
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
-    align-items: stretch;
-  }
-
-  .floatingPrimary,
-  .floatingSecondary {
-    justify-content: center;
   }
 }

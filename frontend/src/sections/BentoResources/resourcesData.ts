@@ -17,8 +17,6 @@ export const resourcesCopy: Record<
   Lang,
   {
     freeLabel: string;
-    getTemplate: string;
-    madeInFramer: string;
     getForFree: string;
     livePreview: string;
     backToResources: string;
@@ -28,8 +26,6 @@ export const resourcesCopy: Record<
 > = {
   ru: {
     freeLabel: 'Бесплатно',
-    getTemplate: 'Получить шаблон',
-    madeInFramer: 'Made in Framer',
     getForFree: 'Получить бесплатно',
     livePreview: 'Live preview',
     backToResources: 'Resources',
@@ -38,8 +34,6 @@ export const resourcesCopy: Record<
   },
   en: {
     freeLabel: 'Free',
-    getTemplate: 'Get this template',
-    madeInFramer: 'Made in Framer',
     getForFree: 'Get it for free',
     livePreview: 'Live preview',
     backToResources: 'Resources',

@@ -50,17 +50,6 @@ const BentoResources: React.FC<BentoResourcesProps> = ({ onOpenProject }) => {
         ))}
       </div>
 
-      <div className={styles.floatingActions}>
-        <button type="button" className={styles.floatingPrimary} onClick={() => onOpenProject('benbox')}>
-          {copy.getTemplate}
-        </button>
-        <a href="https://www.framer.com" className={styles.floatingSecondary} target="_blank" rel="noreferrer">
-          <span className={styles.framerMark} aria-hidden="true">
-            ◆
-          </span>
-          {copy.madeInFramer}
-        </a>
-      </div>
     </section>
   );
 };

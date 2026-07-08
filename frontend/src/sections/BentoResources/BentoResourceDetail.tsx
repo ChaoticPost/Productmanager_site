@@ -120,18 +120,6 @@ const BentoResourceDetail: React.FC<BentoResourceDetailProps> = ({ projectId, on
           </div>
         </article>
       </div>
-
-      <div className={styles.floatingActions}>
-        <a href={project.href} className={styles.floatingPrimary} target="_blank" rel="noreferrer">
-          {copy.getTemplate}
-        </a>
-        <a href="https://www.framer.com" className={styles.floatingSecondary} target="_blank" rel="noreferrer">
-          <span className={styles.framerMark} aria-hidden="true">
-            ◆
-          </span>
-          {copy.madeInFramer}
-        </a>
-      </div>
     </section>
   );
 };
