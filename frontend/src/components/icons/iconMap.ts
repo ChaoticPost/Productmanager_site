@@ -1,11 +1,11 @@
 import type { IconSvgElement } from '@hugeicons/react';
 import {
-  TelegramIcon,
-  GridIcon,
+  NewTwitterIcon,
   DribbbleIcon,
+  InstagramIcon,
   Linkedin01Icon,
   Behance02Icon,
-  Profile02Icon,
+  Mail01Icon,
   ArrowUpRight01Icon,
   Copy01Icon,
   Moon02Icon,
@@ -23,12 +23,12 @@ import {
 } from '@hugeicons/core-free-icons';
 
 export const socialIconMap: Record<string, IconSvgElement> = {
-  telegram: TelegramIcon,
-  setka: GridIcon,
+  x: NewTwitterIcon,
+  dribbble: DribbbleIcon,
+  instagram: InstagramIcon,
   linkedin: Linkedin01Icon,
   behance: Behance02Icon,
-  dribbble: DribbbleIcon,
-  dprofile: Profile02Icon,
+  mail: Mail01Icon,
 };
 
 export const stackIconMap = [

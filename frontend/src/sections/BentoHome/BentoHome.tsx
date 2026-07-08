@@ -19,12 +19,12 @@ interface BentoHomeProps {
 }
 
 const socialLinks = [
-  { id: 'telegram', label: 'Telegram', href: 'https://t.me/' },
-  { id: 'setka', label: 'Сетка', href: 'https://setka.ru' },
+  { id: 'x', label: 'X', href: 'https://x.com' },
+  { id: 'dribbble', label: 'Dribbble', href: 'https://dribbble.com' },
+  { id: 'instagram', label: 'Instagram', href: 'https://instagram.com' },
   { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com' },
   { id: 'behance', label: 'Behance', href: 'https://behance.net' },
-  { id: 'dribbble', label: 'Dribbble', href: 'https://dribbble.com' },
-  { id: 'dprofile', label: 'Dprofile', href: 'https://dprofile.me' },
+  { id: 'mail', label: 'Email', href: 'mailto:hello@example.com' },
 ];
 
 const stackTools = stackIconMap;
@@ -35,19 +35,8 @@ const projectPreviews = [
   { id: 'job-portal', title: 'Job Portal' },
 ];
 
-const ArrowButton: React.FC<{
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  label?: string;
-}> = ({ onClick, label = 'Open' }) => (
-  <button
-    type="button"
-    className={styles.arrowButton}
-    onClick={(event) => {
-      event.stopPropagation();
-      onClick?.(event);
-    }}
-    aria-label={label}
-  >
+const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Open' }) => (
+  <button type="button" className={styles.arrowButton} onClick={onClick} aria-label={label}>
     <HugeIcon icon={ArrowUpRight01Icon} size={15} />
   </button>
 );
@@ -127,7 +116,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
         <div className={`${styles.grid} ${isMobile ? styles.gridMobile : ''}`}>
         <article className={`${styles.tile} ${styles.hero}`}>
           <h1 className={styles.heroTitle}>
-            Hi, I&apos;m <span className={styles.heroName}>Tamer</span>
+            Hi, I&apos;m <span className={styles.heroName}>Daria</span>
             <span className={styles.heroDash}> ⎯</span>
           </h1>
           <p className={styles.heroSubtitle}>
@@ -146,7 +135,14 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
             style={{
               backgroundImage: `url(${index === 0 ? bentoImages.cashless : bentoImages.jobPortal})`,
             }}
-          />
+          >
+            <span className={styles.projectOverlay}>
+              <span className={styles.projectTitle}>{project.title}</span>
+              <span className={styles.projectArrow} aria-hidden="true">
+                →
+              </span>
+            </span>
+          </button>
         ))}
 
         <div className={`${styles.tile} ${styles.socials}`}>
@@ -154,8 +150,8 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
             <a
               key={link.id}
               href={link.href}
-              className={`${styles.socialLink} ${link.id === 'behance' ? styles.socialLinkAccent : ''}`}
-              data-cursor-accent={link.id === 'behance' ? 'true' : undefined}
+              className={styles.socialLink}
+              data-social={link.id}
               target="_blank"
               rel="noreferrer"
               aria-label={link.label}
@@ -171,19 +167,19 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
 
         <article
           className={`${styles.tile} ${styles.about}`}
-          onClick={() => navigate('about')}
+          onClick={() => navigate('job')}
           role="button"
           tabIndex={0}
           onKeyDown={(event) => {
             if (event.key === 'Enter' || event.key === ' ') {
               event.preventDefault();
-              navigate('about');
+              navigate('job');
             }
           }}
         >
           <p className={styles.tileEyebrow}>{copy.aboutEyebrow}</p>
           <p className={styles.aboutText}>{copy.aboutText}</p>
-          <ArrowButton onClick={() => navigate('about')} label="Go to about" />
+          <ArrowButton onClick={() => navigate('job')} label="Go to about" />
         </article>
 
         <button
@@ -192,7 +188,14 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
           onClick={() => navigate('work')}
           aria-label="BoostPro"
           style={{ backgroundImage: `url(${bentoImages.laptop})` }}
-        />
+        >
+          <span className={styles.laptopOverlay}>
+            <span className={styles.laptopTitle}>BoostPro</span>
+            <span className={styles.laptopArrow} aria-hidden="true">
+              →
+            </span>
+          </span>
+        </button>
 
         <article className={`${styles.tile} ${styles.resources}`}>
           <p className={styles.tileEyebrow}>{copy.resourcesEyebrow}</p>

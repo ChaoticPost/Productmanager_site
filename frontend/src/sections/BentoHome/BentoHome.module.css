@@ -26,7 +26,7 @@
   width: 100%;
   height: 100%;
   gap: var(--bento-gap);
-  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.06fr) minmax(0, 1.06fr) minmax(0, 1.32fr) minmax(0, 0.98fr);
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.22fr) minmax(0, 1.18fr) minmax(0, 1.08fr) minmax(0, 0.98fr);
   grid-template-rows: minmax(0, 0.82fr) minmax(0, 1.22fr) minmax(0, 0.88fr);
   grid-template-areas:
     'hero hero project1 project2 socials'
@@ -106,22 +106,71 @@ button.tile {
 }
 
 .project {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
   padding: 0;
+  cursor: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.cashless,
-.jobPortal,
-.projectMockup,
-.projectLabel,
-.projectTitle,
-.cashless::before,
-.cashless::after,
-.jobPortal::before,
-.jobPortal::after {
-  display: none;
+.project::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.03) 34%, rgba(0, 0, 0, 0.64) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.projectOverlay {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+.projectTitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.projectArrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.project:hover::before,
+.project:focus-visible::before {
+  opacity: 1;
+}
+
+.project:hover .projectOverlay,
+.project:focus-visible .projectOverlay {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Socials */
@@ -129,41 +178,87 @@ button.tile {
   grid-area: socials;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: auto;
-  gap: 5px;
-  padding: 5px;
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 8px;
+  padding: 8px;
   height: 100%;
   min-height: 0;
-  align-content: center;
+  align-content: stretch;
   background: var(--bento-tile-bg);
 }
 
 .socialLink {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: 14px;
-  background: var(--bento-social-cell);
-  color: var(--bento-text-main);
-  border: none;
-  transition: background-color 0.15s ease;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  background: #171717;
+  color: #d2d2d2;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.socialLink::after {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 8px;
+  bottom: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--social-hover, #ffffff) 55%, #ffffff 45%);
+  opacity: 0;
+  transform: scale(0.86);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
 }
 
 .socialLink svg {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .socialLink:hover,
 .socialLink:focus-visible {
-  background: #222222;
+  background: var(--social-hover, #2a2a2a);
+  border-color: transparent;
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
-.socialLinkAccent:hover,
-.socialLinkAccent:focus-visible {
-  background: #1769ff;
+.socialLink:hover::after,
+.socialLink:focus-visible::after {
+  opacity: 0.95;
+  transform: scale(1);
+}
+
+.socialLink[data-social='x'] {
+  --social-hover: #232323;
+}
+
+.socialLink[data-social='dribbble'] {
+  --social-hover: #ea4c89;
+}
+
+.socialLink[data-social='instagram'] {
+  --social-hover: #f56040;
+}
+
+.socialLink[data-social='linkedin'] {
+  --social-hover: #0a66c2;
+}
+
+.socialLink[data-social='behance'] {
+  --social-hover: #2f7cff;
+}
+
+.socialLink[data-social='mail'] {
+  --social-hover: #4ea4ff;
 }
 
 /* Photo */
@@ -221,19 +316,73 @@ button.tile {
 /* Laptop */
 .laptop {
   grid-area: laptop;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
   padding: 0;
   height: 100%;
   align-self: stretch;
+  cursor: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.laptopImage,
-.laptopLabel,
-.laptopImage::before,
-.laptopImage::after {
-  display: none;
+.laptop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.03) 34%, rgba(0, 0, 0, 0.64) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.laptopOverlay {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+.laptopTitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.laptopArrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.laptop:hover::before,
+.laptop:focus-visible::before {
+  opacity: 1;
+}
+
+.laptop:hover .laptopOverlay,
+.laptop:focus-visible .laptopOverlay {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Resources */
@@ -373,7 +522,7 @@ button.tile {
 
 /* Theme */
 .theme {
-  grid-area: theme;
+  grid-area: contact;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -476,7 +625,7 @@ button.tile {
 
 /* Contact */
 .contact {
-  grid-area: contact;
+  grid-area: theme;
   display: flex;
   flex-direction: column;
   justify-content: center;
