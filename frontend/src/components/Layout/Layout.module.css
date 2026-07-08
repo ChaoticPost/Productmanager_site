@@ -83,6 +83,17 @@
 
 .layoutResources {
   overflow: hidden;
+  cursor: none;
+}
+
+.layoutResources a,
+.layoutResources button,
+.layoutResources [role='button'],
+.layoutResources input,
+.layoutResources textarea,
+.layoutResources label,
+.layoutResources summary {
+  cursor: none;
 }
 
 @media (max-width: 639px) {

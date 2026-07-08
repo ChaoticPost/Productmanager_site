@@ -1,7 +1,7 @@
 .section {
   width: 100%;
-  height: 100%;
-  min-height: 0;
+  height: auto;
+  min-height: 100%;
   flex: 1;
 }
 
@@ -14,8 +14,21 @@
 .desktopWrap,
 .mobileWrap {
   width: 100%;
-  height: 100%;
-  min-height: 0;
+  height: auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--bento-gap);
+}
+
+.desktopWrap {
+  min-height: calc(100dvh - 24px);
+}
+
+.viewportGrid {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .mobileWrap {
@@ -25,15 +38,37 @@
 .grid {
   display: grid;
   width: 100%;
-  height: 100%;
   gap: var(--bento-gap);
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr) minmax(0, 0.95fr);
-  grid-template-rows: minmax(0, 1fr) minmax(0, 0.72fr) minmax(0, 0.46fr) minmax(0, 0.46fr);
-  grid-template-areas:
-    'story story skills'
-    'story story stack'
-    'experience gallery contact'
-    'experience gallery download';
+  align-items: start;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 0.95fr);
+  grid-template-rows: auto;
+  grid-template-areas: 'leftTrack rightTrack';
+}
+
+.leftTrack {
+  grid-area: leftTrack;
+  display: flex;
+  flex-direction: column;
+  gap: var(--bento-gap);
+}
+
+.middleSlot {
+  width: 100%;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 28px 32px;
+  flex-shrink: 0;
+}
+
+.rightTrack {
+  grid-area: rightTrack;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: var(--bento-gap);
 }
 
 .tile {
@@ -46,14 +81,6 @@
   padding: 32px;
   overflow: hidden;
   min-height: 0;
-}
-
-.story {
-  grid-area: story;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding: 28px 32px;
 }
 
 .pageTitle {
@@ -103,10 +130,10 @@
 }
 
 .skills {
-  grid-area: skills;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 0;
 }
 
 .skillTitle {
@@ -150,11 +177,11 @@
 }
 
 .stack {
-  grid-area: stack;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 14px;
+  min-height: 0;
 }
 
 .stackTitle {
@@ -185,10 +212,42 @@
 }
 
 .experience {
-  grid-area: experience;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
+}
+
+.middleRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--bento-gap);
+  width: 100%;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.middleRow .experience,
+.middleRow .personal {
+  box-sizing: border-box;
+  min-height: 100%;
+  height: 100%;
+  padding-block: 24px;
+  padding-inline: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.middleRow .musicCard {
+  margin-top: 0;
+  padding: 10px;
+}
+
+.middleRow .personalEyebrow,
+.middleRow .eyebrow {
+  margin: 0;
+  font-size: 12px;
 }
 
 .experienceList {
@@ -197,7 +256,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .experienceItem {
@@ -233,113 +292,105 @@
   white-space: nowrap;
 }
 
-.gallery {
-  grid-area: gallery;
-  padding: 0;
-  position: relative;
+.personal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.galleryImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: inherit;
+.personal .personalEyebrow {
+  margin-bottom: 0;
 }
 
-.galleryNav {
-  position: absolute;
-  inset: 0;
+.middleRow .personalText {
+  max-width: none;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.musicCard {
+  margin-top: 0;
+  border-radius: 16px;
+  padding: 12px 12px 10px;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 55%),
+    #121212;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.musicMain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.musicCover {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0c9fe2, #1f65ff);
+}
+
+.musicMeta {
+  min-width: 0;
+  flex: 1;
+}
+
+.musicTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.musicArtist {
+  margin: 3px 0 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--bento-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.musicFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
-  pointer-events: none;
+  gap: 10px;
+  min-width: 0;
 }
 
-.galleryButton {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background-color 0.15s ease;
-}
-
-.galleryButton:hover {
-  background: rgba(0, 0, 0, 0.62);
-}
-
-.contact {
-  grid-area: contact;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.contactTitle {
+.musicNote {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.35;
-  color: var(--bento-text-main);
-  letter-spacing: -0.01em;
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--bento-text-secondary);
+  min-width: 0;
 }
 
-.copyButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: fit-content;
-  height: 48px;
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 0 16px;
-  background: var(--bento-button-bg);
-  color: var(--bento-text-main);
-  font-size: 15px;
-  font-weight: 500;
+.musicLink {
+  font-size: 11px;
   line-height: 1;
+  color: var(--bento-text-muted);
   white-space: nowrap;
   flex-shrink: 0;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.copyButton:hover {
-  background: var(--bento-button-hover);
-}
-
-.copyButtonIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-}
-
-.copyButtonLabel {
-  white-space: nowrap;
-  text-align: left;
 }
 
 .download {
-  grid-area: download;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
+  min-height: 0;
+  padding: 28px 32px;
 }
 
 .downloadTitle {
@@ -399,11 +450,39 @@
     'story'
     'skills'
     'stack'
-    'experience'
-    'gallery'
-    'contact'
+    'middle'
     'download';
   gap: 12px;
+}
+
+.gridMobile .leftTrack,
+.gridMobile .rightTrack {
+  display: contents;
+}
+
+.gridMobile .middleSlot {
+  display: contents;
+  justify-content: unset;
+}
+
+.gridMobile .story {
+  grid-area: story;
+}
+
+.gridMobile .skills {
+  grid-area: skills;
+}
+
+.gridMobile .stack {
+  grid-area: stack;
+}
+
+.gridMobile .middleRow {
+  grid-area: middle;
+}
+
+.gridMobile .download {
+  grid-area: download;
 }
 
 .gridMobile .tile {
@@ -412,19 +491,254 @@
   min-height: 160px;
 }
 
+.gridMobile .middleRow {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.gridMobile .middleRow .experience,
+.gridMobile .middleRow .personal {
+  height: auto;
+  min-height: auto;
+}
+
 .gridMobile .story {
   min-height: auto;
 }
 
-.gridMobile .gallery {
-  min-height: 220px;
-  aspect-ratio: 1;
+.gridMobile .personal {
+  min-height: auto;
 }
 
 .gridMobile .skillText,
 .gridMobile .bodyText,
 .gridMobile .nowText {
   max-width: none;
+}
+
+.personalSection {
+  width: 100%;
+}
+
+.personalTile {
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  background: var(--bento-tile-bg);
+  border-radius: var(--bento-radius);
+  color: var(--bento-text-main);
+  text-align: left;
+}
+
+.personalEyebrow {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bento-text-muted);
+}
+
+.personalText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--bento-text-muted);
+}
+
+.photoStrip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 12px 8px 20px;
+}
+
+.personalPhotosTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  padding: 20px 12px 28px;
+  overflow: visible;
+}
+
+.photoFan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoItem {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(188px, 32%, 272px);
+  margin-left: -68px;
+}
+
+.photoItem:first-child {
+  margin-left: 0;
+}
+
+.photoItemInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  transition: transform 0.22s ease;
+}
+
+.photoCard {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  cursor: none;
+  transition: box-shadow 0.22s ease;
+}
+
+.photoItem:nth-child(1) .photoItemInner {
+  transform: rotate(-16deg) translateY(4px);
+}
+
+.photoItem:nth-child(2) .photoItemInner {
+  transform: rotate(-11deg) translateY(2px);
+}
+
+.photoItem:nth-child(3) .photoItemInner {
+  transform: rotate(-7deg);
+}
+
+.photoItem:nth-child(4) .photoItemInner {
+  transform: rotate(-4deg) translateY(2px);
+}
+
+.photoItem:hover .photoItemInner,
+.photoItem:focus-within .photoItemInner {
+  transform: rotate(-2deg) translateY(-8px) scale(1.03);
+}
+
+.photoItem:hover .photoCard,
+.photoItem:focus-within .photoCard {
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.58);
+  outline: none;
+}
+
+.photoItem:hover,
+.photoItem:focus-within {
+  z-index: 10 !important;
+}
+
+.photoCard img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.photoCaption {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: max(100%, 200px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.photoItem:hover .photoCaption,
+.photoItem:focus-within .photoCaption {
+  opacity: 1;
+  visibility: visible;
+}
+
+.photoCaptionTitle {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--bento-text-main);
+}
+
+.photoCaptionSubtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--bento-text-muted);
+}
+
+.photoLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.photoLightboxImage {
+  max-width: min(92vw, 960px);
+  max-height: min(86vh, 860px);
+  width: auto;
+  height: auto;
+  border-radius: 18px;
+  object-fit: contain;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+}
+
+.photoLightboxClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.photoLightboxClose:hover {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+@media (max-width: 900px) {
+  .personalSection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .personalPhotosTile {
+    min-height: 320px;
+  }
+
+  .photoStrip {
+    min-height: 280px;
+    padding: 10px 0 32px;
+  }
+
+  .photoCard {
+    width: 100%;
+  }
+
+  .photoItem {
+    width: clamp(156px, 36vw, 208px);
+    margin-left: -52px;
+  }
 }
 
 @media (max-width: 380px) {

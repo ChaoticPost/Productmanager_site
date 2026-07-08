@@ -3,6 +3,7 @@ export type SectionId =
   | 'about'
   | 'resources'
   | 'resource-detail'
+  | 'project-case'
   | 'work'
   | 'job'
   | 'education'

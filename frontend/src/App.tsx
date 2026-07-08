@@ -4,6 +4,7 @@ import BentoHome from './sections/BentoHome/BentoHome';
 import BentoAbout from './sections/BentoAbout/BentoAbout';
 import BentoResources from './sections/BentoResources/BentoResources';
 import BentoResourceDetail from './sections/BentoResources/BentoResourceDetail';
+import ProjectCaseStudy from './sections/ProjectCase/ProjectCaseStudy';
 import Work from './sections/Work/Work';
 import Job from './sections/Job/Job';
 import Education from './sections/Education/Education';
@@ -11,25 +12,48 @@ import License from './sections/License/License';
 import Contact from './sections/Contact/Contact';
 import { SectionId } from './types/sections';
 
+interface BackConfig {
+  target: SectionId;
+  label: string;
+}
+
 const App: React.FC = () => {
   const [view, setView] = useState<SectionId>('intro');
   const [resourceProjectId, setResourceProjectId] = useState('benbox');
+  const [projectCaseId, setProjectCaseId] = useState('cashless');
+  const [projectCaseOrigin, setProjectCaseOrigin] = useState<SectionId>('about');
 
   const openResourceProject = (projectId: string) => {
     setResourceProjectId(projectId);
     setView('resource-detail');
   };
 
+  const openProjectCase = (projectId: string, origin: SectionId) => {
+    setProjectCaseId(projectId);
+    setProjectCaseOrigin(origin);
+    setView('project-case');
+  };
+
+  const backConfig: BackConfig | undefined =
+    view === 'project-case'
+      ? {
+          target: projectCaseOrigin,
+          label: projectCaseOrigin === 'intro' ? 'Home' : 'About',
+        }
+      : undefined;
+
   const renderView = () => {
     switch (view) {
       case 'intro':
-        return <BentoHome onNavigate={setView} />;
+        return <BentoHome onNavigate={setView} onOpenProjectCase={(id) => openProjectCase(id, 'intro')} />;
       case 'about':
-        return <BentoAbout />;
+        return <BentoAbout onOpenProjectCase={(id) => openProjectCase(id, 'about')} />;
       case 'resources':
         return <BentoResources onOpenProject={openResourceProject} />;
       case 'resource-detail':
         return <BentoResourceDetail projectId={resourceProjectId} onNavigate={setView} />;
+      case 'project-case':
+        return <ProjectCaseStudy projectId={projectCaseId} onNavigate={setView} />;
       case 'work':
         return <Work />;
       case 'job':
@@ -41,12 +65,12 @@ const App: React.FC = () => {
       case 'contact':
         return <Contact />;
       default:
-        return <BentoHome onNavigate={setView} />;
+        return <BentoHome onNavigate={setView} onOpenProjectCase={(id) => openProjectCase(id, 'intro')} />;
     }
   };
 
   return (
-    <Layout currentView={view} onNavigate={setView}>
+    <Layout currentView={view} onNavigate={setView} backConfig={backConfig}>
       {renderView()}
     </Layout>
   );

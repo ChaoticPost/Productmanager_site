@@ -16,6 +16,7 @@ import { bentoImages } from './bentoImages';
 
 interface BentoHomeProps {
   onNavigate: (sectionId: SectionId) => void;
+  onOpenProjectCase: (projectId: string) => void;
 }
 
 const socialLinks = [
@@ -41,7 +42,7 @@ const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onCli
   </button>
 );
 
-const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
+const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) => {
   const containerRef = useRef<HTMLElement>(null);
   const { isMobile } = useBentoScale(containerRef);
   const [emailCopied, setEmailCopied] = useState(false);
@@ -130,7 +131,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
             key={project.id}
             type="button"
             className={`${styles.tile} ${styles.project} ${index === 0 ? styles.projectOne : styles.projectTwo}`}
-            onClick={() => navigate('work')}
+            onClick={() => onOpenProjectCase(project.id)}
             aria-label={project.title}
             style={{
               backgroundImage: `url(${index === 0 ? bentoImages.cashless : bentoImages.jobPortal})`,
@@ -185,7 +186,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate }) => {
         <button
           type="button"
           className={`${styles.tile} ${styles.laptop}`}
-          onClick={() => navigate('work')}
+          onClick={() => onOpenProjectCase('laptop')}
           aria-label="BoostPro"
           style={{ backgroundImage: `url(${bentoImages.laptop})` }}
         >

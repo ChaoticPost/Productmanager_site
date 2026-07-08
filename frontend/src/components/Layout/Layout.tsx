@@ -10,16 +10,21 @@ interface LayoutProps {
   children: ReactNode;
   currentView: SectionId;
   onNavigate: (sectionId: SectionId) => void;
+  backConfig?: { target: SectionId; label: string };
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) => {
-  const isBentoView = currentView === 'intro' || currentView === 'about';
+const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate, backConfig }) => {
+  const isIntroView = currentView === 'intro';
+  const isAboutView = currentView === 'about';
+  const isBentoView = isIntroView || isAboutView;
   const isResourcesFlow = currentView === 'resources' || currentView === 'resource-detail';
-  const isFullBleedView = isBentoView || isResourcesFlow;
-  const showDotCursor = isBentoView || isResourcesFlow;
+  const isProjectCaseView = currentView === 'project-case';
+  const isScrollableBentoView = isAboutView || isResourcesFlow || isProjectCaseView;
+  const isFullBleedView = isBentoView || isResourcesFlow || isProjectCaseView;
+  const showDotCursor = isBentoView || isResourcesFlow || isProjectCaseView;
   const showBack = currentView !== 'intro';
-  const backTarget: SectionId = currentView === 'resource-detail' ? 'resources' : 'intro';
-  const backLabel = currentView === 'resource-detail' ? 'Resources' : 'Home';
+  const backTarget: SectionId = backConfig?.target ?? (currentView === 'resource-detail' ? 'resources' : 'intro');
+  const backLabel = backConfig?.label ?? (currentView === 'resource-detail' ? 'Resources' : 'Home');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) =>
       return;
     }
 
-    if (isResourcesFlow) {
+    if (isScrollableBentoView) {
       document.body.style.overflow = '';
       return;
     }
@@ -49,12 +54,12 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) =>
       media.removeEventListener('change', updateOverflow);
       document.body.style.overflow = '';
     };
-  }, [isFullBleedView, isResourcesFlow]);
+  }, [isFullBleedView, isScrollableBentoView]);
 
   return (
     <div
       className={`${styles.layout} ${isFullBleedView ? styles.layoutHome : ''} ${
-        isResourcesFlow ? styles.layoutResources : ''
+        isScrollableBentoView ? styles.layoutResources : ''
       }`}
     >
       {showDotCursor && <DotCursor />}
@@ -66,7 +71,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) =>
       )}
       <main
         className={`${styles.main} ${isFullBleedView ? styles.mainHome : ''} ${
-          isResourcesFlow ? styles.mainResources : ''
+          isScrollableBentoView ? styles.mainResources : ''
         }`}
       >
         {children}

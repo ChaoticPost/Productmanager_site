@@ -22,6 +22,7 @@ import {
   ChatGptIcon,
   ArrowRight01Icon,
   Tick01Icon,
+  Cancel01Icon,
 } from '@hugeicons/core-free-icons';
 
 export const socialIconMap: Record<string, IconSvgElement> = {
@@ -56,4 +57,5 @@ export {
   ArrowRight01Icon,
   Tick01Icon,
   Home01Icon,
+  Cancel01Icon,
 };

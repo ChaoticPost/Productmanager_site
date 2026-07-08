@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import HugeIcon from '../../components/icons/HugeIcon';
 import {
-  ArrowLeft01Icon,
-  ArrowRight01Icon,
-  Copy01Icon,
+  Cancel01Icon,
   Download01Icon,
   aboutStackIconMap,
 } from '../../components/icons/iconMap';
@@ -11,21 +9,25 @@ import { Lang } from '../BentoHome/bentoCopy';
 import { useBentoScale } from '../BentoHome/useBentoScale';
 import { bentoImages } from '../BentoHome/bentoImages';
 import { aboutCopy } from './aboutCopy';
+import { isProjectCaseId } from '../ProjectCase/projectCaseData';
 import styles from './BentoAbout.module.css';
 
-const galleryImages = [
-  { id: 'portrait', src: bentoImages.portrait, alt: 'Portrait' },
-  { id: 'cashless', src: bentoImages.cashless, alt: 'Cashless project' },
-  { id: 'job-portal', src: bentoImages.jobPortal, alt: 'Job portal project' },
-  { id: 'laptop', src: bentoImages.laptop, alt: 'BoostPro project' },
-];
+const personalPhotoImages = {
+  cashless: { src: bentoImages.cashless, alt: 'Street photo' },
+  'job-portal': { src: bentoImages.jobPortal, alt: 'Coast photo' },
+  laptop: { src: bentoImages.laptop, alt: 'Workspace photo' },
+  portrait: { src: bentoImages.portrait, alt: 'Portrait photo' },
+} as const;
 
-const BentoAbout: React.FC = () => {
+interface BentoAboutProps {
+  onOpenProjectCase: (projectId: string) => void;
+}
+
+const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
   const containerRef = useRef<HTMLElement>(null);
   const { isMobile } = useBentoScale(containerRef);
   const [skillIndex, setSkillIndex] = useState(0);
-  const [galleryIndex, setGalleryIndex] = useState(0);
-  const [emailCopied, setEmailCopied] = useState(false);
+  const [activePhotoId, setActivePhotoId] = useState<string | null>(null);
   const [lang] = useState<Lang>(() => {
     if (typeof window === 'undefined') {
       return 'ru';
@@ -39,10 +41,31 @@ const BentoAbout: React.FC = () => {
     return 'ru';
   });
 
-  const email = 'hello@example.com';
   const copy = aboutCopy[lang];
   const activeSkill = copy.skills[skillIndex];
-  const activeGallery = galleryImages[galleryIndex];
+  const activePhoto =
+    copy.personalPhotos
+      .map((photo) => ({
+        ...photo,
+        ...personalPhotoImages[photo.id as keyof typeof personalPhotoImages],
+      }))
+      .find((photo) => photo.id === activePhotoId) ?? null;
+
+  useEffect(() => {
+    if (!activePhotoId) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActivePhotoId(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activePhotoId]);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -52,22 +75,13 @@ const BentoAbout: React.FC = () => {
     return () => window.clearInterval(timer);
   }, [copy.skills.length]);
 
-  const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setEmailCopied(true);
-      window.setTimeout(() => setEmailCopied(false), 2000);
-    } catch {
-      setEmailCopied(false);
+  const handlePhotoClick = (photoId: string) => {
+    if (isProjectCaseId(photoId)) {
+      onOpenProjectCase(photoId);
+      return;
     }
-  };
 
-  const showPrevGallery = () => {
-    setGalleryIndex((current) => (current - 1 + galleryImages.length) % galleryImages.length);
-  };
-
-  const showNextGallery = () => {
-    setGalleryIndex((current) => (current + 1) % galleryImages.length);
+    setActivePhotoId(photoId);
   };
 
   return (
@@ -77,34 +91,74 @@ const BentoAbout: React.FC = () => {
       className={`${styles.section} ${isMobile ? styles.sectionMobile : ''}`}
     >
       <div className={isMobile ? styles.mobileWrap : styles.desktopWrap}>
-        <div className={`${styles.grid} ${isMobile ? styles.gridMobile : ''}`}>
-          <article className={`${styles.tile} ${styles.story}`}>
-            <h1 className={styles.pageTitle}>{copy.pageTitle}</h1>
+        <div className={isMobile ? undefined : styles.viewportGrid}>
+          <div className={`${styles.grid} ${isMobile ? styles.gridMobile : ''}`}>
+          <div className={styles.leftTrack}>
+            <article className={`${styles.tile} ${styles.story}`}>
+              <h1 className={styles.pageTitle}>{copy.pageTitle}</h1>
 
-            <div className={styles.storyBlock}>
-              <p className={styles.eyebrow}>{copy.myStory}</p>
-              <p className={styles.bodyText}>{copy.storyText}</p>
+              <div className={styles.storyBlock}>
+                <p className={styles.eyebrow}>{copy.myStory}</p>
+                <p className={styles.bodyText}>{copy.storyText}</p>
+              </div>
+
+              <div className={styles.storyBlock}>
+                <p className={styles.eyebrow}>{copy.whatIDoNow}</p>
+                <p className={styles.nowText}>
+                  {copy.whatIDoNowText}{' '}
+                  <a
+                    href="https://manoapp.com"
+                    className={styles.underline}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {copy.companyName}
+                  </a>{' '}
+                  {lang === 'ru'
+                    ? 'улучшаю ежедневный процесс заказа продуктов.'
+                    : 'improving the daily process of ordering groceries.'}
+                </p>
+              </div>
+            </article>
+
+            <div className={styles.middleSlot}>
+              <div className={styles.middleRow}>
+                <article className={`${styles.tile} ${styles.experience}`}>
+                  <p className={styles.eyebrow}>{copy.experienceEyebrow}</p>
+                  <ul className={styles.experienceList}>
+                    {copy.experience.map((item) => (
+                      <li key={item.role} className={styles.experienceItem}>
+                        <span className={styles.experienceRole}>{item.role}</span>
+                        <span className={styles.experienceLine} aria-hidden="true" />
+                        <span className={styles.experiencePeriod}>{item.period}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+
+                <article className={`${styles.tile} ${styles.personal}`}>
+                  <p className={styles.personalEyebrow}>{copy.personalEyebrow}</p>
+                  <p className={styles.personalText}>{copy.personalText}</p>
+
+                  <div className={styles.musicCard}>
+                    <div className={styles.musicMain}>
+                      <div className={styles.musicCover} aria-hidden="true" />
+                      <div className={styles.musicMeta}>
+                        <p className={styles.musicTitle}>{copy.personalTrackTitle}</p>
+                        <p className={styles.musicArtist}>{copy.personalTrackArtist}</p>
+                      </div>
+                    </div>
+                    <div className={styles.musicFooter}>
+                      <p className={styles.musicNote}>{copy.personalTrackNote}</p>
+                      <span className={styles.musicLink}>{copy.personalListenCta}</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
             </div>
+          </div>
 
-            <div className={styles.storyBlock}>
-              <p className={styles.eyebrow}>{copy.whatIDoNow}</p>
-              <p className={styles.nowText}>
-                {copy.whatIDoNowText}{' '}
-                <a
-                  href="https://manoapp.com"
-                  className={styles.underline}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {copy.companyName}
-                </a>{' '}
-                {lang === 'ru'
-                  ? 'улучшаю ежедневный процесс заказа продуктов.'
-                  : 'improving the daily process of ordering groceries.'}
-              </p>
-            </div>
-          </article>
-
+          <div className={styles.rightTrack}>
           <article className={`${styles.tile} ${styles.skills}`}>
             <div>
               <p className={styles.eyebrow}>{copy.skillsEyebrow}</p>
@@ -138,56 +192,6 @@ const BentoAbout: React.FC = () => {
             </div>
           </article>
 
-          <article className={`${styles.tile} ${styles.experience}`}>
-            <p className={styles.eyebrow}>{copy.experienceEyebrow}</p>
-            <ul className={styles.experienceList}>
-              {copy.experience.map((item) => (
-                <li key={item.role} className={styles.experienceItem}>
-                  <span className={styles.experienceRole}>{item.role}</span>
-                  <span className={styles.experienceLine} aria-hidden="true" />
-                  <span className={styles.experiencePeriod}>{item.period}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-
-          <article className={`${styles.tile} ${styles.gallery}`}>
-            <img
-              key={activeGallery.id}
-              className={styles.galleryImage}
-              src={activeGallery.src}
-              alt={activeGallery.alt}
-            />
-            <div className={styles.galleryNav}>
-              <button
-                type="button"
-                className={styles.galleryButton}
-                onClick={showPrevGallery}
-                aria-label={copy.galleryPrev}
-              >
-                <HugeIcon icon={ArrowLeft01Icon} size={14} />
-              </button>
-              <button
-                type="button"
-                className={styles.galleryButton}
-                onClick={showNextGallery}
-                aria-label={copy.galleryNext}
-              >
-                <HugeIcon icon={ArrowRight01Icon} size={14} />
-              </button>
-            </div>
-          </article>
-
-          <article className={`${styles.tile} ${styles.contact}`}>
-            <h3 className={styles.contactTitle}>{copy.contactTitle}</h3>
-            <button type="button" className={styles.copyButton} onClick={() => void handleCopyEmail()}>
-              <span className={styles.copyButtonIcon} aria-hidden="true">
-                <HugeIcon icon={Copy01Icon} size={16} />
-              </span>
-              <span className={styles.copyButtonLabel}>{emailCopied ? copy.copied : copy.copyEmail}</span>
-            </button>
-          </article>
-
           <article className={`${styles.tile} ${styles.download}`}>
             <h3 className={styles.downloadTitle}>{copy.downloadTitle}</h3>
             <a
@@ -201,8 +205,70 @@ const BentoAbout: React.FC = () => {
               <span className={styles.downloadButtonLabel}>{copy.downloadPdf}</span>
             </a>
           </article>
+          </div>
+          </div>
+        </div>
+
+        <div className={styles.personalSection}>
+          <article className={`${styles.personalTile} ${styles.personalPhotosTile}`}>
+            <div className={styles.photoStrip}>
+              <div className={styles.photoFan}>
+                {copy.personalPhotos.map((photo, index) => {
+                  const image = personalPhotoImages[photo.id as keyof typeof personalPhotoImages];
+
+                  return (
+                    <div
+                      key={photo.id}
+                      className={styles.photoItem}
+                      style={{ zIndex: index + 1 }}
+                    >
+                      <div className={styles.photoItemInner}>
+                        <button
+                          type="button"
+                          className={styles.photoCard}
+                          onClick={() => handlePhotoClick(photo.id)}
+                          aria-label={isProjectCaseId(photo.id) ? photo.title : copy.viewPhoto}
+                        >
+                          <img src={image.src} alt={image.alt} />
+                        </button>
+                        <div className={styles.photoCaption} aria-hidden="true">
+                          <p className={styles.photoCaptionTitle}>{photo.title}</p>
+                          <p className={styles.photoCaptionSubtitle}>{photo.subtitle}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </article>
         </div>
       </div>
+
+      {activePhoto && (
+        <div
+          className={styles.photoLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activePhoto.alt}
+          onClick={() => setActivePhotoId(null)}
+        >
+          <button
+            type="button"
+            className={styles.photoLightboxClose}
+            onClick={() => setActivePhotoId(null)}
+            aria-label={copy.closePhoto}
+          >
+            <HugeIcon icon={Cancel01Icon} size={18} />
+          </button>
+          <img
+            className={styles.photoLightboxImage}
+            src={activePhoto.src}
+            alt={activePhoto.alt}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 };

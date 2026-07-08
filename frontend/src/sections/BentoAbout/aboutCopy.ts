@@ -5,6 +5,12 @@ export interface SkillSlide {
   text: string;
 }
 
+export interface PersonalPhotoCaption {
+  id: string;
+  title: string;
+  subtitle: string;
+}
+
 export interface ExperienceItem {
   role: string;
   period: string;
@@ -32,6 +38,15 @@ export const aboutCopy: Record<
     downloadFileName: string;
     galleryPrev: string;
     galleryNext: string;
+    viewPhoto: string;
+    closePhoto: string;
+    personalEyebrow: string;
+    personalText: string;
+    personalTrackTitle: string;
+    personalTrackArtist: string;
+    personalTrackNote: string;
+    personalListenCta: string;
+    personalPhotos: PersonalPhotoCaption[];
   }
 > = {
   ru: {
@@ -76,6 +91,20 @@ export const aboutCopy: Record<
     downloadFileName: 'resume.pdf',
     galleryPrev: 'Предыдущее фото',
     galleryNext: 'Следующее фото',
+    viewPhoto: 'Открыть фото',
+    closePhoto: 'Закрыть',
+    personalEyebrow: 'Personal',
+    personalText: 'В свободное время люблю слушать музыку и фотографировать на свою Leica.',
+    personalTrackTitle: 'Luna',
+    personalTrackArtist: 'Pascal Schumacher, Echo Collective',
+    personalTrackNote: 'Больше всего слушала в этом месяце',
+    personalListenCta: 'Слушать в Spotify',
+    personalPhotos: [
+      { id: 'cashless', title: 'Identity', subtitle: 'Единый визуальный язык бренда' },
+      { id: 'job-portal', title: 'Travel', subtitle: 'Моменты вне экрана' },
+      { id: 'laptop', title: 'Workspace', subtitle: 'Где рождаются идеи' },
+      { id: 'portrait', title: 'Portrait', subtitle: 'Жизнь за кадром' },
+    ],
   },
   en: {
     pageTitle: "What I'm about?",
@@ -119,5 +148,19 @@ export const aboutCopy: Record<
     downloadFileName: 'resume.pdf',
     galleryPrev: 'Previous photo',
     galleryNext: 'Next photo',
+    viewPhoto: 'View photo',
+    closePhoto: 'Close',
+    personalEyebrow: 'Personal',
+    personalText: 'In my spare time, I enjoy listening to music and taking photos with my Leica.',
+    personalTrackTitle: 'Luna',
+    personalTrackArtist: 'Pascal Schumacher, Echo Collective',
+    personalTrackNote: 'Most replayed this month',
+    personalListenCta: 'Listen on Spotify',
+    personalPhotos: [
+      { id: 'cashless', title: 'Identity', subtitle: 'Consistent brand presence' },
+      { id: 'job-portal', title: 'Travel', subtitle: 'Moments off the screen' },
+      { id: 'laptop', title: 'Workspace', subtitle: 'Where ideas take shape' },
+      { id: 'portrait', title: 'Portrait', subtitle: 'Life behind the lens' },
+    ],
   },
 };
