@@ -24,7 +24,6 @@ export interface ProjectCase {
   solution: Record<Lang, string>;
   insights: Record<Lang, string>;
   showcaseMain: string;
-  showcaseGrid: string[];
 }
 
 const sharedTools = ['Figma', 'Framer', 'Arc', 'Notion'];
@@ -78,7 +77,6 @@ export const projectCases: ProjectCase[] = [
       en: "The app's success was due in part to its user-centric design process. The team conducted extensive research and user testing to ensure that the app met users' needs and preferences, resulting in a highly effective and user-friendly platform.",
     },
     showcaseMain: bentoImages.cashless,
-    showcaseGrid: [bentoImages.cashless, bentoImages.cashless, bentoImages.cashless],
   },
   {
     id: 'job-portal',
@@ -128,7 +126,6 @@ export const projectCases: ProjectCase[] = [
       en: 'Reducing steps to apply and making statuses transparent drove the biggest early engagement gains.',
     },
     showcaseMain: bentoImages.jobPortal,
-    showcaseGrid: [bentoImages.jobPortal, bentoImages.jobPortal, bentoImages.jobPortal],
   },
   {
     id: 'laptop',
@@ -178,7 +175,6 @@ export const projectCases: ProjectCase[] = [
       en: 'A simple structure and one primary CTA per screen outperform crowded blocks with multiple goals.',
     },
     showcaseMain: bentoImages.laptop,
-    showcaseGrid: [bentoImages.laptop, bentoImages.laptop, bentoImages.laptop],
   },
 ];
 

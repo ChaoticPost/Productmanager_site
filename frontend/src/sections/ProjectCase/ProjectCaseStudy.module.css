@@ -10,8 +10,7 @@
 .header,
 .introGrid,
 .mediaCard,
-.textSection,
-.showcaseGrid {
+.textSection {
   max-width: 1120px;
   margin-left: auto;
   margin-right: auto;
@@ -137,8 +136,7 @@
   background: rgba(255, 255, 255, 0.04);
 }
 
-.mediaCard,
-.showcaseItem {
+.mediaCard {
   border: 1px solid var(--border-subtle);
   border-radius: var(--bento-radius);
   background: var(--bento-tile-bg);
@@ -193,16 +191,6 @@
   color: var(--bento-text-muted);
 }
 
-.showcaseGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--bento-gap);
-}
-
-.showcaseItem .mediaImage {
-  aspect-ratio: 9 / 16;
-}
-
 @media (max-width: 900px) {
   .introGrid {
     grid-template-columns: minmax(0, 1fr);
@@ -210,13 +198,5 @@
 
   .card {
     padding: 22px 20px;
-  }
-
-  .showcaseGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .showcaseItem .mediaImage {
-    aspect-ratio: 16 / 10;
   }
 }

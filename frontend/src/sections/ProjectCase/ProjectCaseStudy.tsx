@@ -124,14 +124,6 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
       <article className={styles.mediaCard}>
         <img className={styles.mediaImage} src={project.showcaseMain} alt="" />
       </article>
-
-      <div className={styles.showcaseGrid}>
-        {project.showcaseGrid.map((image, index) => (
-          <article key={`${project.id}-showcase-${index}`} className={styles.showcaseItem}>
-            <img className={styles.mediaImage} src={image} alt="" />
-          </article>
-        ))}
-      </div>
     </section>
   );
 };
