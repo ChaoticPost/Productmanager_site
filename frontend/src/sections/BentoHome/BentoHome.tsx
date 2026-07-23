@@ -117,12 +117,11 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         <div className={`${styles.grid} ${isMobile ? styles.gridMobile : ''}`}>
         <article className={`${styles.tile} ${styles.hero}`}>
           <h1 className={styles.heroTitle}>
-            Hi, I&apos;m <span className={styles.heroName}>Daria</span>
-            <span className={styles.heroDash}> ⎯</span>
+            {copy.heroTitleBefore} <span className={styles.heroName}>{copy.heroName}</span>
+            {copy.heroTitleAfter}
           </h1>
           <p className={styles.heroSubtitle}>
-            {copy.heroSubtitle} <span className={styles.underline}>mano</span>
-            {lang === 'ru' ? ', Каир' : ' based in Cairo'}
+            {copy.heroSubtitle} <span className={styles.underline}>{copy.companyName}</span>
           </p>
         </article>
 
