@@ -96,6 +96,10 @@ button.tile {
   text-decoration-thickness: 1px;
 }
 
+a.underline {
+  cursor: pointer;
+}
+
 /* Projects */
 .projectOne {
   grid-area: project1;
