@@ -18,7 +18,14 @@ const navItems: NavItem[] = [
 const Header: React.FC<HeaderProps> = ({ onNavigate }) => (
   <header className={styles.header}>
     <div className={styles.container}>
-      <div className={styles.logo}>PM Portfolio</div>
+      <button
+        type="button"
+        className={styles.logo}
+        onClick={() => onNavigate('intro')}
+        aria-label="Daria Chugunova — go to home"
+      >
+        Daria Chugunova
+      </button>
       <nav className={styles.nav}>
         {navItems.map((item) => (
           <button

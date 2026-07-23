@@ -121,7 +121,15 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
             {copy.heroTitleAfter}
           </h1>
           <p className={styles.heroSubtitle}>
-            {copy.heroSubtitle} <span className={styles.underline}>{copy.companyName}</span>
+            {copy.heroSubtitle}{' '}
+            <a
+              href={copy.companyUrl}
+              className={styles.underline}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {copy.companyName}
+            </a>
           </p>
         </article>
 

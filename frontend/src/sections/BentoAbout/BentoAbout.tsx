@@ -27,6 +27,7 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
   const containerRef = useRef<HTMLElement>(null);
   const { isMobile } = useBentoScale(containerRef);
   const [skillIndex, setSkillIndex] = useState(0);
+  const [careerIndex, setCareerIndex] = useState(0);
   const [activePhotoId, setActivePhotoId] = useState<string | null>(null);
   const [lang] = useState<Lang>(() => {
     if (typeof window === 'undefined') {
@@ -74,6 +75,14 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
 
     return () => window.clearInterval(timer);
   }, [copy.skills.length]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCareerIndex((current) => (current + 1) % copy.careerSlides.length);
+    }, 6000);
+
+    return () => window.clearInterval(timer);
+  }, [copy.careerSlides.length]);
 
   const handlePhotoClick = (photoId: string) => {
     if (isProjectCaseId(photoId)) {
@@ -124,16 +133,72 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
             <div className={styles.middleSlot}>
               <div className={styles.middleRow}>
                 <article className={`${styles.tile} ${styles.experience}`}>
-                  <p className={styles.eyebrow}>{copy.experienceEyebrow}</p>
-                  <ul className={styles.experienceList}>
-                    {copy.experience.map((item) => (
-                      <li key={item.role} className={styles.experienceItem}>
-                        <span className={styles.experienceRole}>{item.role}</span>
-                        <span className={styles.experienceLine} aria-hidden="true" />
-                        <span className={styles.experiencePeriod}>{item.period}</span>
-                      </li>
+                  <div className={styles.careerBody}>
+                    <div className={styles.careerSlides}>
+                      {copy.careerSlides.map((slide, index) => {
+                        const isActive = index === careerIndex;
+
+                        return (
+                          <div
+                            key={slide.id}
+                            className={`${styles.careerSlide} ${isActive ? styles.careerSlideActive : ''}`}
+                            aria-hidden={!isActive}
+                          >
+                            <p className={styles.eyebrow}>{slide.eyebrow}</p>
+
+                            {slide.kind === 'experience' ? (
+                              <ul className={styles.experienceList}>
+                                {slide.items.map((item) => (
+                                  <li key={item.role} className={styles.experienceItem}>
+                                    <span className={styles.experienceRole}>{item.role}</span>
+                                    <span className={styles.experienceLine} aria-hidden="true" />
+                                    <span className={styles.experiencePeriod}>{item.period}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : null}
+
+                            {slide.kind === 'education' ? (
+                              <div className={styles.educationList}>
+                                {slide.items.map((item) => (
+                                  <div key={`${item.degree}-${item.period}`} className={styles.educationBlock}>
+                                    <div className={styles.experienceItem}>
+                                      <span className={styles.experienceRole}>{item.school}</span>
+                                      <span className={styles.experienceLine} aria-hidden="true" />
+                                      <span className={styles.experiencePeriod}>{item.period}</span>
+                                    </div>
+                                    <p className={styles.educationDegree}>{item.degree}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : null}
+
+                            {slide.kind === 'upskilling' ? (
+                              <ul className={styles.upskillList}>
+                                {slide.items.map((item) => (
+                                  <li key={item}>{item}</li>
+                                ))}
+                              </ul>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className={styles.dots} role="tablist" aria-label={copy.careerCarouselLabel}>
+                    {copy.careerSlides.map((slide, index) => (
+                      <button
+                        key={slide.id}
+                        type="button"
+                        className={`${styles.dot} ${index === careerIndex ? styles.dotActive : ''}`}
+                        onClick={() => setCareerIndex(index)}
+                        aria-label={slide.eyebrow}
+                        aria-selected={index === careerIndex}
+                        role="tab"
+                      />
                     ))}
-                  </ul>
+                  </div>
                 </article>
 
                 <article className={`${styles.tile} ${styles.personal}`}>

@@ -1,10 +1,13 @@
 import React, { ReactNode, useEffect } from 'react';
 import DotCursor from '../DotCursor/DotCursor';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 import HugeIcon from '../icons/HugeIcon';
 import { ArrowLeft01Icon } from '../icons/iconMap';
 import { SectionId } from '../../types/sections';
 import styles from './Layout.module.css';
+
+const SITE_TITLE = 'Daria Chugunova product manager';
 
 interface LayoutProps {
   children: ReactNode;
@@ -25,6 +28,10 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate, back
   const showBack = currentView !== 'intro';
   const backTarget: SectionId = backConfig?.target ?? (currentView === 'resource-detail' ? 'resources' : 'intro');
   const backLabel = backConfig?.label ?? (currentView === 'resource-detail' ? 'Resources' : 'Home');
+
+  useEffect(() => {
+    document.title = SITE_TITLE;
+  }, [currentView]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,6 +70,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate, back
       }`}
     >
       {showDotCursor && <DotCursor />}
+      {!isFullBleedView && <Header onNavigate={onNavigate} />}
       {showBack && (
         <button type="button" className={styles.backButton} onClick={() => onNavigate(backTarget)}>
           <HugeIcon icon={ArrowLeft01Icon} size={16} />

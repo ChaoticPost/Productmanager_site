@@ -16,6 +16,17 @@ export interface ExperienceItem {
   period: string;
 }
 
+export interface EducationSlide {
+  school: string;
+  period: string;
+  degree: string;
+}
+
+export type CareerSlide =
+  | { id: 'experience'; eyebrow: string; kind: 'experience'; items: ExperienceItem[] }
+  | { id: 'education'; eyebrow: string; kind: 'education'; items: EducationSlide[] }
+  | { id: 'upskilling'; eyebrow: string; kind: 'upskilling'; items: string[] };
+
 export const aboutCopy: Record<
   Lang,
   {
@@ -28,8 +39,8 @@ export const aboutCopy: Record<
     skillsEyebrow: string;
     skills: SkillSlide[];
     stackTitle: string;
-    experienceEyebrow: string;
-    experience: ExperienceItem[];
+    careerSlides: CareerSlide[];
+    careerCarouselLabel: string;
     contactTitle: string;
     copyEmail: string;
     copied: string;
@@ -77,11 +88,44 @@ export const aboutCopy: Record<
       },
     ],
     stackTitle: 'Мой стек',
-    experienceEyebrow: 'Опыт',
-    experience: [
-      { role: 'Design Lead в Mano', period: 'Сейчас' },
-      { role: 'Senior Designer в Shopify', period: '2021 – 2022' },
-      { role: 'Product Designer в OLX', period: '2020 – 2021' },
+    careerCarouselLabel: 'Карьера и образование',
+    careerSlides: [
+      {
+        id: 'experience',
+        eyebrow: 'Опыт',
+        kind: 'experience',
+        items: [
+          { role: 'Менеджер продукта в RTUITLab', period: 'май 2023 – н. в.' },
+          { role: 'Менеджер продукта в КРОК', period: 'окт – дек 2024' },
+        ],
+      },
+      {
+        id: 'education',
+        eyebrow: 'Учёба',
+        kind: 'education',
+        items: [
+          {
+            school: 'РТУ МИРЭА · ИИТ',
+            period: '2021–2025',
+            degree: 'Бакалавриат, «Программная инженерия»',
+          },
+          {
+            school: 'РТУ МИРЭА · ПИ',
+            period: '2025 – 2027',
+            degree: 'Магистратура, «Цифровая трансформация»',
+          },
+        ],
+      },
+      {
+        id: 'upskilling',
+        eyebrow: 'Повышение квалификации',
+        kind: 'upskilling',
+        items: [
+          'Переподготовка «Менеджмент», РТУ МИРЭА, 2025',
+          'ИИ в здравоохранении, РТУ МИРЭА и ЦДиТ ДЗМ, 2025',
+          'Переподготовка в сфере дизайна, РТУ МИРЭА, 2026',
+        ],
+      },
     ],
     contactTitle: 'Есть проект?',
     copyEmail: 'Email',
@@ -134,11 +178,44 @@ export const aboutCopy: Record<
       },
     ],
     stackTitle: 'Stack I use',
-    experienceEyebrow: 'Experience',
-    experience: [
-      { role: 'Design Lead at Mano', period: 'Current' },
-      { role: 'Senior Designer at Shopify', period: '2021 – 2022' },
-      { role: 'Product Designer at OLX', period: '2020 – 2021' },
+    careerCarouselLabel: 'Career and education',
+    careerSlides: [
+      {
+        id: 'experience',
+        eyebrow: 'Experience',
+        kind: 'experience',
+        items: [
+          { role: 'Product Manager at RTUITLab', period: 'May 2023 – present' },
+          { role: 'Product Manager at CROC', period: 'Oct – Dec 2024' },
+        ],
+      },
+      {
+        id: 'education',
+        eyebrow: 'Education',
+        kind: 'education',
+        items: [
+          {
+            school: 'RTU MIREA · Institute of IT',
+            period: '2021–2025',
+            degree: "Bachelor's, Software Engineering",
+          },
+          {
+            school: 'RTU MIREA · Applied Informatics',
+            period: '2025 – 2027',
+            degree: "Master's, SE · digital transformation",
+          },
+        ],
+      },
+      {
+        id: 'upskilling',
+        eyebrow: 'Professional development',
+        kind: 'upskilling',
+        items: [
+          'Professional retraining in Management, RTU MIREA, 2025',
+          'AI tech in healthcare, RTU MIREA & CDT Moscow, 2025',
+          'Professional retraining in design, RTU MIREA, 2026',
+        ],
+      },
     ],
     contactTitle: 'Have a project in mind?',
     copyEmail: 'Email',

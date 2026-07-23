@@ -8,6 +8,7 @@ export const bentoCopy: Record<
     heroTitleAfter: string;
     heroSubtitle: string;
     companyName: string;
+    companyUrl: string;
     aboutEyebrow: string;
     aboutText: string;
     resourcesEyebrow: string;
@@ -31,6 +32,7 @@ export const bentoCopy: Record<
     heroTitleAfter: ',',
     heroSubtitle: 'менеджер продукта с техническим бэкграундом. Сейчас работаю в',
     companyName: 'RTUITLab',
+    companyUrl: 'https://rtuitlab.dev',
     aboutEyebrow: 'О себе',
     aboutText: 'Увлечён дизайном и люблю решать задачи.',
     resourcesEyebrow: 'Ресурсы',
@@ -53,6 +55,7 @@ export const bentoCopy: Record<
     heroTitleAfter: ',',
     heroSubtitle: 'a product manager with a technical background. Currently working at',
     companyName: 'RTUITLab',
+    companyUrl: 'https://rtuitlab.dev',
     aboutEyebrow: 'About',
     aboutText: 'Passionate about design and enjoy solving problems.',
     resourcesEyebrow: 'Resources',

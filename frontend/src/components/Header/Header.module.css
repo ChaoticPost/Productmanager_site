@@ -22,9 +22,19 @@
 }
 
 .logo {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+}
+
+.logo:hover {
+  opacity: 0.85;
 }
 
 .nav {
