@@ -5,6 +5,7 @@ import { SectionId } from '../../types/sections';
 import { Lang } from '../BentoHome/bentoCopy';
 import { caseStudyCopy } from './caseStudyCopy';
 import { getProjectCase } from './projectCaseData';
+import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import styles from './ProjectCaseStudy.module.css';
 
 interface ProjectCaseStudyProps {
@@ -89,7 +90,7 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
       </div>
 
       <article className={styles.mediaCard}>
-        <img className={styles.mediaImage} src={project.heroImage} alt={project.title[lang]} />
+        <SkeletonImage className={styles.mediaImage} src={project.heroImage} alt={project.title[lang]} />
       </article>
 
       <section className={styles.textSection}>
@@ -98,7 +99,7 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
       </section>
 
       <article className={styles.mediaCard}>
-        <img className={styles.mediaImage} src={project.problemImage} alt="" />
+        <SkeletonImage className={styles.mediaImage} src={project.problemImage} alt="" />
       </article>
 
       <section className={styles.textSection}>
@@ -122,7 +123,7 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
       </section>
 
       <article className={styles.mediaCard}>
-        <img className={styles.mediaImage} src={project.showcaseMain} alt="" />
+        <SkeletonImage className={styles.mediaImage} src={project.showcaseMain} alt="" />
       </article>
     </section>
   );

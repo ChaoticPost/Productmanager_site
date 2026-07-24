@@ -31,7 +31,7 @@
   grid-template-areas:
     'hero hero project1 project2 socials'
     'photo about about laptop resources'
-    'newsletter newsletter stack theme contact';
+    'newsletter stack stack theme contact';
 }
 
 .tile {
@@ -206,6 +206,12 @@ a.underline {
   transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
+:global(html[data-theme='light']) .socialLink {
+  background: #ffffff;
+  color: #171717;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
 .socialLink svg {
   width: 20px;
   height: 20px;
@@ -217,6 +223,13 @@ a.underline {
   border-color: transparent;
   color: #ffffff;
   transform: translateY(-1px);
+}
+
+:global(html[data-theme='light']) .socialLink:hover,
+:global(html[data-theme='light']) .socialLink:focus-visible {
+  background: var(--social-hover, #2a2a2a);
+  border-color: transparent;
+  color: #ffffff;
 }
 
 .socialLink[data-social='x'] {
@@ -386,64 +399,54 @@ a.underline {
   max-width: 13ch;
 }
 
-/* Newsletter */
-.newsletter {
+/* Resume */
+.resume {
   grid-area: newsletter;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.resumeButton {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  gap: 16px;
-}
-
-.newsletterTitle {
-  margin: 0;
-  font-size: 22px;
-  line-height: 1.35;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--bento-text-main);
-  max-width: 30ch;
-}
-
-.newsletterForm {
-  display: flex;
   gap: 8px;
-}
-
-.newsletterInput {
-  flex: 1;
-  min-width: 0;
+  width: fit-content;
+  height: 48px;
+  margin-top: 24px;
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  padding: 14px 16px;
-  background: var(--bento-input-bg);
-  color: var(--bento-text-main);
-  font-size: 15px;
-}
-
-.newsletterInput::placeholder {
-  color: var(--bento-text-muted);
-}
-
-.newsletterInput:focus {
-  outline: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.newsletterButton {
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 14px 20px;
+  padding: 0 16px;
   background: var(--bento-button-bg);
   color: var(--bento-text-main);
   font-size: 15px;
   font-weight: 500;
-  cursor: pointer;
+  line-height: 1;
   white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
   transition: background-color 0.15s ease;
 }
 
-.newsletterButton:hover {
+.resumeButton:hover {
   background: var(--bento-button-hover);
+}
+
+.resumeButtonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.resumeButtonLabel {
+  white-space: nowrap;
+  text-align: left;
 }
 
 /* Stack */
@@ -594,8 +597,13 @@ a.underline {
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #f3e4c3;
-  transition: transform 0.25s ease, background-color 0.25s ease;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
   transform: translateX(0);
+}
+
+:global(html[data-theme='light']) .langThumb {
+  background: #ffffff;
+  color: #171717;
 }
 
 .langThumbEn {
@@ -609,18 +617,8 @@ a.underline {
   grid-area: theme;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  gap: 14px;
-}
-
-.contactTitle {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.35;
-  color: var(--bento-text-main);
-  letter-spacing: -0.01em;
 }
 
 .copyButton {
@@ -630,6 +628,7 @@ a.underline {
   gap: 8px;
   width: fit-content;
   height: 48px;
+  margin-top: 24px;
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 0 16px;
@@ -735,8 +734,7 @@ a.underline {
 }
 
 .gridMobile .aboutText,
-.gridMobile .resourcesText,
-.gridMobile .newsletterTitle {
+.gridMobile .resourcesText {
   max-width: none;
   font-size: 1.125rem;
 }
@@ -761,14 +759,6 @@ a.underline {
 
 .gridMobile .themeControls {
   gap: 10px;
-}
-
-.gridMobile .newsletterForm {
-  flex-direction: column;
-}
-
-.gridMobile .newsletterButton {
-  width: 100%;
 }
 
 @media (max-width: 380px) {
