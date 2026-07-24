@@ -44,9 +44,6 @@ export const aboutCopy: Record<
     contactTitle: string;
     copyEmail: string;
     copied: string;
-    blogTitle: string;
-    blogCta: string;
-    blogUrl: string;
     galleryPrev: string;
     galleryNext: string;
     viewPhoto: string;
@@ -110,7 +107,7 @@ export const aboutCopy: Record<
             degree: 'Бакалавриат, «Программная инженерия»',
           },
           {
-            school: 'РТУ МИРЭА · ПИ',
+            school: 'РТУ МИРЭА · ПИШ',
             period: '2025 – 2027',
             degree: 'Магистратура, «Цифровая трансформация»',
           },
@@ -130,9 +127,6 @@ export const aboutCopy: Record<
     contactTitle: 'Есть проект?',
     copyEmail: 'Email',
     copied: 'Скопировано!',
-    blogTitle: 'Блог',
-    blogCta: 'Читать',
-    blogUrl: '#',
     galleryPrev: 'Предыдущее фото',
     galleryNext: 'Следующее фото',
     viewPhoto: 'Открыть фото',
@@ -220,9 +214,6 @@ export const aboutCopy: Record<
     contactTitle: 'Have a project in mind?',
     copyEmail: 'Email',
     copied: 'Copied!',
-    blogTitle: 'Blog',
-    blogCta: 'Read',
-    blogUrl: '#',
     galleryPrev: 'Previous photo',
     galleryNext: 'Next photo',
     viewPhoto: 'View photo',

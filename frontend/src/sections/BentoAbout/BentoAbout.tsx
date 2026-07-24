@@ -9,6 +9,7 @@ import { Lang } from '../BentoHome/bentoCopy';
 import { useBentoScale } from '../BentoHome/useBentoScale';
 import { bentoImages } from '../BentoHome/bentoImages';
 import { aboutCopy } from './aboutCopy';
+import { aboutBlog } from './aboutBlog';
 import { isProjectCaseId } from '../ProjectCase/projectCaseData';
 import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import styles from './BentoAbout.module.css';
@@ -44,6 +45,7 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
   });
 
   const copy = aboutCopy[lang];
+  const blog = aboutBlog[lang];
   const activeSkill = copy.skills[skillIndex];
   const activePhoto =
     copy.personalPhotos
@@ -259,9 +261,9 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
           </article>
 
           <article className={`${styles.tile} ${styles.download}`}>
-            <h3 className={styles.downloadTitle}>{copy.blogTitle}</h3>
+            <h3 className={styles.downloadTitle}>{blog.blogTitle}</h3>
             <a
-              href={copy.blogUrl}
+              href={blog.blogUrl}
               className={styles.downloadButton}
               target="_blank"
               rel="noreferrer"
@@ -269,7 +271,7 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
               <span className={styles.downloadButtonIcon} aria-hidden="true">
                 <HugeIcon icon={ArrowUpRight01Icon} size={16} />
               </span>
-              <span className={styles.downloadButtonLabel}>{copy.blogCta}</span>
+              <span className={styles.downloadButtonLabel}>{blog.blogCta}</span>
             </a>
           </article>
           </div>
