@@ -1,8 +1,7 @@
 import type { IconSvgElement } from '@hugeicons/react';
 import {
-  NewTwitterIcon,
   DribbbleIcon,
-  InstagramIcon,
+  GridIcon,
   Linkedin01Icon,
   Behance02Icon,
   Mail01Icon,
@@ -26,9 +25,8 @@ import {
 } from '@hugeicons/core-free-icons';
 
 export const socialIconMap: Record<string, IconSvgElement> = {
-  x: NewTwitterIcon,
   dribbble: DribbbleIcon,
-  instagram: InstagramIcon,
+  setka: GridIcon,
   linkedin: Linkedin01Icon,
   behance: Behance02Icon,
   mail: Mail01Icon,

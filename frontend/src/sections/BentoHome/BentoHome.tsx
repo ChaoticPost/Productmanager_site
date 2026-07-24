@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SectionId } from '../../types/sections';
 import HugeIcon from '../../components/icons/HugeIcon';
+import TenChatIcon from '../../components/icons/TenChatIcon';
 import {
   ArrowUpRight01Icon,
   Copy01Icon,
@@ -23,9 +24,9 @@ interface BentoHomeProps {
 }
 
 const socialLinks = [
-  { id: 'x', label: 'X', href: 'https://x.com' },
+  { id: 'tenchat', label: 'TenChat', href: 'https://tenchat.ru/daria_chugu' },
   { id: 'dribbble', label: 'Dribbble', href: 'https://dribbble.com' },
-  { id: 'instagram', label: 'Instagram', href: 'https://instagram.com' },
+  { id: 'setka', label: 'Сетка', href: 'https://setka.ru/users/e52593fc-b3f2-4a8b-86aa-575cab9d3c88' },
   { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com' },
   { id: 'behance', label: 'Behance', href: 'https://behance.net' },
   { id: 'mail', label: 'Email', href: 'mailto:hello@example.com' },
@@ -169,7 +170,11 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
               rel="noreferrer"
               aria-label={link.label}
             >
-              <HugeIcon icon={socialIconMap[link.id]} size={16} strokeWidth={1.5} />
+              {link.id === 'tenchat' ? (
+                <TenChatIcon size={16} />
+              ) : (
+                <HugeIcon icon={socialIconMap[link.id]} size={16} strokeWidth={1.5} />
+              )}
             </a>
           ))}
         </div>

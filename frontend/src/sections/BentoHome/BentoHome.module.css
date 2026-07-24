@@ -232,16 +232,16 @@ a.underline {
   color: #ffffff;
 }
 
-.socialLink[data-social='x'] {
-  --social-hover: #232323;
+.socialLink[data-social='tenchat'] {
+  --social-hover: #fc3234;
 }
 
 .socialLink[data-social='dribbble'] {
   --social-hover: #ea4c89;
 }
 
-.socialLink[data-social='instagram'] {
-  --social-hover: #f56040;
+.socialLink[data-social='setka'] {
+  --social-hover: #6c5ce7;
 }
 
 .socialLink[data-social='linkedin'] {
