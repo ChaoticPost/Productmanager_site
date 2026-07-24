@@ -4,6 +4,7 @@ import HugeIcon from '../../components/icons/HugeIcon';
 import {
   ArrowUpRight01Icon,
   Copy01Icon,
+  Download01Icon,
   Moon02Icon,
   Sun02Icon,
   socialIconMap,
@@ -211,24 +212,18 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
           <ArrowButton onClick={() => navigate('resources')} label="Go to resources" />
         </article>
 
-        <article className={`${styles.tile} ${styles.newsletter}`}>
-          <h2 className={styles.newsletterTitle}>{copy.newsletterTitle}</h2>
-          <form
-            className={styles.newsletterForm}
-            onSubmit={(event) => {
-              event.preventDefault();
-            }}
+        <article className={`${styles.tile} ${styles.resume}`}>
+          <p className={styles.tileEyebrow}>{copy.downloadTitle}</p>
+          <a
+            href="/resume.pdf"
+            download={copy.downloadFileName}
+            className={styles.resumeButton}
           >
-            <input
-              type="email"
-              className={styles.newsletterInput}
-              placeholder={copy.emailPlaceholder}
-              aria-label={copy.emailPlaceholder}
-            />
-            <button type="submit" className={styles.newsletterButton}>
-              {copy.subscribe}
-            </button>
-          </form>
+            <span className={styles.resumeButtonIcon} aria-hidden="true">
+              <HugeIcon icon={Download01Icon} size={16} />
+            </span>
+            <span className={styles.resumeButtonLabel}>{copy.downloadPdf}</span>
+          </a>
         </article>
 
         <article className={`${styles.tile} ${styles.stack}`}>
@@ -283,7 +278,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         </article>
 
         <article className={`${styles.tile} ${styles.contact}`}>
-          <h3 className={styles.contactTitle}>{copy.contactTitle}</h3>
+          <p className={styles.tileEyebrow}>{copy.contactTitle}</p>
           <button type="button" className={styles.copyButton} onClick={() => void handleCopyEmail()}>
             <span className={styles.copyButtonIcon} aria-hidden="true">
               <HugeIcon icon={Copy01Icon} size={16} />

@@ -13,9 +13,9 @@ export const bentoCopy: Record<
     aboutText: string;
     resourcesEyebrow: string;
     resourcesText: string;
-    newsletterTitle: string;
-    emailPlaceholder: string;
-    subscribe: string;
+    downloadTitle: string;
+    downloadPdf: string;
+    downloadFileName: string;
     stackEyebrow: string;
     contactTitle: string;
     copyEmail: string;
@@ -37,9 +37,9 @@ export const bentoCopy: Record<
     aboutText: 'Увлечён дизайном и люблю решать задачи.',
     resourcesEyebrow: 'Ресурсы',
     resourcesText: 'Ресурсы, которые ускорят ваш workflow',
-    newsletterTitle: 'Получайте советы и гайды по дизайну на почту бесплатно!',
-    emailPlaceholder: 'Ваш email',
-    subscribe: 'Подписаться',
+    downloadTitle: 'Резюме',
+    downloadPdf: 'Скачать PDF',
+    downloadFileName: 'resume.pdf',
     stackEyebrow: 'Мой стек',
     contactTitle: 'Есть проект?',
     copyEmail: 'Email',
@@ -60,9 +60,9 @@ export const bentoCopy: Record<
     aboutText: 'Passionate about design and enjoy solving problems.',
     resourcesEyebrow: 'Resources',
     resourcesText: 'Resources to speed your workflow',
-    newsletterTitle: 'Get design tips & guides straight to your inbox for free!',
-    emailPlaceholder: 'Your email address',
-    subscribe: 'Subscribe',
+    downloadTitle: 'Resume',
+    downloadPdf: 'Download PDF',
+    downloadFileName: 'resume.pdf',
     stackEyebrow: 'Stack I use',
     contactTitle: 'Have a project in mind?',
     copyEmail: 'Email',
