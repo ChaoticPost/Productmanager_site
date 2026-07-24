@@ -31,7 +31,7 @@
   grid-template-areas:
     'hero hero project1 project2 socials'
     'photo about about laptop resources'
-    'newsletter newsletter stack theme contact';
+    'newsletter stack stack theme contact';
 }
 
 .tile {
