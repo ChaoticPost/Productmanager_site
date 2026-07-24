@@ -9,6 +9,7 @@ import {
 import { SectionId } from '../../types/sections';
 import { Lang } from '../BentoHome/bentoCopy';
 import { getResourceProject, resourcesCopy } from './resourcesData';
+import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import styles from './BentoResourceDetail.module.css';
 
 interface BentoResourceDetailProps {
@@ -65,7 +66,7 @@ const BentoResourceDetail: React.FC<BentoResourceDetailProps> = ({ projectId, on
       <div className={styles.layout}>
         <article className={styles.galleryCard}>
           <div className={styles.galleryFrame}>
-            <img
+            <SkeletonImage
               key={`${project.id}-${slideIndex}`}
               className={styles.galleryImage}
               src={activeSlide}

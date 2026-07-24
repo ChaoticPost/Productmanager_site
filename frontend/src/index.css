@@ -18,6 +18,8 @@
   --bento-button-bg: #242424;
   --bento-button-hover: #2e2e2e;
   --bento-social-cell: #1a1a1a;
+  --skeleton-base: #1a1a1a;
+  --skeleton-shine: #2a2a2a;
   --radius-lg: 18px;
   --radius-pill: 999px;
   --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
@@ -42,6 +44,8 @@
   --bento-button-bg: #ecebe6;
   --bento-button-hover: #e3e2dc;
   --bento-social-cell: #ecebe6;
+  --skeleton-base: #e8e7e2;
+  --skeleton-shine: #f4f3ef;
   --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
 }
 

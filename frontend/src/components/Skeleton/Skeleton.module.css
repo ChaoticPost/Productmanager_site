@@ -1,0 +1,63 @@
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 0%,
+    var(--skeleton-shine) 45%,
+    var(--skeleton-base) 90%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.35s ease-in-out infinite;
+}
+
+.rounded {
+  border-radius: inherit;
+}
+
+.wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--skeleton-base);
+  min-height: 0;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.mediaVisible {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.cover {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}

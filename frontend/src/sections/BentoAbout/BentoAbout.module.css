@@ -640,8 +640,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 380px;
-  padding: 20px 12px 28px;
+  min-height: 460px;
+  padding: 28px 12px 36px;
   overflow: visible;
 }
 
@@ -654,8 +654,8 @@
 .photoItem {
   position: relative;
   flex: 0 0 auto;
-  width: clamp(188px, 32%, 272px);
-  margin-left: -68px;
+  width: clamp(220px, 36%, 320px);
+  margin-left: -76px;
 }
 
 .photoItem:first-child {
@@ -716,11 +716,11 @@
   z-index: 10 !important;
 }
 
-.photoCard img {
+.photoCard > div {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 3;
   border-radius: 20px;
-  object-fit: cover;
   display: block;
   pointer-events: none;
 }
@@ -807,11 +807,11 @@
   }
 
   .personalPhotosTile {
-    min-height: 320px;
+    min-height: 380px;
   }
 
   .photoStrip {
-    min-height: 280px;
+    min-height: 320px;
     padding: 10px 0 32px;
   }
 
@@ -820,8 +820,8 @@
   }
 
   .photoItem {
-    width: clamp(156px, 36vw, 208px);
-    margin-left: -52px;
+    width: clamp(180px, 42vw, 240px);
+    margin-left: -56px;
   }
 }
 

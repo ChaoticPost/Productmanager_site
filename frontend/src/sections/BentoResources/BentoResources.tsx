@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Lang } from '../BentoHome/bentoCopy';
-import { SectionId } from '../../types/sections';
+import SkeletonBackground from '../../components/Skeleton/SkeletonBackground';
 import { resourceProjects, resourcesCopy } from './resourcesData';
 import styles from './BentoResources.module.css';
 
@@ -34,11 +34,7 @@ const BentoResources: React.FC<BentoResourcesProps> = ({ onOpenProject }) => {
             className={styles.card}
             onClick={() => onOpenProject(project.id)}
           >
-            <div
-              className={styles.preview}
-              style={{ backgroundImage: `url(${project.image})` }}
-              aria-hidden="true"
-            />
+            <SkeletonBackground src={project.image} className={styles.preview} />
             <div className={styles.meta}>
               <div className={styles.metaTop}>
                 <h3 className={styles.title}>{project.title[lang]}</h3>
@@ -49,7 +45,6 @@ const BentoResources: React.FC<BentoResourcesProps> = ({ onOpenProject }) => {
           </button>
         ))}
       </div>
-
     </section>
   );
 };

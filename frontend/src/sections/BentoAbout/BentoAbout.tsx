@@ -10,6 +10,7 @@ import { useBentoScale } from '../BentoHome/useBentoScale';
 import { bentoImages } from '../BentoHome/bentoImages';
 import { aboutCopy } from './aboutCopy';
 import { isProjectCaseId } from '../ProjectCase/projectCaseData';
+import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import styles from './BentoAbout.module.css';
 
 const personalPhotoImages = {
@@ -294,7 +295,7 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
                           onClick={() => handlePhotoClick(photo.id)}
                           aria-label={isProjectCaseId(photo.id) ? photo.title : copy.viewPhoto}
                         >
-                          <img src={image.src} alt={image.alt} />
+                          <SkeletonImage src={image.src} alt={image.alt} />
                         </button>
                         <div className={styles.photoCaption} aria-hidden="true">
                           <p className={styles.photoCaptionTitle}>{photo.title}</p>

@@ -14,6 +14,8 @@ import styles from './BentoHome.module.css';
 import { useBentoScale } from './useBentoScale';
 import { bentoCopy, Lang } from './bentoCopy';
 import { bentoImages } from './bentoImages';
+import SkeletonImage from '../../components/Skeleton/SkeletonImage';
+import SkeletonBackground from '../../components/Skeleton/SkeletonBackground';
 
 interface BentoHomeProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -134,25 +136,27 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
           </p>
         </article>
 
-        {projectPreviews.map((project, index) => (
-          <button
-            key={project.id}
-            type="button"
-            className={`${styles.tile} ${styles.project} ${index === 0 ? styles.projectOne : styles.projectTwo}`}
-            onClick={() => onOpenProjectCase(project.id)}
-            aria-label={project.title}
-            style={{
-              backgroundImage: `url(${index === 0 ? bentoImages.cashless : bentoImages.jobPortal})`,
-            }}
-          >
-            <span className={styles.projectOverlay}>
-              <span className={styles.projectTitle}>{project.title}</span>
-              <span className={styles.projectArrow} aria-hidden="true">
-                →
+        {projectPreviews.map((project, index) => {
+          const imageSrc = index === 0 ? bentoImages.cashless : bentoImages.jobPortal;
+
+          return (
+            <SkeletonBackground
+              key={project.id}
+              type="button"
+              src={imageSrc}
+              className={`${styles.tile} ${styles.project} ${index === 0 ? styles.projectOne : styles.projectTwo}`}
+              onClick={() => onOpenProjectCase(project.id)}
+              ariaLabel={project.title}
+            >
+              <span className={styles.projectOverlay}>
+                <span className={styles.projectTitle}>{project.title}</span>
+                <span className={styles.projectArrow} aria-hidden="true">
+                  →
+                </span>
               </span>
-            </span>
-          </button>
-        ))}
+            </SkeletonBackground>
+          );
+        })}
 
         <div className={`${styles.tile} ${styles.socials}`}>
           {socialLinks.map((link) => (
@@ -171,7 +175,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         </div>
 
         <div className={`${styles.tile} ${styles.photo}`}>
-          <img className={styles.photoImage} src={bentoImages.portrait} alt="Portrait" />
+          <SkeletonImage className={styles.photoImage} src={bentoImages.portrait} alt="Portrait" />
         </div>
 
         <article
@@ -191,12 +195,12 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
           <ArrowButton onClick={() => navigate('about')} label="Go to about" />
         </article>
 
-        <button
+        <SkeletonBackground
           type="button"
+          src={bentoImages.laptop}
           className={`${styles.tile} ${styles.laptop}`}
           onClick={() => onOpenProjectCase('laptop')}
-          aria-label="BoostPro"
-          style={{ backgroundImage: `url(${bentoImages.laptop})` }}
+          ariaLabel="BoostPro"
         >
           <span className={styles.laptopOverlay}>
             <span className={styles.laptopTitle}>BoostPro</span>
@@ -204,7 +208,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
               →
             </span>
           </span>
-        </button>
+        </SkeletonBackground>
 
         <article className={`${styles.tile} ${styles.resources}`}>
           <p className={styles.tileEyebrow}>{copy.resourcesEyebrow}</p>
