@@ -44,9 +44,9 @@ export const aboutCopy: Record<
     contactTitle: string;
     copyEmail: string;
     copied: string;
-    downloadTitle: string;
-    downloadPdf: string;
-    downloadFileName: string;
+    blogTitle: string;
+    blogCta: string;
+    blogUrl: string;
     galleryPrev: string;
     galleryNext: string;
     viewPhoto: string;
@@ -130,9 +130,9 @@ export const aboutCopy: Record<
     contactTitle: 'Есть проект?',
     copyEmail: 'Email',
     copied: 'Скопировано!',
-    downloadTitle: 'Резюме',
-    downloadPdf: 'Скачать PDF',
-    downloadFileName: 'resume.pdf',
+    blogTitle: 'Блог',
+    blogCta: 'Читать',
+    blogUrl: '#',
     galleryPrev: 'Предыдущее фото',
     galleryNext: 'Следующее фото',
     viewPhoto: 'Открыть фото',
@@ -220,9 +220,9 @@ export const aboutCopy: Record<
     contactTitle: 'Have a project in mind?',
     copyEmail: 'Email',
     copied: 'Copied!',
-    downloadTitle: 'Resume',
-    downloadPdf: 'Download PDF',
-    downloadFileName: 'resume.pdf',
+    blogTitle: 'Blog',
+    blogCta: 'Read',
+    blogUrl: '#',
     galleryPrev: 'Previous photo',
     galleryNext: 'Next photo',
     viewPhoto: 'View photo',

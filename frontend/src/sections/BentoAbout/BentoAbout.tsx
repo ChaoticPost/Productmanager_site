@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import HugeIcon from '../../components/icons/HugeIcon';
 import {
+  ArrowUpRight01Icon,
   Cancel01Icon,
-  Download01Icon,
   aboutStackIconMap,
 } from '../../components/icons/iconMap';
 import { Lang } from '../BentoHome/bentoCopy';
@@ -259,16 +259,17 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
           </article>
 
           <article className={`${styles.tile} ${styles.download}`}>
-            <h3 className={styles.downloadTitle}>{copy.downloadTitle}</h3>
+            <h3 className={styles.downloadTitle}>{copy.blogTitle}</h3>
             <a
-              href="/resume.pdf"
-              download={copy.downloadFileName}
+              href={copy.blogUrl}
               className={styles.downloadButton}
+              target="_blank"
+              rel="noreferrer"
             >
               <span className={styles.downloadButtonIcon} aria-hidden="true">
-                <HugeIcon icon={Download01Icon} size={16} />
+                <HugeIcon icon={ArrowUpRight01Icon} size={16} />
               </span>
-              <span className={styles.downloadButtonLabel}>{copy.downloadPdf}</span>
+              <span className={styles.downloadButtonLabel}>{copy.blogCta}</span>
             </a>
           </article>
           </div>
