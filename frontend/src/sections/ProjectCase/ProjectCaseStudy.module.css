@@ -1,74 +1,34 @@
 .section {
   width: 100%;
   min-height: 100%;
-  padding: 4px 8px 48px;
+  padding: 8px 8px 48px;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.02), transparent 38%),
-    #0c0c0c;
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.03), transparent 42%),
+    var(--bg-main, #0c0c0c);
 }
 
-.header,
-.introGrid,
-.mediaCard,
-.textSection {
-  max-width: 1120px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.header {
-  margin-bottom: var(--bento-gap);
-  padding: 0 4px;
-}
-
-.pageTitle {
-  margin: 0;
-  font-size: clamp(28px, 4vw, 40px);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  color: var(--bento-text-main);
-}
-
-.pageSubtitle {
-  margin: 8px 0 0;
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--bento-text-muted);
-}
-
-.introGrid {
+.bento {
+  --case-gap: var(--bento-gap, 12px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
-  gap: var(--bento-gap);
-  margin-bottom: var(--bento-gap);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--case-gap);
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: stretch;
 }
 
-.card {
+.tile {
+  position: relative;
+  min-width: 0;
   border: 1px solid var(--border-subtle);
   border-radius: var(--bento-radius);
   background: var(--bento-tile-bg);
-  padding: 28px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  min-width: 0;
+  padding: 24px 26px;
+  overflow: hidden;
 }
 
-.metaList {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.metaItem {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.metaLabel {
-  margin: 0;
+.eyebrow {
+  margin: 0 0 10px;
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -76,12 +36,91 @@
   font-weight: 500;
 }
 
-.metaValue {
+.pageTitle,
+.tileHeading,
+.valueTitle {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--bento-text-main);
+}
+
+.pageTitle {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.08;
+}
+
+.tileHeading {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.valueTitle {
+  font-size: 18px;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.bodyText,
+.metaValue,
+.stepText {
   margin: 0;
   font-size: 15px;
-  line-height: 1.4;
+  line-height: 1.55;
+  color: var(--bento-text-muted);
+}
+
+.metaValue {
   color: var(--bento-text-main);
   font-weight: 500;
+  line-height: 1.35;
+}
+
+.titleTile {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  min-height: 280px;
+}
+
+.heroTile {
+  grid-column: span 7;
+  padding: 0;
+  min-height: 280px;
+}
+
+.mediaTile {
+  grid-column: span 6;
+  padding: 0;
+  min-height: 260px;
+}
+
+.heroImage,
+.mediaImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.metaTile {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-height: 110px;
+}
+
+.toolsTile {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
 }
 
 .toolsList {
@@ -89,28 +128,159 @@
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.toolsList li {
-  font-size: 15px;
-  line-height: 1.4;
-  color: var(--bento-text-main);
-  font-weight: 500;
-}
-
-.infoBlock {
-  display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
-.infoText {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--bento-text-muted);
+.toolIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bento-tile-elevated);
+  color: var(--bento-text-main);
+  flex-shrink: 0;
+}
+
+.toolFallback {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.descTile {
+  grid-column: span 4;
+}
+
+.contextTile {
+  grid-column: span 8;
+}
+
+.problemTile {
+  grid-column: span 6;
+}
+
+.problemTileWide {
+  grid-column: span 12;
+}
+
+.problemTile .eyebrow {
+  display: none;
+}
+
+.mediaTile {
+  grid-column: span 6;
+}
+
+.processIntroTile {
+  grid-column: span 12;
+}
+
+.processIntroTile .eyebrow {
+  display: none;
+}
+
+.stepTile {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 150px;
+}
+
+.stepIndex {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--bento-text-secondary, var(--bento-text-muted));
+  font-weight: 600;
+}
+
+.stepText {
+  color: var(--bento-text-main);
+}
+
+.valueHeaderTile {
+  grid-column: span 12;
+  padding-top: 20px;
+  padding-bottom: 18px;
+}
+
+.valueHeaderTile .eyebrow {
+  display: none;
+}
+
+.valueTile {
+  grid-column: span 6;
+}
+
+.solutionTile {
+  grid-column: span 6;
+}
+
+.solutionTile .eyebrow {
+  display: none;
+}
+
+.solutionMedia {
+  grid-column: span 6;
+}
+
+.metricsTile {
+  grid-column: span 12;
+}
+
+.metricsTile .eyebrow {
+  display: none;
+}
+
+.metricChips {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.metricChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bento-tile-elevated);
+  color: var(--bento-text-main);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+:global(html[data-theme='light']) .metricChip {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.insightsTile {
+  grid-column: span 12;
+}
+
+.insightsTile .eyebrow {
+  display: none;
 }
 
 .ctaButton {
@@ -118,7 +288,7 @@
   align-items: center;
   gap: 8px;
   width: fit-content;
-  margin-top: auto;
+  margin-top: 18px;
   padding: 12px 18px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
@@ -128,7 +298,6 @@
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
-  cursor: none;
   transition: background-color 0.15s ease;
 }
 
@@ -136,66 +305,66 @@
   background: rgba(255, 255, 255, 0.04);
 }
 
-.mediaCard {
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--bento-radius);
-  background: var(--bento-tile-bg);
-  overflow: hidden;
-  margin-bottom: var(--bento-gap);
+:global(html[data-theme='light']) .ctaButton {
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
-.mediaImage {
-  width: 100%;
-  display: block;
-}
-
-.mediaCard .mediaImage {
-  aspect-ratio: 16 / 9;
-}
-
-.textSection {
-  padding: 8px 4px 28px;
-  margin-bottom: calc(var(--bento-gap) - 8px);
-}
-
-.sectionTitle {
-  margin: 0 0 12px;
-  font-size: clamp(22px, 3vw, 28px);
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--bento-text-main);
-}
-
-.sectionText {
-  margin: 0;
-  max-width: 72ch;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--bento-text-muted);
-}
-
-.processList {
-  margin: 16px 0 0;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 72ch;
-}
-
-.processList li {
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--bento-text-muted);
-}
-
-@media (max-width: 900px) {
-  .introGrid {
-    grid-template-columns: minmax(0, 1fr);
+@media (max-width: 960px) {
+  .titleTile,
+  .heroTile,
+  .metaTile,
+  .toolsTile,
+  .descTile,
+  .contextTile,
+  .problemTile,
+  .problemTileWide,
+  .mediaTile,
+  .processIntroTile,
+  .stepTile,
+  .valueHeaderTile,
+  .valueTile,
+  .solutionTile,
+  .solutionMedia,
+  .metricsTile,
+  .insightsTile {
+    grid-column: span 12;
   }
 
-  .card {
-    padding: 22px 20px;
+  .titleTile,
+  .heroTile {
+    min-height: 220px;
+  }
+
+  .metaTile,
+  .toolsTile {
+    grid-column: span 6;
+  }
+
+  .stepTile {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 4px 4px 32px;
+  }
+
+  .tile {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .metaTile,
+  .toolsTile,
+  .stepTile,
+  .valueTile {
+    grid-column: span 12;
+  }
+
+  .heroTile,
+  .mediaTile,
+  .solutionMedia {
+    min-height: 200px;
   }
 }

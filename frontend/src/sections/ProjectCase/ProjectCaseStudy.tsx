@@ -3,6 +3,7 @@ import HugeIcon from '../../components/icons/HugeIcon';
 import { ArrowUpRight01Icon } from '../../components/icons/iconMap';
 import { SectionId } from '../../types/sections';
 import { Lang } from '../BentoHome/bentoCopy';
+import { caseToolIconMap } from '../../components/icons/stackBrandIcons';
 import { caseStudyCopy } from './caseStudyCopy';
 import { getProjectCase } from './projectCaseData';
 import SkeletonImage from '../../components/Skeleton/SkeletonImage';
@@ -42,89 +43,126 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
 
   return (
     <section id="project-case" className={styles.section}>
-      <header className={styles.header}>
-        <h1 className={styles.pageTitle}>{project.title[lang]}</h1>
-        <p className={styles.pageSubtitle}>{project.subtitle[lang]}</p>
-      </header>
-
-      <div className={styles.introGrid}>
-        <article className={styles.card}>
-          <div className={styles.metaList}>
-            <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>{copy.company}</p>
-              <p className={styles.metaValue}>{project.company[lang]}</p>
-            </div>
-            <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>{copy.myRole}</p>
-              <p className={styles.metaValue}>{project.role[lang]}</p>
-            </div>
-            <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>{copy.tools}</p>
-              <ul className={styles.toolsList}>
-                {project.tools.map((tool) => (
-                  <li key={tool}>{tool}</li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>{copy.timeline}</p>
-              <p className={styles.metaValue}>{project.timeline}</p>
-            </div>
-          </div>
+      <div className={styles.bento}>
+        <article className={`${styles.tile} ${styles.titleTile}`}>
+          <p className={styles.eyebrow}>{project.subtitle[lang]}</p>
+          <h1 className={styles.pageTitle}>{project.title[lang]}</h1>
+          {project.appUrl ? (
+            <a href={project.appUrl} className={styles.ctaButton} target="_blank" rel="noreferrer">
+              <span>{copy.checkApp}</span>
+              <HugeIcon icon={ArrowUpRight01Icon} size={14} />
+            </a>
+          ) : null}
         </article>
 
-        <article className={styles.card}>
-          <div className={styles.infoBlock}>
-            <p className={styles.metaLabel}>{copy.description}</p>
-            <p className={styles.infoText}>{project.description[lang]}</p>
-          </div>
-          <div className={styles.infoBlock}>
-            <p className={styles.metaLabel}>{copy.context}</p>
-            <p className={styles.infoText}>{project.context[lang]}</p>
-          </div>
-          <a href={project.appUrl} className={styles.ctaButton} target="_blank" rel="noreferrer">
-            <span>{copy.checkApp}</span>
-            <HugeIcon icon={ArrowUpRight01Icon} size={14} />
-          </a>
+        <article className={`${styles.tile} ${styles.heroTile}`}>
+          <SkeletonImage className={styles.heroImage} src={project.heroImage} alt={project.title[lang]} />
+        </article>
+
+        <article className={`${styles.tile} ${styles.metaTile}`}>
+          <p className={styles.eyebrow}>{copy.company}</p>
+          <p className={styles.metaValue}>{project.company[lang]}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.metaTile}`}>
+          <p className={styles.eyebrow}>{copy.myRole}</p>
+          <p className={styles.metaValue}>{project.role[lang]}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.metaTile}`}>
+          <p className={styles.eyebrow}>{copy.timeline}</p>
+          <p className={styles.metaValue}>{project.timeline}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.toolsTile}`}>
+          <p className={styles.eyebrow}>{copy.tools}</p>
+          <ul className={styles.toolsList}>
+            {project.tools.map((tool) => {
+              const Icon = caseToolIconMap[tool.id];
+
+              return (
+                <li key={tool.id} className={styles.toolIcon} title={tool.label}>
+                  {Icon ? <Icon size={18} /> : <span className={styles.toolFallback}>{tool.label}</span>}
+                  <span className={styles.srOnly}>{tool.label}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </article>
+
+        <article className={`${styles.tile} ${styles.descTile}`}>
+          <p className={styles.eyebrow}>{copy.description}</p>
+          <p className={styles.bodyText}>{project.description[lang]}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.contextTile}`}>
+          <p className={styles.eyebrow}>{copy.context}</p>
+          <p className={styles.bodyText}>{project.context[lang]}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.problemTile}`}>
+          <h2 className={styles.tileHeading}>{copy.problem}</h2>
+          <p className={styles.bodyText}>{project.problem[lang]}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.mediaTile}`}>
+          <SkeletonImage className={styles.mediaImage} src={project.problemImage} alt="" />
+        </article>
+
+        <article className={`${styles.tile} ${styles.processIntroTile}`}>
+          <h2 className={styles.tileHeading}>{copy.process}</h2>
+          <p className={styles.bodyText}>{project.processIntro[lang]}</p>
+        </article>
+
+        {project.processSteps[lang].map((step, index) => (
+          <article key={step} className={`${styles.tile} ${styles.stepTile}`}>
+            <span className={styles.stepIndex}>{String(index + 1).padStart(2, '0')}</span>
+            <p className={styles.stepText}>{step}</p>
+          </article>
+        ))}
+
+        {project.valueBlocks?.length ? (
+          <>
+            <article className={`${styles.tile} ${styles.valueHeaderTile}`}>
+              <h2 className={styles.tileHeading}>{copy.value}</h2>
+            </article>
+            {project.valueBlocks.map((block) => (
+              <article key={block.title[lang]} className={`${styles.tile} ${styles.valueTile}`}>
+                <p className={styles.eyebrow}>{copy.valueFor}</p>
+                <h3 className={styles.valueTitle}>{block.title[lang]}</h3>
+                <p className={styles.bodyText}>{block.text[lang]}</p>
+              </article>
+            ))}
+          </>
+        ) : null}
+
+        <article className={`${styles.tile} ${styles.solutionTile}`}>
+          <h2 className={styles.tileHeading}>{copy.solution}</h2>
+          <p className={styles.bodyText}>{project.solution[lang]}</p>
+        </article>
+
+        <article className={`${styles.tile} ${styles.mediaTile} ${styles.solutionMedia}`}>
+          <SkeletonImage className={styles.mediaImage} src={project.showcaseMain} alt="" />
+        </article>
+
+        {project.metrics ? (
+          <article className={`${styles.tile} ${styles.metricsTile}`}>
+            <h2 className={styles.tileHeading}>{copy.metrics}</h2>
+            <ul className={styles.metricChips}>
+              {project.metrics[lang].map((metric) => (
+                <li key={metric} className={styles.metricChip}>
+                  {metric}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ) : null}
+
+        <article className={`${styles.tile} ${styles.insightsTile}`}>
+          <h2 className={styles.tileHeading}>{copy.keyInsights}</h2>
+          <p className={styles.bodyText}>{project.insights[lang]}</p>
         </article>
       </div>
-
-      <article className={styles.mediaCard}>
-        <SkeletonImage className={styles.mediaImage} src={project.heroImage} alt={project.title[lang]} />
-      </article>
-
-      <section className={styles.textSection}>
-        <h2 className={styles.sectionTitle}>{copy.problem}</h2>
-        <p className={styles.sectionText}>{project.problem[lang]}</p>
-      </section>
-
-      <article className={styles.mediaCard}>
-        <SkeletonImage className={styles.mediaImage} src={project.problemImage} alt="" />
-      </article>
-
-      <section className={styles.textSection}>
-        <h2 className={styles.sectionTitle}>{copy.process}</h2>
-        <p className={styles.sectionText}>{project.processIntro[lang]}</p>
-        <ol className={styles.processList}>
-          {project.processSteps[lang].map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
-      </section>
-
-      <section className={styles.textSection}>
-        <h2 className={styles.sectionTitle}>{copy.solution}</h2>
-        <p className={styles.sectionText}>{project.solution[lang]}</p>
-      </section>
-
-      <section className={styles.textSection}>
-        <h2 className={styles.sectionTitle}>{copy.keyInsights}</h2>
-        <p className={styles.sectionText}>{project.insights[lang]}</p>
-      </section>
-
-      <article className={styles.mediaCard}>
-        <SkeletonImage className={styles.mediaImage} src={project.showcaseMain} alt="" />
-      </article>
     </section>
   );
 };

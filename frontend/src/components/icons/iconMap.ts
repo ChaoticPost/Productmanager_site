@@ -12,13 +12,6 @@ import {
   Sun02Icon,
   ArrowLeft01Icon,
   Home01Icon,
-  FigmaIcon,
-  Notion01Icon,
-  FramerIcon,
-  Task01Icon,
-  ArcBrowserIcon,
-  SlackIcon,
-  ChatGptIcon,
   ArrowRight01Icon,
   Tick01Icon,
   Cancel01Icon,
@@ -32,18 +25,8 @@ export const socialIconMap: Record<string, IconSvgElement> = {
   mail: Mail01Icon,
 };
 
-export const stackIconMap = [
-  { id: 'figma', label: 'Figma', icon: FigmaIcon },
-  { id: 'notion', label: 'Notion', icon: Notion01Icon },
-] as const;
+export { stackIconMap } from './stackBrandIcons';
 
-export const aboutStackIconMap = [
-  { id: 'arc', label: 'Arc Browser', icon: ArcBrowserIcon },
-  { id: 'slack', label: 'Slack', icon: SlackIcon },
-  { id: 'chatgpt', label: 'ChatGPT', icon: ChatGptIcon },
-  { id: 'framer', label: 'Framer', icon: FramerIcon },
-  { id: 'figma', label: 'Figma', icon: FigmaIcon },
-] as const;
 
 export {
   ArrowUpRight01Icon,

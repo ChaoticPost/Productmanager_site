@@ -12,7 +12,10 @@ export const caseStudyCopy: Record<
     checkApp: string;
     problem: string;
     process: string;
+    value: string;
+    valueFor: string;
     solution: string;
+    metrics: string;
     keyInsights: string;
   }
 > = {
@@ -26,7 +29,10 @@ export const caseStudyCopy: Record<
     checkApp: 'Открыть приложение',
     problem: 'Проблема',
     process: 'Процесс',
+    value: 'Ценность продукта',
+    valueFor: 'Для кого',
     solution: 'Решение',
+    metrics: 'Метрики',
     keyInsights: 'Ключевые выводы',
   },
   en: {
@@ -39,7 +45,10 @@ export const caseStudyCopy: Record<
     checkApp: 'Check the app',
     problem: 'Problem',
     process: 'Process',
+    value: 'Product value',
+    valueFor: 'For whom',
     solution: 'Solution',
+    metrics: 'Metrics',
     keyInsights: 'Key Insights',
   },
 };
