@@ -1,10 +1,16 @@
 .section {
   width: 100%;
   min-height: 100%;
-  padding: 8px 8px 48px;
+  padding: 8px 8px 0;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.03), transparent 42%),
-    var(--bg-main, #0c0c0c);
+    var(--bg-color);
+}
+
+:global(html[data-theme='light']) .section {
+  background:
+    radial-gradient(circle at top, rgba(0, 0, 0, 0.03), transparent 42%),
+    var(--bg-color);
 }
 
 .bento {
@@ -12,6 +18,7 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--case-gap);
+  padding-bottom: var(--case-gap);
   max-width: 1180px;
   margin: 0 auto;
   align-items: stretch;
@@ -197,22 +204,93 @@
 }
 
 .stepTile {
-  grid-column: span 4;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  min-height: 150px;
+  gap: 12px;
+  min-height: 0;
+}
+
+.stepTileThird {
+  grid-column: span 4;
+}
+
+.stepTileHalf {
+  grid-column: span 6;
+}
+
+.stepTitle {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--bento-text-main);
 }
 
 .stepIndex {
   font-size: 13px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--bento-text-secondary, var(--bento-text-muted));
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .stepText {
+  margin: 0;
+  color: var(--bento-text-secondary, var(--bento-text-muted));
+  font-size: 14px;
+  line-height: 1.45;
+  max-width: 36ch;
+}
+
+.stepChips {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stepChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bento-tile-elevated);
   color: var(--bento-text-main);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+:global(html[data-theme='light']) .stepChip {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.stepFlow {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepFlowItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepFlowArrow {
+  display: inline-flex;
+  color: var(--bento-text-muted);
+  opacity: 0.7;
 }
 
 .valueHeaderTile {
@@ -320,7 +398,6 @@
   .problemTileWide,
   .mediaTile,
   .processIntroTile,
-  .stepTile,
   .valueHeaderTile,
   .valueTile,
   .solutionTile,
@@ -340,14 +417,15 @@
     grid-column: span 6;
   }
 
-  .stepTile {
+  .stepTileThird,
+  .stepTileHalf {
     grid-column: span 6;
   }
 }
 
 @media (max-width: 640px) {
   .section {
-    padding: 4px 4px 32px;
+    padding: 4px 4px 0;
   }
 
   .tile {
@@ -358,6 +436,8 @@
   .metaTile,
   .toolsTile,
   .stepTile,
+  .stepTileThird,
+  .stepTileHalf,
   .valueTile {
     grid-column: span 12;
   }

@@ -10,6 +10,16 @@ export interface CaseTool {
   label: string;
 }
 
+export type ProcessStepIcon = 'research' | 'roles' | 'journey' | 'design';
+
+export interface ProcessStep {
+  title: string;
+  text?: string;
+  chips?: string[];
+  flow?: string[];
+  icon?: ProcessStepIcon;
+}
+
 export interface ProjectCase {
   id: ProjectCaseId;
   title: Record<Lang, string>;
@@ -26,7 +36,7 @@ export interface ProjectCase {
   problem: Record<Lang, string>;
   problemImage: string;
   processIntro: Record<Lang, string>;
-  processSteps: Record<Lang, string[]>;
+  processSteps: Record<Lang, ProcessStep[]>;
   valueBlocks?: Array<{
     title: Record<Lang, string>;
     text: Record<Lang, string>;
@@ -76,23 +86,53 @@ export const projectCases: ProjectCase[] = [
     },
     problemImage: bentoImages.campusCareCreate,
     processIntro: {
-      ru: '',
-      en: '',
+      ru: 'Продуктовый и user-centric подход: от исследования до проектирования сервиса.',
+      en: 'A product and user-centric approach: from research to service design.',
     },
     processSteps: {
       ru: [
-        'Провела опрос среди потенциальных пользователей и собрала примеры ситуаций в корпусах вуза.',
-        'Определила основные роли: студент или преподаватель, сотрудник ответственного подразделения, исполнитель и администратор.',
-        'Составила пользовательские сценарии и основной путь: заметить неисправность → сфотографировать → указать место → отправить → отслеживать статус.',
-        'Спроектировала структуру веб-сервиса, экраны, статусы обращений и логику взаимодействия между пользователями и сотрудниками вуза.',
-        'Подготовила архитектуру frontend-приложения с расчётом на реализацию на React и TypeScript.',
+        {
+          icon: 'research',
+          title: 'Исследование',
+          text: 'Опрос пользователей и реальные кейсы из корпусов.',
+        },
+        {
+          icon: 'roles',
+          title: 'Роли',
+          chips: ['Студент', 'Сотрудник', 'Исполнитель', 'Админ'],
+        },
+        {
+          icon: 'journey',
+          title: 'Путь заявки',
+          flow: ['Заметить', 'Фото', 'Место', 'Отправить', 'Статус'],
+        },
+        {
+          icon: 'design',
+          title: 'Проектирование',
+          text: 'Экраны, статусы и логика взаимодействия.',
+        },
       ],
       en: [
-        'Ran a survey with potential users and collected real campus issue examples.',
-        'Defined core roles: student or lecturer, responsible department staff, assignee, and admin.',
-        'Mapped user scenarios and the main path: notice an issue → photograph it → set location → submit → track status.',
-        'Designed the service structure, screens, request statuses, and interaction logic between users and university staff.',
-        'Prepared the frontend architecture with React and TypeScript in mind for later implementation.',
+        {
+          icon: 'research',
+          title: 'Research',
+          text: 'User survey and real campus issue examples.',
+        },
+        {
+          icon: 'roles',
+          title: 'Roles',
+          chips: ['Student', 'Staff', 'Assignee', 'Admin'],
+        },
+        {
+          icon: 'journey',
+          title: 'Request path',
+          flow: ['Notice', 'Photo', 'Place', 'Submit', 'Status'],
+        },
+        {
+          icon: 'design',
+          title: 'Design',
+          text: 'Screens, statuses, and interaction logic.',
+        },
       ],
     },
     valueBlocks: [
@@ -174,14 +214,14 @@ export const projectCases: ProjectCase[] = [
     },
     processSteps: {
       ru: [
-        'Провели исследование аудитории через опросы и интервью, чтобы понять финансовые привычки пользователей.',
-        'Создали wireframes и прототипы на основе инсайтов, уточняя дизайн по обратной связи.',
-        'Протестировали приложение с пользователями и улучшили UX на основе результатов.',
+        { icon: 'research', title: 'Исследование', text: 'Опросы и интервью о финансовых привычках.' },
+        { icon: 'design', title: 'Прототипы', text: 'Wireframes и итерации по обратной связи.' },
+        { icon: 'journey', title: 'Тесты', text: 'Проверка UX с пользователями и доработки.' },
       ],
       en: [
-        "We've conducted studies with our audience's finances and preferences through surveys and research, giving us valuable insights.",
-        'The team created wireframes and prototypes based on research insights, refining the designs with user feedback to improve the overall user experience.',
-        'Testing the app with users and used their feedback to improve usability and design.',
+        { icon: 'research', title: 'Research', text: 'Surveys and interviews on financial habits.' },
+        { icon: 'design', title: 'Prototypes', text: 'Wireframes refined with user feedback.' },
+        { icon: 'journey', title: 'Testing', text: 'UX tests with users and follow-up fixes.' },
       ],
     },
     solution: {
@@ -223,14 +263,14 @@ export const projectCases: ProjectCase[] = [
     },
     processSteps: {
       ru: [
-        'Интервью с соискателями и рекрутерами для карты боли в текущих инструментах.',
-        'Прототипирование ключевых флоу: поиск, отклик, статус заявки.',
-        'Юзабилити-тесты и итерации по результатам сессий.',
+        { icon: 'research', title: 'Интервью', text: 'Карта болей соискателей и рекрутеров.' },
+        { icon: 'journey', title: 'Прототипы', text: 'Поиск, отклик и статус заявки.' },
+        { icon: 'design', title: 'Тесты', text: 'Юзабилити-сессии и итерации.' },
       ],
       en: [
-        'Interviews with candidates and recruiters to map pain points in existing tools.',
-        'Prototyping core flows: search, apply, and application status.',
-        'Usability testing and iterations based on session results.',
+        { icon: 'research', title: 'Interviews', text: 'Pain map for candidates and recruiters.' },
+        { icon: 'journey', title: 'Prototypes', text: 'Search, apply, and status flows.' },
+        { icon: 'design', title: 'Testing', text: 'Usability sessions and iterations.' },
       ],
     },
     solution: {
@@ -272,14 +312,14 @@ export const projectCases: ProjectCase[] = [
     },
     processSteps: {
       ru: [
-        'Аудит текущего сайта и конкурентов, формулировка value proposition.',
-        'Wireframes и дизайн-система для лендинга и внутренних страниц.',
-        'A/B-тесты CTA и финальная полировка перед запуском.',
+        { icon: 'research', title: 'Аудит', text: 'Сайт, конкуренты и value proposition.' },
+        { icon: 'design', title: 'Дизайн-система', text: 'Wireframes для лендинга и страниц.' },
+        { icon: 'journey', title: 'Запуск', text: 'A/B CTA и финальная полировка.' },
       ],
       en: [
-        'Audit of the current site and competitors, defining the value proposition.',
-        'Wireframes and a design system for the landing and inner pages.',
-        'CTA A/B tests and final polish before launch.',
+        { icon: 'research', title: 'Audit', text: 'Site, competitors, and value proposition.' },
+        { icon: 'design', title: 'Design system', text: 'Wireframes for landing and pages.' },
+        { icon: 'journey', title: 'Launch', text: 'CTA A/B tests and final polish.' },
       ],
     },
     solution: {

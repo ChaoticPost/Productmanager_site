@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HugeIcon from '../../components/icons/HugeIcon';
-import { ArrowUpRight01Icon } from '../../components/icons/iconMap';
+import { ArrowRight01Icon, ArrowUpRight01Icon } from '../../components/icons/iconMap';
 import { SectionId } from '../../types/sections';
 import { Lang } from '../BentoHome/bentoCopy';
 import { caseToolIconMap } from '../../components/icons/stackBrandIcons';
@@ -114,12 +114,43 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
           <p className={styles.bodyText}>{project.processIntro[lang]}</p>
         </article>
 
-        {project.processSteps[lang].map((step, index) => (
-          <article key={step} className={`${styles.tile} ${styles.stepTile}`}>
-            <span className={styles.stepIndex}>{String(index + 1).padStart(2, '0')}</span>
-            <p className={styles.stepText}>{step}</p>
-          </article>
-        ))}
+        {project.processSteps[lang].map((step, index, steps) => {
+          const spanClass = steps.length <= 3 ? styles.stepTileThird : styles.stepTileHalf;
+          const flow = step.flow;
+
+          return (
+            <article key={step.title} className={`${styles.tile} ${styles.stepTile} ${spanClass}`}>
+              <h3 className={styles.stepTitle}>
+                <span className={styles.stepIndex}>{String(index + 1).padStart(2, '0')}</span>
+                {step.title}
+              </h3>
+              {step.text ? <p className={styles.stepText}>{step.text}</p> : null}
+              {step.chips?.length ? (
+                <ul className={styles.stepChips}>
+                  {step.chips.map((chip) => (
+                    <li key={chip} className={styles.stepChip}>
+                      {chip}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {flow?.length ? (
+                <ol className={styles.stepFlow}>
+                  {flow.map((node, nodeIndex) => (
+                    <li key={node} className={styles.stepFlowItem}>
+                      <span className={styles.stepChip}>{node}</span>
+                      {nodeIndex < flow.length - 1 ? (
+                        <span className={styles.stepFlowArrow} aria-hidden>
+                          <HugeIcon icon={ArrowRight01Icon} size={14} />
+                        </span>
+                      ) : null}
+                    </li>
+                  ))}
+                </ol>
+              ) : null}
+            </article>
+          );
+        })}
 
         {project.valueBlocks?.length ? (
           <>
