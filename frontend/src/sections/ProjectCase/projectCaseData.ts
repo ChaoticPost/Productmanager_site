@@ -1,9 +1,24 @@
 import type { Lang } from '../BentoHome/bentoCopy';
 import { bentoImages } from '../BentoHome/bentoImages';
 
-export type ProjectCaseId = 'cashless' | 'job-portal' | 'laptop';
+export type ProjectCaseId = 'campus-care' | 'cashless' | 'job-portal' | 'laptop';
 
-export const projectCaseIds: ProjectCaseId[] = ['cashless', 'job-portal', 'laptop'];
+export const projectCaseIds: ProjectCaseId[] = ['campus-care', 'cashless', 'job-portal', 'laptop'];
+
+export interface CaseTool {
+  id: string;
+  label: string;
+}
+
+export type ProcessStepIcon = 'research' | 'roles' | 'journey' | 'design';
+
+export interface ProcessStep {
+  title: string;
+  text?: string;
+  chips?: string[];
+  flow?: string[];
+  icon?: ProcessStepIcon;
+}
 
 export interface ProjectCase {
   id: ProjectCaseId;
@@ -11,24 +26,165 @@ export interface ProjectCase {
   subtitle: Record<Lang, string>;
   company: Record<Lang, string>;
   role: Record<Lang, string>;
-  tools: string[];
+  tools: CaseTool[];
   timeline: string;
   description: Record<Lang, string>;
   context: Record<Lang, string>;
-  appUrl: string;
+  /** Omit or leave empty for concept / unreleased projects */
+  appUrl?: string;
   heroImage: string;
   problem: Record<Lang, string>;
   problemImage: string;
   processIntro: Record<Lang, string>;
-  processSteps: Record<Lang, string[]>;
+  processSteps: Record<Lang, ProcessStep[]>;
+  valueBlocks?: Array<{
+    title: Record<Lang, string>;
+    text: Record<Lang, string>;
+  }>;
   solution: Record<Lang, string>;
+  metrics?: Record<Lang, string[]>;
   insights: Record<Lang, string>;
   showcaseMain: string;
 }
 
-const sharedTools = ['Figma', 'Framer', 'Arc', 'Notion'];
+const sharedTools: CaseTool[] = [
+  { id: 'figma', label: 'Figma' },
+  { id: 'framer', label: 'Framer' },
+  { id: 'notion', label: 'Notion' },
+];
 
 export const projectCases: ProjectCase[] = [
+  {
+    id: 'campus-care',
+    title: { ru: 'Campus Care', en: 'Campus Care' },
+    subtitle: { ru: 'Веб-сервис для университета', en: 'University web service' },
+    company: {
+      ru: 'Проект для РТУ МИРЭА',
+      en: 'Сoncept for RTU MIREA',
+    },
+    role: { ru: 'Product Manager', en: 'Product Manager' },
+    tools: [
+      { id: 'anytype', label: 'Anytype' },
+      { id: 'yandex-forms', label: 'Яндекс формы' },
+      { id: 'excel', label: 'Excel' },
+      { id: 'miro', label: 'Miro' },
+      { id: 'figma-stitch', label: 'Figma / Stitch' },
+    ],
+    timeline: '2026',
+    description: {
+      ru: 'Сервис для фиксации неисправностей в университете и отслеживания процесса их устранения.',
+      en: 'A service for reporting campus facility issues and tracking how they get resolved.',
+    },
+    context: {
+      ru: 'Campus Care помогает студентам и сотрудникам сообщать о неисправностях в вузе. Пользователь загружает фото, указывает место и описание проблемы, после чего отслеживает статус и результат её устранения.',
+      en: 'Campus Care helps students and staff report problems across campus buildings. A user can photograph an issue, specify the building and classroom, add a description, and send the request to the responsible department — from broken outlets and monitors to projectors, furniture, lighting, plumbing, and more. After submitting, they can see status, processing timelines, and the outcome of the work.',
+    },
+    heroImage: bentoImages.campusCareList,
+    problem: {
+      ru: 'Студентам и сотрудникам не всегда понятно, куда сообщать о неисправностях, а обращения через разные каналы могут теряться. По результатам опроса и личных наблюдений я выявила потребность в едином сервисе, где можно быстро создать заявку и отследить её до устранения проблемы.',
+      en: 'Students and staff often do not know where to report facility issues. Requests go verbally or through scattered channels, so information gets lost and people cannot tell whether a problem was accepted for work. Based on personal observation and a user survey, the university lacks a single transparent service for these requests. The goal was to design a solution that makes it easy to report an issue and follow the full path from submission to resolution.',
+    },
+    problemImage: bentoImages.campusCareCreate,
+    processIntro: {
+      ru: 'Продуктовый и user-centric подход: от исследования до проектирования сервиса.',
+      en: 'A product and user-centric approach: from research to service design.',
+    },
+    processSteps: {
+      ru: [
+        {
+          icon: 'research',
+          title: 'Исследование',
+          text: 'Опрос пользователей и реальные кейсы из корпусов.',
+        },
+        {
+          icon: 'roles',
+          title: 'Роли',
+          chips: ['Студент', 'Сотрудник', 'Исполнитель', 'Админ'],
+        },
+        {
+          icon: 'journey',
+          title: 'Путь заявки',
+          flow: ['Заметить', 'Фото', 'Место', 'Отправить', 'Статус'],
+        },
+        {
+          icon: 'design',
+          title: 'Проектирование',
+          text: 'Экраны, статусы и логика взаимодействия.',
+        },
+      ],
+      en: [
+        {
+          icon: 'research',
+          title: 'Research',
+          text: 'User survey and real campus issue examples.',
+        },
+        {
+          icon: 'roles',
+          title: 'Roles',
+          chips: ['Student', 'Staff', 'Assignee', 'Admin'],
+        },
+        {
+          icon: 'journey',
+          title: 'Request path',
+          flow: ['Notice', 'Photo', 'Place', 'Submit', 'Status'],
+        },
+        {
+          icon: 'design',
+          title: 'Design',
+          text: 'Screens, statuses, and interaction logic.',
+        },
+      ],
+    },
+    valueBlocks: [
+      {
+        title: { ru: 'Студенты и преподаватели', en: 'Students & lecturers' },
+        text: {
+          ru: 'Понятный способ сообщить о проблеме, прозрачный статус обращения, обратная связь от сотрудников вуза и контроль результата.',
+          en: 'A clear way to report an issue, transparent request status, feedback from university staff, and control over the outcome.',
+        },
+      },
+      {
+        title: { ru: 'Университет', en: 'University' },
+        text: {
+          ru: 'Единая база неисправностей, меньше потерянных обращений, контроль сроков и ответственных, данные о проблемных корпусах и приоритеты на основе реальной потребности.',
+          en: 'A single issues database, fewer lost requests, control of deadlines and owners, data on problem buildings, and prioritization based on real demand.',
+        },
+      },
+    ],
+    solution: {
+      ru: 'Пользователь создаёт обращение с фото, описанием и местоположением, затем отслеживает статус и подтверждает результат. Карта помогает избежать дубликатов, а сотрудники через админ-панель назначают исполнителей, управляют сроками и фиксируют выполнение.',
+      en: 'The core is a simple request form: photo, category, building, floor, room, description, and urgency. After submit, the request appears in a personal cabinet — users track status, get notifications, answer follow-ups, and confirm the fix. An issues map reduces duplicates: people can see requests in a building and mark that the same problem affects them too. For staff, an admin area covers new requests, assignee allocation, priority and status, deadlines, and recording outcomes.',
+    },
+    metrics: {
+      ru: [
+        'Количество созданных обращений',
+        'Доля принятых в работу заявок',
+        'Среднее время первичной реакции',
+        'Среднее время устранения проблемы',
+        'Доля обращений, решённых в срок',
+        'Количество повторных обращений',
+        'Доля подтверждённых пользователями решений',
+        'Оценка качества выполненных работ',
+        'CSAT после закрытия заявки',
+      ],
+      en: [
+        'Number of created requests',
+        'Share of requests accepted into work',
+        'Average first-response time',
+        'Average time to resolve',
+        'Share of requests resolved on time',
+        'Number of duplicate / repeat requests',
+        'Share of user-confirmed resolutions',
+        'Work quality rating',
+        'CSAT after request closure',
+      ],
+    },
+    insights: {
+      ru: 'Даже бытовая неисправность требует понятного процесса между пользователем и организацией. Главная ценность Campus Care — не только фото проблемы, но и видимость работы с обращением: заявка зарегистрирована, кто отвечает, на каком этапе решение. Сервис может сократить потери обращений, систематизировать данные об инфраструктуре и сделать среду комфортнее для студентов и сотрудников.',
+      en: 'Even a small facility issue needs a clear process between the user and the organization. Campus Care’s main value is not only capturing a photo, but making follow-up visible: the request is registered, who owns it, and where resolution stands. The service can reduce lost requests, systematize infrastructure data, and make campus life more comfortable for students and staff.',
+    },
+    showcaseMain: bentoImages.campusCareMap,
+  },
   {
     id: 'cashless',
     title: { ru: 'Cashless', en: 'Cashless' },
@@ -58,14 +214,14 @@ export const projectCases: ProjectCase[] = [
     },
     processSteps: {
       ru: [
-        'Провели исследование аудитории через опросы и интервью, чтобы понять финансовые привычки пользователей.',
-        'Создали wireframes и прототипы на основе инсайтов, уточняя дизайн по обратной связи.',
-        'Протестировали приложение с пользователями и улучшили UX на основе результатов.',
+        { icon: 'research', title: 'Исследование', text: 'Опросы и интервью о финансовых привычках.' },
+        { icon: 'design', title: 'Прототипы', text: 'Wireframes и итерации по обратной связи.' },
+        { icon: 'journey', title: 'Тесты', text: 'Проверка UX с пользователями и доработки.' },
       ],
       en: [
-        "We've conducted studies with our audience's finances and preferences through surveys and research, giving us valuable insights.",
-        'The team created wireframes and prototypes based on research insights, refining the designs with user feedback to improve the overall user experience.',
-        'Testing the app with users and used their feedback to improve usability and design.',
+        { icon: 'research', title: 'Research', text: 'Surveys and interviews on financial habits.' },
+        { icon: 'design', title: 'Prototypes', text: 'Wireframes refined with user feedback.' },
+        { icon: 'journey', title: 'Testing', text: 'UX tests with users and follow-up fixes.' },
       ],
     },
     solution: {
@@ -107,14 +263,14 @@ export const projectCases: ProjectCase[] = [
     },
     processSteps: {
       ru: [
-        'Интервью с соискателями и рекрутерами для карты боли в текущих инструментах.',
-        'Прототипирование ключевых флоу: поиск, отклик, статус заявки.',
-        'Юзабилити-тесты и итерации по результатам сессий.',
+        { icon: 'research', title: 'Интервью', text: 'Карта болей соискателей и рекрутеров.' },
+        { icon: 'journey', title: 'Прототипы', text: 'Поиск, отклик и статус заявки.' },
+        { icon: 'design', title: 'Тесты', text: 'Юзабилити-сессии и итерации.' },
       ],
       en: [
-        'Interviews with candidates and recruiters to map pain points in existing tools.',
-        'Prototyping core flows: search, apply, and application status.',
-        'Usability testing and iterations based on session results.',
+        { icon: 'research', title: 'Interviews', text: 'Pain map for candidates and recruiters.' },
+        { icon: 'journey', title: 'Prototypes', text: 'Search, apply, and status flows.' },
+        { icon: 'design', title: 'Testing', text: 'Usability sessions and iterations.' },
       ],
     },
     solution: {
@@ -156,14 +312,14 @@ export const projectCases: ProjectCase[] = [
     },
     processSteps: {
       ru: [
-        'Аудит текущего сайта и конкурентов, формулировка value proposition.',
-        'Wireframes и дизайн-система для лендинга и внутренних страниц.',
-        'A/B-тесты CTA и финальная полировка перед запуском.',
+        { icon: 'research', title: 'Аудит', text: 'Сайт, конкуренты и value proposition.' },
+        { icon: 'design', title: 'Дизайн-система', text: 'Wireframes для лендинга и страниц.' },
+        { icon: 'journey', title: 'Запуск', text: 'A/B CTA и финальная полировка.' },
       ],
       en: [
-        'Audit of the current site and competitors, defining the value proposition.',
-        'Wireframes and a design system for the landing and inner pages.',
-        'CTA A/B tests and final polish before launch.',
+        { icon: 'research', title: 'Audit', text: 'Site, competitors, and value proposition.' },
+        { icon: 'design', title: 'Design system', text: 'Wireframes for landing and pages.' },
+        { icon: 'journey', title: 'Launch', text: 'CTA A/B tests and final polish.' },
       ],
     },
     solution: {

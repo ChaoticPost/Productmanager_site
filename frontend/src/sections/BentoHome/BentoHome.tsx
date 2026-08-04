@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SectionId } from '../../types/sections';
 import HugeIcon from '../../components/icons/HugeIcon';
+import TenChatIcon from '../../components/icons/TenChatIcon';
 import {
   ArrowUpRight01Icon,
   Copy01Icon,
@@ -23,20 +24,20 @@ interface BentoHomeProps {
 }
 
 const socialLinks = [
-  { id: 'x', label: 'X', href: 'https://x.com' },
-  { id: 'dribbble', label: 'Dribbble', href: 'https://dribbble.com' },
-  { id: 'instagram', label: 'Instagram', href: 'https://instagram.com' },
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com' },
-  { id: 'behance', label: 'Behance', href: 'https://behance.net' },
-  { id: 'mail', label: 'Email', href: 'mailto:hello@example.com' },
+  { id: 'tenchat', label: 'TenChat', href: 'https://tenchat.ru/daria_chugu' },
+  { id: 'dribbble', label: 'Dribbble', href: 'https://dribbble.com/Daria_Chugunova' },
+  { id: 'setka', label: 'Сетка', href: 'https://setka.ru/users/e52593fc-b3f2-4a8b-86aa-575cab9d3c88' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/daria-chugunova-21a737390/' },
+  { id: 'behance', label: 'Behance', href: 'https://www.behance.net/daria_chugu' },
+  { id: 'mail', label: 'Email', href: 'mailto:dariachugu_work@inbox.ru' },
 ];
 
 const stackTools = stackIconMap;
 const stackStripItems = [...stackTools, ...stackTools, ...stackTools, ...stackTools];
 
 const projectPreviews = [
-  { id: 'cashless', title: 'Cashless' },
-  { id: 'job-portal', title: 'Job Portal' },
+  { id: 'campus-care', title: 'Campus Care', image: 'campusCare' as const },
+  { id: 'job-portal', title: 'Job Portal', image: 'jobPortal' as const },
 ];
 
 const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Open' }) => (
@@ -73,7 +74,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
 
     return 'ru';
   });
-  const email = 'hello@example.com';
+  const email = 'dariachugu_work@inbox.ru';
   const copy = bentoCopy[lang];
 
   useEffect(() => {
@@ -137,7 +138,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         </article>
 
         {projectPreviews.map((project, index) => {
-          const imageSrc = index === 0 ? bentoImages.cashless : bentoImages.jobPortal;
+          const imageSrc = bentoImages[project.image];
 
           return (
             <SkeletonBackground
@@ -159,19 +160,44 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         })}
 
         <div className={`${styles.tile} ${styles.socials}`}>
-          {socialLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              className={styles.socialLink}
-              data-social={link.id}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={link.label}
-            >
-              <HugeIcon icon={socialIconMap[link.id]} size={16} strokeWidth={1.5} />
-            </a>
-          ))}
+          {socialLinks.map((link) => {
+            const showBlockedNotice = link.id === 'linkedin';
+
+            return (
+              <div key={link.id} className={styles.socialCell}>
+                <a
+                  href={link.href}
+                  className={styles.socialLink}
+                  data-social={link.id}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={link.label}
+                >
+                  {link.id === 'tenchat' ? (
+                    <TenChatIcon size={16} />
+                  ) : (
+                    <HugeIcon icon={socialIconMap[link.id]} size={16} strokeWidth={1.5} />
+                  )}
+                </a>
+
+                {showBlockedNotice ? (
+                  <span className={styles.socialNotice}>
+                    <button
+                      type="button"
+                      className={styles.socialNoticeBtn}
+                      aria-label={copy.linkedinBlockedNotice}
+                      aria-describedby="linkedin-blocked-tip"
+                    >
+                      i
+                    </button>
+                    <span id="linkedin-blocked-tip" role="tooltip" className={styles.socialNoticeTip}>
+                      {copy.linkedinBlockedNotice}
+                    </span>
+                  </span>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
 
         <div className={`${styles.tile} ${styles.photo}`}>
@@ -219,7 +245,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         <article className={`${styles.tile} ${styles.resume}`}>
           <p className={styles.tileEyebrow}>{copy.downloadTitle}</p>
           <a
-            href="/resume.pdf"
+            href={`${import.meta.env.BASE_URL}CV_DariaChugunova_PM.pdf`}
             download={copy.downloadFileName}
             className={styles.resumeButton}
           >
@@ -237,7 +263,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
               <div className={styles.stackStripTrack}>
                 {stackStripItems.map((tool, index) => (
                   <div key={`${tool.id}-${index}`} className={styles.stackIcon} title={tool.label}>
-                    <HugeIcon icon={tool.icon} size={22} />
+                    <tool.Icon size={20} />
                   </div>
                 ))}
               </div>

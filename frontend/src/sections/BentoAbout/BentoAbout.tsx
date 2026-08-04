@@ -3,12 +3,13 @@ import HugeIcon from '../../components/icons/HugeIcon';
 import {
   ArrowUpRight01Icon,
   Cancel01Icon,
-  aboutStackIconMap,
 } from '../../components/icons/iconMap';
 import { Lang } from '../BentoHome/bentoCopy';
 import { useBentoScale } from '../BentoHome/useBentoScale';
 import { bentoImages } from '../BentoHome/bentoImages';
 import { aboutCopy } from './aboutCopy';
+import { aboutBlog } from './aboutBlog';
+import SkillBricks from './SkillBricks';
 import { isProjectCaseId } from '../ProjectCase/projectCaseData';
 import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import styles from './BentoAbout.module.css';
@@ -27,7 +28,6 @@ interface BentoAboutProps {
 const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
   const containerRef = useRef<HTMLElement>(null);
   const { isMobile } = useBentoScale(containerRef);
-  const [skillIndex, setSkillIndex] = useState(0);
   const [careerIndex, setCareerIndex] = useState(0);
   const [activePhotoId, setActivePhotoId] = useState<string | null>(null);
   const [lang] = useState<Lang>(() => {
@@ -44,7 +44,7 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
   });
 
   const copy = aboutCopy[lang];
-  const activeSkill = copy.skills[skillIndex];
+  const blog = aboutBlog[lang];
   const activePhoto =
     copy.personalPhotos
       .map((photo) => ({
@@ -68,14 +68,6 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activePhotoId]);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setSkillIndex((current) => (current + 1) % copy.skills.length);
-    }, 5000);
-
-    return () => window.clearInterval(timer);
-  }, [copy.skills.length]);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -117,16 +109,14 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
                 <p className={styles.nowText}>
                   {copy.whatIDoNowText}{' '}
                   <a
-                    href="https://manoapp.com"
+                    href={copy.companyUrl}
                     className={styles.underline}
                     target="_blank"
                     rel="noreferrer"
                   >
                     {copy.companyName}
-                  </a>{' '}
-                  {lang === 'ru'
-                    ? 'улучшаю ежедневный процесс заказа продуктов.'
-                    : 'improving the daily process of ordering groceries.'}
+                  </a>
+                  {copy.whatIDoNowAfter}
                 </p>
               </div>
             </article>
@@ -226,42 +216,13 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
 
           <div className={styles.rightTrack}>
           <article className={`${styles.tile} ${styles.skills}`}>
-            <div>
-              <p className={styles.eyebrow}>{copy.skillsEyebrow}</p>
-              <h2 className={styles.skillTitle}>{activeSkill.title}</h2>
-              <p className={styles.skillText}>{activeSkill.text}</p>
-            </div>
-
-            <div className={styles.dots} role="tablist" aria-label={copy.skillsEyebrow}>
-              {copy.skills.map((skill, index) => (
-                <button
-                  key={skill.title}
-                  type="button"
-                  className={`${styles.dot} ${index === skillIndex ? styles.dotActive : ''}`}
-                  onClick={() => setSkillIndex(index)}
-                  aria-label={skill.title}
-                  aria-selected={index === skillIndex}
-                  role="tab"
-                />
-              ))}
-            </div>
-          </article>
-
-          <article className={`${styles.tile} ${styles.stack}`}>
-            <h2 className={styles.stackTitle}>{copy.stackTitle}</h2>
-            <div className={styles.stackRow}>
-              {aboutStackIconMap.map((tool) => (
-                <div key={tool.id} className={styles.stackIcon} title={tool.label}>
-                  <HugeIcon icon={tool.icon} size={22} />
-                </div>
-              ))}
-            </div>
+            <SkillBricks title={copy.skillsTitle} skills={copy.skillBricks} />
           </article>
 
           <article className={`${styles.tile} ${styles.download}`}>
-            <h3 className={styles.downloadTitle}>{copy.blogTitle}</h3>
+            <h3 className={styles.downloadTitle}>{blog.blogTitle}</h3>
             <a
-              href={copy.blogUrl}
+              href={blog.blogUrl}
               className={styles.downloadButton}
               target="_blank"
               rel="noreferrer"
@@ -269,7 +230,7 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
               <span className={styles.downloadButtonIcon} aria-hidden="true">
                 <HugeIcon icon={ArrowUpRight01Icon} size={16} />
               </span>
-              <span className={styles.downloadButtonLabel}>{copy.blogCta}</span>
+              <span className={styles.downloadButtonLabel}>{blog.blogCta}</span>
             </a>
           </article>
           </div>

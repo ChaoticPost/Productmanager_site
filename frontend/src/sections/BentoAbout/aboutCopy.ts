@@ -1,8 +1,11 @@
 import type { Lang } from '../BentoHome/bentoCopy';
 
-export interface SkillSlide {
-  title: string;
-  text: string;
+export type SkillBrickCategory = 'pm' | 'analytics' | 'mgmt';
+
+export interface SkillBrickItem {
+  id: string;
+  label: string;
+  category: SkillBrickCategory;
 }
 
 export interface PersonalPhotoCaption {
@@ -36,19 +39,12 @@ export const aboutCopy: Record<
     whatIDoNow: string;
     whatIDoNowText: string;
     companyName: string;
-    skillsEyebrow: string;
-    skills: SkillSlide[];
-    stackTitle: string;
+    companyUrl: string;
+    whatIDoNowAfter: string;
+    skillsTitle: string;
+    skillBricks: SkillBrickItem[];
     careerSlides: CareerSlide[];
     careerCarouselLabel: string;
-    contactTitle: string;
-    copyEmail: string;
-    copied: string;
-    blogTitle: string;
-    blogCta: string;
-    blogUrl: string;
-    galleryPrev: string;
-    galleryNext: string;
     viewPhoto: string;
     closePhoto: string;
     personalEyebrow: string;
@@ -64,30 +60,41 @@ export const aboutCopy: Record<
     pageTitle: 'Кто я?',
     myStory: 'Моя история',
     storyText:
-      'Я родилась и выросла в Каире, Египет. С детства меня увлекало искусство и дизайн — яркие цвета и детали вокруг вдохновляли меня. Позже я ушла в веб-дизайн, а затем глубже погрузилась в UX и продуктовый дизайн.',
+      'Начала с frontend-разработки, затем погрузилась в UX, исследования и управление цифровыми продуктами. Технический опыт помогает понимать реализацию, а продуктовый подход — превращать проблемы пользователей в полезные для людей и бизнеса сервисы.',
     whatIDoNow: 'Чем занимаюсь сейчас',
-    whatIDoNowText: 'Сейчас я Design Lead в',
-    companyName: 'mano',
-    skillsEyebrow: 'Мои сильные стороны',
-    skills: [
-      {
-        title: 'Digital Design',
-        text: 'Инновационные методы решения задач и сильные решения для лучшего пользовательского опыта.',
-      },
-      {
-        title: 'Product Strategy',
-        text: 'Связываю пользовательские инсайты с бизнес-целями, чтобы продукт развивался осмысленно.',
-      },
-      {
-        title: 'Design Systems',
-        text: 'Строю масштабируемые системы, которые ускоряют команду и сохраняют единый визуальный язык.',
-      },
-      {
-        title: 'Team Leadership',
-        text: 'Веду дизайн-команды, выстраиваю процессы и помогаю расти специалистам.',
-      },
+    whatIDoNowText: 'Работаю менеджером продукта в',
+    companyName: 'RTUITLab',
+    companyUrl: 'https://rtuitlab.dev',
+    whatIDoNowAfter: ': исследую пользователей, проверяю гипотезы и развиваю цифровые сервисы.',
+    skillsTitle: 'Ключевые навыки',
+    skillBricks: [
+      { id: 'product-discovery', label: 'Product Discovery', category: 'pm' },
+      { id: 'product-delivery', label: 'Product Delivery', category: 'pm' },
+      { id: 'custdev', label: 'CustDev', category: 'pm' },
+      { id: 'jtbd', label: 'JTBD', category: 'pm' },
+      { id: 'cjm', label: 'CJM', category: 'pm' },
+      { id: 'user-flow', label: 'User Flow', category: 'pm' },
+      { id: 'ux-research', label: 'UX Research', category: 'pm' },
+      { id: 'market-analysis', label: 'анализ рынка', category: 'pm' },
+      { id: 'competitor-analysis', label: 'анализ конкурентов', category: 'pm' },
+      { id: 'hypotheses', label: 'гипотезы', category: 'pm' },
+      { id: 'rice', label: 'RICE', category: 'pm' },
+      { id: 'roadmap', label: 'roadmap', category: 'pm' },
+      { id: 'backlog', label: 'backlog', category: 'pm' },
+      { id: 'user-stories', label: 'user stories', category: 'pm' },
+      { id: 'tasking', label: 'задачи', category: 'pm' },
+      { id: 'product-metrics', label: 'метрики', category: 'analytics' },
+      { id: 'mau', label: 'MAU', category: 'analytics' },
+      { id: 'dau', label: 'DAU', category: 'analytics' },
+      { id: 'retention', label: 'Retention', category: 'analytics' },
+      { id: 'funnels', label: 'воронки', category: 'analytics' },
+      { id: 'ab', label: 'A/B', category: 'analytics' },
+      { id: 'feedback', label: 'Анализ данных', category: 'analytics' },
+      { id: 'viz', label: 'визуализация', category: 'analytics' },
+      { id: 'agile', label: 'Agile', category: 'mgmt' },
+      { id: 'scrum', label: 'Scrum', category: 'mgmt' },
+      { id: 'kanban', label: 'Kanban', category: 'mgmt' },
     ],
-    stackTitle: 'Мой стек',
     careerCarouselLabel: 'Карьера и образование',
     careerSlides: [
       {
@@ -110,7 +117,7 @@ export const aboutCopy: Record<
             degree: 'Бакалавриат, «Программная инженерия»',
           },
           {
-            school: 'РТУ МИРЭА · ПИ',
+            school: 'РТУ МИРЭА · ПИШ',
             period: '2025 – 2027',
             degree: 'Магистратура, «Цифровая трансформация»',
           },
@@ -127,14 +134,6 @@ export const aboutCopy: Record<
         ],
       },
     ],
-    contactTitle: 'Есть проект?',
-    copyEmail: 'Email',
-    copied: 'Скопировано!',
-    blogTitle: 'Блог',
-    blogCta: 'Читать',
-    blogUrl: '#',
-    galleryPrev: 'Предыдущее фото',
-    galleryNext: 'Следующее фото',
     viewPhoto: 'Открыть фото',
     closePhoto: 'Закрыть',
     personalEyebrow: 'Personal',
@@ -154,30 +153,41 @@ export const aboutCopy: Record<
     pageTitle: "What I'm about?",
     myStory: 'My story',
     storyText:
-      'I was born and raised in Cairo, Egypt. Ever since I was a child, I have had a passion for art and design. I was captivated by the vibrant colors and intricate details of the things around me, which inspired me to learn web design, where I delved deeper into the world of UX and product design.',
+      'I started in frontend development, then went deeper into UX, research, and digital product management. Technical experience helps me understand implementation, while a product approach turns user problems into services that create value for people and the business.',
     whatIDoNow: 'What I do now',
-    whatIDoNowText: "Today I'm a Design Lead at",
-    companyName: 'mano',
-    skillsEyebrow: 'What I do best',
-    skills: [
-      {
-        title: 'Digital Design',
-        text: 'Providing innovative problem-solving methods and impactful solutions to ensure a better experience.',
-      },
-      {
-        title: 'Product Strategy',
-        text: 'Connecting user insights with business goals so the product evolves with purpose.',
-      },
-      {
-        title: 'Design Systems',
-        text: 'Building scalable systems that speed up teams and keep a consistent visual language.',
-      },
-      {
-        title: 'Team Leadership',
-        text: 'Leading design teams, shaping processes, and helping people grow.',
-      },
+    whatIDoNowText: "I'm a product manager at",
+    companyName: 'RTUITLab',
+    companyUrl: 'https://rtuitlab.dev',
+    whatIDoNowAfter: ': I research users, validate hypotheses, and grow digital services.',
+    skillsTitle: 'Key skills',
+    skillBricks: [
+      { id: 'product-discovery', label: 'Product Discovery', category: 'pm' },
+      { id: 'product-delivery', label: 'Product Delivery', category: 'pm' },
+      { id: 'custdev', label: 'CustDev', category: 'pm' },
+      { id: 'jtbd', label: 'JTBD', category: 'pm' },
+      { id: 'cjm', label: 'CJM', category: 'pm' },
+      { id: 'user-flow', label: 'User Flow', category: 'pm' },
+      { id: 'ux-research', label: 'UX Research', category: 'pm' },
+      { id: 'market-analysis', label: 'market analysis', category: 'pm' },
+      { id: 'competitor-analysis', label: 'competitor analysis', category: 'pm' },
+      { id: 'hypotheses', label: 'hypotheses', category: 'pm' },
+      { id: 'rice', label: 'RICE', category: 'pm' },
+      { id: 'roadmap', label: 'roadmap', category: 'pm' },
+      { id: 'backlog', label: 'backlog', category: 'pm' },
+      { id: 'user-stories', label: 'user stories', category: 'pm' },
+      { id: 'tasking', label: 'tasks', category: 'pm' },
+      { id: 'product-metrics', label: 'metrics', category: 'analytics' },
+      { id: 'mau', label: 'MAU', category: 'analytics' },
+      { id: 'dau', label: 'DAU', category: 'analytics' },
+      { id: 'retention', label: 'Retention', category: 'analytics' },
+      { id: 'funnels', label: 'funnels', category: 'analytics' },
+      { id: 'ab', label: 'A/B', category: 'analytics' },
+      { id: 'feedback', label: 'Data analysis', category: 'analytics' },
+      { id: 'viz', label: 'visualization', category: 'analytics' },
+      { id: 'agile', label: 'Agile', category: 'mgmt' },
+      { id: 'scrum', label: 'Scrum', category: 'mgmt' },
+      { id: 'kanban', label: 'Kanban', category: 'mgmt' },
     ],
-    stackTitle: 'Stack I use',
     careerCarouselLabel: 'Career and education',
     careerSlides: [
       {
@@ -217,14 +227,6 @@ export const aboutCopy: Record<
         ],
       },
     ],
-    contactTitle: 'Have a project in mind?',
-    copyEmail: 'Email',
-    copied: 'Copied!',
-    blogTitle: 'Blog',
-    blogCta: 'Read',
-    blogUrl: '#',
-    galleryPrev: 'Previous photo',
-    galleryNext: 'Next photo',
     viewPhoto: 'View photo',
     closePhoto: 'Close',
     personalEyebrow: 'Personal',

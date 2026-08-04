@@ -21,8 +21,8 @@ const Contact: React.FC = () => {
           <ul className={styles.list}>
             <li className={styles.item}>
               <span className={styles.label}>Email</span>
-              <a href="mailto:placeholder@mail.com" className={styles.value}>
-                placeholder@mail.com
+              <a href="mailto:dariachugu_work@inbox.ru" className={styles.value}>
+                dariachugu_work@inbox.ru
               </a>
             </li>
             <li className={styles.item}>

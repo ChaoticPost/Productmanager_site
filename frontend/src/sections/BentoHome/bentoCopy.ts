@@ -20,6 +20,7 @@ export const bentoCopy: Record<
     contactTitle: string;
     copyEmail: string;
     copied: string;
+    linkedinBlockedNotice: string;
     switchToLight: string;
     switchToDark: string;
     switchToEn: string;
@@ -27,23 +28,26 @@ export const bentoCopy: Record<
   }
 > = {
   ru: {
-    heroTitleBefore: 'Привет! Я —',
+    heroTitleBefore: 'Привет! Я -',
     heroName: 'Дарья',
     heroTitleAfter: ',',
     heroSubtitle: 'менеджер продукта с техническим бэкграундом. Сейчас работаю в',
     companyName: 'RTUITLab',
     companyUrl: 'https://rtuitlab.dev',
     aboutEyebrow: 'О себе',
-    aboutText: 'Увлечён дизайном и люблю решать задачи.',
-    resourcesEyebrow: 'Ресурсы',
-    resourcesText: 'Ресурсы, которые ускорят ваш workflow',
+    aboutText: 'Люблю понятные\nинтерфейсы и продукты\nс измеримым результатом.',
+    //companyName: 'чтобы создавать решения, которые действительно нужны людям..',
+    resourcesEyebrow: 'Проекты',
+    resourcesText: 'От гипотез\nдо запуска\nцифровых продуктов.',
     downloadTitle: 'Резюме',
     downloadPdf: 'Скачать PDF',
-    downloadFileName: 'resume.pdf',
+    downloadFileName: 'CV_DariaChugunova_PM.pdf',
     stackEyebrow: 'Мой стек',
     contactTitle: 'Есть проект?',
     copyEmail: 'Email',
     copied: 'Скопировано!',
+    linkedinBlockedNotice:
+      'Без использования специальных средств открыть указанную ссылку с российского IP-адреса не получится.',
     switchToLight: 'Включить светлую тему',
     switchToDark: 'Включить тёмную тему',
     switchToEn: 'Переключить на английский',
@@ -62,11 +66,13 @@ export const bentoCopy: Record<
     resourcesText: 'Resources to speed your workflow',
     downloadTitle: 'Resume',
     downloadPdf: 'Download PDF',
-    downloadFileName: 'resume.pdf',
+    downloadFileName: 'CV_DariaChugunova_PM.pdf',
     stackEyebrow: 'Stack I use',
     contactTitle: 'Have a project in mind?',
     copyEmail: 'Email',
     copied: 'Copied!',
+    linkedinBlockedNotice:
+      'Without a VPN or other unblock tools, this link can’t be opened from a Russian IP address.',
     switchToLight: 'Switch to light theme',
     switchToDark: 'Switch to dark theme',
     switchToEn: 'Switch to English',
