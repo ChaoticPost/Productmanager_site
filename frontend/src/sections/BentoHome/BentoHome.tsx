@@ -245,7 +245,7 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         <article className={`${styles.tile} ${styles.resume}`}>
           <p className={styles.tileEyebrow}>{copy.downloadTitle}</p>
           <a
-            href="/CV_DariaChugunova_PM.pdf"
+            href={`${import.meta.env.BASE_URL}CV_DariaChugunova_PM.pdf`}
             download={copy.downloadFileName}
             className={styles.resumeButton}
           >
