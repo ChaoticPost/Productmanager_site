@@ -1,9 +1,9 @@
 import type { Lang } from '../BentoHome/bentoCopy';
 import { bentoImages } from '../BentoHome/bentoImages';
 
-export type ProjectCaseId = 'campus-care' | 'cashless' | 'job-portal' | 'laptop';
+export type ProjectCaseId = 'campus-care' | 'cashless' | 'sorting-center' | 'laptop';
 
-export const projectCaseIds: ProjectCaseId[] = ['campus-care', 'cashless', 'job-portal', 'laptop'];
+export const projectCaseIds: ProjectCaseId[] = ['campus-care', 'cashless', 'sorting-center', 'laptop'];
 
 export interface CaseTool {
   id: string;
@@ -235,51 +235,98 @@ export const projectCases: ProjectCase[] = [
     showcaseMain: bentoImages.cashless,
   },
   {
-    id: 'job-portal',
-    title: { ru: 'Job Portal', en: 'Job Portal' },
+    id: 'sorting-center',
+    title: {
+      ru: 'Конструктор сортировочного центра',
+      en: 'Sorting Center Constructor',
+    },
     subtitle: { ru: 'Веб-платформа', en: 'Web Platform' },
-    company: { ru: 'Boom', en: 'Boom' },
-    role: { ru: 'Product Designer', en: 'Product Designer' },
-    tools: sharedTools,
-    timeline: '2021 – 2022',
+    company: {
+      ru: 'Ozon (хакатон Роботон)',
+      en: 'Ozon (Roboton hackathon)',
+    },
+    role: {
+      ru: 'Product Manager / Frontend-разработчик',
+      en: 'Product Manager / Frontend Developer',
+    },
+    tools: [
+      { id: 'figma', label: 'Figma' },
+      { id: 'figjam', label: 'FigJam' },
+      { id: 'notion', label: 'Notion' },
+      { id: 'stitch', label: 'Stitch' },
+    ],
+    timeline: '2026',
     description: {
-      ru: 'Платформа для поиска работы с фокусом на простоту отклика и прозрачность вакансий.',
-      en: 'A job search platform focused on simple applications and transparent listings.',
+      ru: 'Веб-платформа для проектирования цифровых моделей сортировочных центров, расчёта их производительности и сравнения разных вариантов организации процессов.',
+      en: 'A web platform for designing digital models of sorting centers, calculating throughput, and comparing alternative process layouts.',
     },
     context: {
-      ru: 'Job Portal объединяет кандидатов и работодателей: от поиска вакансий до отслеживания статуса откликов в одном интерфейсе.',
-      en: 'Job Portal connects candidates and employers — from job discovery to application tracking in a single interface.',
+      ru: 'Сервис позволяет собрать схему сортировочного центра из готовых технологических блоков, настроить параметры оборудования и товарных потоков, запустить расчёт или симуляцию и изучить результаты в едином интерфейсе. Пользователь может проверить, справится ли выбранная конфигурация с целевым потоком, где появятся очереди и сколько потребуется оборудования, площади и персонала.',
+      en: 'The service lets users assemble a sorting-center scheme from ready technological blocks, configure equipment and goods-flow parameters, run a calculation or simulation, and review results in one interface. Users can check whether a configuration handles the target flow, where queues form, and how much equipment, floor space, and staff are required.',
     },
-    appUrl: 'https://example.com/job-portal',
     heroImage: bentoImages.jobPortal,
     problem: {
-      ru: 'Кандидатам сложно отслеживать отклики на разных площадках, а работодателям — быстро оценивать релевантность профилей без лишних шагов.',
-      en: 'Candidates struggle to track applications across platforms, while employers need a faster way to evaluate relevant profiles without friction.',
+      ru: 'Проектирование сортировочного центра требует большого количества взаимосвязанных расчётов. Специалистам сложно быстро оценивать разные конфигурации, находить узкие места и сравнивать сценарии без разрозненных таблиц и специализированного программного обеспечения.',
+      en: 'Designing a sorting center involves many interdependent calculations. Specialists struggle to quickly evaluate configurations, find bottlenecks, and compare scenarios without scattered spreadsheets and specialized software.',
     },
     problemImage: bentoImages.jobPortal,
     processIntro: {
-      ru: 'Команда выстроила процесс вокруг реальных сценариев поиска работы и найма, проверяя гипотезы на прототипах.',
-      en: 'The team built the process around real hiring and job-search scenarios, validating hypotheses through prototypes.',
+      ru: 'Команда выстроила работу вокруг полного сценария инженера: от создания проекта и сборки технологической схемы до запуска модели, анализа результатов и выбора оптимальной конфигурации.',
+      en: 'The team structured the work around the full engineer journey: from creating a project and assembling the process scheme to running the model, analyzing results, and choosing the optimal configuration.',
     },
     processSteps: {
       ru: [
-        { icon: 'research', title: 'Интервью', text: 'Карта болей соискателей и рекрутеров.' },
-        { icon: 'journey', title: 'Прототипы', text: 'Поиск, отклик и статус заявки.' },
-        { icon: 'design', title: 'Тесты', text: 'Юзабилити-сессии и итерации.' },
+        {
+          icon: 'research',
+          title: 'Исследование',
+          text: 'Изучили процессы сортировочного центра, основные типы оборудования, потоки товаров, ограничения и показатели эффективности.',
+        },
+        {
+          icon: 'roles',
+          title: 'Проектирование',
+          text: 'Сформировали структуру сервиса, пользовательские сценарии, библиотеку технологических блоков и логику редактора модели.',
+        },
+        {
+          icon: 'design',
+          title: 'Прототипирование',
+          text: 'Спроектировали экраны проектов, редактора схемы, настройки параметров, запусков, аналитики и сравнения сценариев.',
+        },
+        {
+          icon: 'journey',
+          title: 'Проверка модели',
+          text: 'Сопоставили аналитические расчёты с результатами SimPy-симуляции и подготовили V&V-тесты для проверки корректности модели.',
+        },
       ],
       en: [
-        { icon: 'research', title: 'Interviews', text: 'Pain map for candidates and recruiters.' },
-        { icon: 'journey', title: 'Prototypes', text: 'Search, apply, and status flows.' },
-        { icon: 'design', title: 'Testing', text: 'Usability sessions and iterations.' },
+        {
+          icon: 'research',
+          title: 'Research',
+          text: 'Studied sorting-center processes, equipment types, goods flows, constraints, and performance metrics.',
+        },
+        {
+          icon: 'roles',
+          title: 'Product design',
+          text: 'Defined the service structure, user scenarios, technology-block library, and model editor logic.',
+        },
+        {
+          icon: 'design',
+          title: 'Prototyping',
+          text: 'Designed screens for projects, scheme editor, parameter setup, runs, analytics, and scenario comparison.',
+        },
+        {
+          icon: 'journey',
+          title: 'Model validation',
+          text: 'Aligned analytical calculations with SimPy simulation results and prepared V&V tests to verify model correctness.',
+        },
       ],
     },
     solution: {
-      ru: 'Единый дашборд для кандидатов и HR: фильтры, сохранённые вакансии, статусы откликов и быстрые действия без перегруженного интерфейса.',
-      en: 'A unified dashboard for candidates and HR: filters, saved jobs, application statuses, and quick actions without a cluttered interface.',
+      ru: 'Единый инженерный сервис, в котором пользователь создаёт проект, собирает технологическую схему из готовых блоков и настраивает параметры каждого участка. После запуска система рассчитывает производительность, загрузку оборудования, очереди, площадь и численность персонала. Результаты нескольких сценариев можно сравнить в таблицах и на графиках, а автоматический вывод помогает определить лучший вариант и основные ограничения.',
+      en: 'A single engineering service where the user creates a project, assembles a process scheme from ready blocks, and configures each section. After a run, the system calculates throughput, equipment load, queues, floor space, and staffing. Multiple scenarios can be compared in tables and charts, and automated insights help identify the best option and key constraints.',
     },
     insights: {
-      ru: 'Сокращение шагов до отклика и прозрачные статусы дали наибольший прирост вовлечённости на ранних этапах.',
-      en: 'Reducing steps to apply and making statuses transparent drove the biggest early engagement gains.',
+      ru: 'Наибольшую ценность для пользователя дают не отдельные расчёты, а возможность пройти весь путь в одном интерфейсе: собрать модель, проверить её корректность, увидеть узкие места и сравнить альтернативные сценарии. Визуальный редактор делает сложную инженерную модель понятнее, а единый формат результатов ускоряет принятие решений по конфигурации сортировочного центра.',
+      en: 'The highest value is not isolated calculations, but walking the full path in one interface: build a model, validate it, spot bottlenecks, and compare alternatives. A visual editor makes a complex engineering model clearer, and a unified results format speeds decisions on sorting-center configuration.',
     },
     showcaseMain: bentoImages.jobPortal,
   },
