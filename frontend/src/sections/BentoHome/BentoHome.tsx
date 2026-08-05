@@ -37,7 +37,7 @@ const stackStripItems = [...stackTools, ...stackTools, ...stackTools, ...stackTo
 
 const projectPreviews = [
   { id: 'campus-care', title: 'Campus Care', image: 'campusCare' as const },
-  { id: 'job-portal', title: 'Job Portal', image: 'jobPortal' as const },
+  { id: 'sorting-center', title: 'Sorting Center', image: 'jobPortal' as const },
 ];
 
 const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Open' }) => (

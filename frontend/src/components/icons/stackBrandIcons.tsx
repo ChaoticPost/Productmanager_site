@@ -127,6 +127,8 @@ export const caseToolIconMap: Record<string, React.FC<BrandIconProps>> = {
   miro: MiroBrandIcon,
   'figma-stitch': FigmaBrandIcon,
   figma: FigmaBrandIcon,
+  figjam: FigmaBrandIcon,
+  stitch: FigmaBrandIcon,
   framer: FramerBrandIcon,
   notion: NotionBrandIcon,
 };
