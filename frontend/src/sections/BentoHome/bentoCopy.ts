@@ -26,6 +26,9 @@ export const bentoCopy: Record<
     switchToEn: string;
     switchToRu: string;
     inDevelopmentLabel: string;
+    backHome: string;
+    backAbout: string;
+    backProjects: string;
   }
 > = {
   ru: {
@@ -54,6 +57,9 @@ export const bentoCopy: Record<
     switchToEn: 'Переключить на английский',
     switchToRu: 'Переключить на русский',
     inDevelopmentLabel: 'В разработке',
+    backHome: 'Главная',
+    backAbout: 'О себе',
+    backProjects: 'Проекты',
   },
   en: {
     heroTitleBefore: "Hi, I'm",
@@ -63,9 +69,9 @@ export const bentoCopy: Record<
     companyName: 'RTUITLab',
     companyUrl: 'https://rtuitlab.dev',
     aboutEyebrow: 'About',
-    aboutText: 'Passionate about design and enjoy solving problems.',
-    resourcesEyebrow: 'Resources',
-    resourcesText: 'Resources to speed your workflow',
+    aboutText: 'I love clear\ninterfaces and products\nwith measurable impact.',
+    resourcesEyebrow: 'Projects',
+    resourcesText: 'From hypotheses\nto launching\ndigital products.',
     downloadTitle: 'Resume',
     downloadPdf: 'Download PDF',
     downloadFileName: 'CV_DariaChugunova_PM.pdf',
@@ -80,5 +86,8 @@ export const bentoCopy: Record<
     switchToEn: 'Switch to English',
     switchToRu: 'Switch to Russian',
     inDevelopmentLabel: 'In development',
+    backHome: 'Home',
+    backAbout: 'About',
+    backProjects: 'Projects',
   },
 };

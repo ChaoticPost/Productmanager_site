@@ -116,7 +116,7 @@ export const YandexFormsIcon: React.FC<BrandIconProps> = ({ size = 22, className
     color="currentColor"
     strokeWidth={1.75}
     className={className}
-    aria-label="Яндекс формы"
+    aria-label="Yandex Forms"
   />
 );
 

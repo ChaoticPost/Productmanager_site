@@ -150,7 +150,7 @@ export const aboutCopy: Record<
     ],
   },
   en: {
-    pageTitle: "What I'm about?",
+    pageTitle: 'Who am I?',
     myStory: 'My story',
     storyText:
       'I started in frontend development, then went deeper into UX, research, and digital product management. Technical experience helps me understand implementation, while a product approach turns user problems into services that create value for people and the business.',
@@ -210,9 +210,9 @@ export const aboutCopy: Record<
             degree: "Bachelor's, Software Engineering",
           },
           {
-            school: 'RTU MIREA · Applied Informatics',
+            school: 'RTU MIREA · Applied Informatics School',
             period: '2025 – 2027',
-            degree: "Master's, SE · digital transformation",
+            degree: "Master's, Digital Transformation",
           },
         ],
       },

@@ -62,12 +62,12 @@ export const projectCases: ProjectCase[] = [
     subtitle: { ru: 'Веб-сервис для университета', en: 'University web service' },
     company: {
       ru: 'Проект для РТУ МИРЭА',
-      en: 'Сoncept for RTU MIREA',
+      en: 'Project for RTU MIREA',
     },
     role: { ru: 'Product Manager', en: 'Product Manager' },
     tools: [
       { id: 'anytype', label: 'Anytype' },
-      { id: 'yandex-forms', label: 'Яндекс формы' },
+      { id: 'yandex-forms', label: 'Yandex Forms' },
       { id: 'excel', label: 'Excel' },
       { id: 'miro', label: 'Miro' },
       { id: 'figma-stitch', label: 'Figma / Stitch' },
@@ -79,12 +79,12 @@ export const projectCases: ProjectCase[] = [
     },
     context: {
       ru: 'Campus Care помогает студентам и сотрудникам сообщать о неисправностях в вузе. Пользователь загружает фото, указывает место и описание проблемы, после чего отслеживает статус и результат её устранения.',
-      en: 'Campus Care helps students and staff report problems across campus buildings. A user can photograph an issue, specify the building and classroom, add a description, and send the request to the responsible department — from broken outlets and monitors to projectors, furniture, lighting, plumbing, and more. After submitting, they can see status, processing timelines, and the outcome of the work.',
+      en: 'Campus Care helps students and staff report facility issues on campus. Users upload a photo, specify the location, describe the problem, and track its status through to resolution.',
     },
     heroImage: bentoImages.campusCareList,
     problem: {
       ru: 'Студентам и сотрудникам не всегда понятно, куда сообщать о неисправностях, а обращения через разные каналы могут теряться. По результатам опроса и личных наблюдений я выявила потребность в едином сервисе, где можно быстро создать заявку и отследить её до устранения проблемы.',
-      en: 'Students and staff often do not know where to report facility issues. Requests go verbally or through scattered channels, so information gets lost and people cannot tell whether a problem was accepted for work. Based on personal observation and a user survey, the university lacks a single transparent service for these requests. The goal was to design a solution that makes it easy to report an issue and follow the full path from submission to resolution.',
+      en: 'Students and staff often do not know where to report facility issues, and requests sent through different channels can get lost. Based on a user survey and personal observations, I identified a need for a single service where people can quickly submit a request and track it through to resolution.',
     },
     problemImage: bentoImages.campusCareCreate,
     processIntro: {
@@ -155,7 +155,7 @@ export const projectCases: ProjectCase[] = [
     ],
     solution: {
       ru: 'Пользователь создаёт обращение с фото, описанием и местоположением, затем отслеживает статус и подтверждает результат. Карта помогает избежать дубликатов, а сотрудники через админ-панель назначают исполнителей, управляют сроками и фиксируют выполнение.',
-      en: 'The core is a simple request form: photo, category, building, floor, room, description, and urgency. After submit, the request appears in a personal cabinet — users track status, get notifications, answer follow-ups, and confirm the fix. An issues map reduces duplicates: people can see requests in a building and mark that the same problem affects them too. For staff, an admin area covers new requests, assignee allocation, priority and status, deadlines, and recording outcomes.',
+      en: 'Users submit a request with a photo, description, and location, then track its status and confirm the outcome. A map helps avoid duplicates, while staff use an admin panel to assign owners, manage deadlines, and record completion.',
     },
     metrics: {
       ru: [
@@ -207,12 +207,12 @@ export const projectCases: ProjectCase[] = [
     heroImage: bentoImages.cashless,
     problem: {
       ru: 'Людям с множеством финансовых обязательств нужна единая платформа для эффективного управления деньгами. Она должна помогать сокращать лишние траты и достигать финансовых целей через удобное мобильное приложение.',
-      en: 'As people have many financial obligations, they require a single platform to assist in managing their finances effectively. This platform should help limit unnecessary expenses and enable users to reach their financial objectives through a user-friendly mobile application.',
+      en: 'People with many financial commitments need a single platform to manage money effectively. It should help cut unnecessary spending and reach financial goals through a convenient mobile app.',
     },
     problemImage: bentoImages.cashless,
     processIntro: {
       ru: 'Мы использовали user-centric подход, итеративный дизайн и тестирование, чтобы продукт соответствовал потребностям аудитории.',
-      en: "We've adopted a user-centric approach, iterative design, and rigorous testing, ensuring that the app met the target audience's needs and preferences effectively.",
+      en: 'We used a user-centric approach, iterative design, and testing to ensure the product met audience needs.',
     },
     processSteps: {
       ru: [
@@ -228,11 +228,11 @@ export const projectCases: ProjectCase[] = [
     },
     solution: {
       ru: 'Интерфейс приложения интуитивен: пользователи отслеживают финансы в реальном времени, видят историю транзакций и получают напоминания о платежах. Можно ставить цели по бюджету и получать персональные рекомендации.',
-      en: "The app's user-friendly interface and intuitive design make it easy for users to track their financial activities in real-time, view their transaction history, and receive alerts for upcoming bills and payments. Users can also set budget goals and receive personalized financial advice based on their spending patterns, helping them stay on track and achieve their financial objectives.",
+      en: 'The app interface is intuitive: users track finances in real time, view transaction history, and get payment reminders. They can set budget goals and receive personalized recommendations.',
     },
     insights: {
       ru: 'Успех приложения во многом связан с user-centric процессом. Команда провела исследования и тестирование, чтобы продукт соответствовал ожиданиям пользователей.',
-      en: "The app's success was due in part to its user-centric design process. The team conducted extensive research and user testing to ensure that the app met users' needs and preferences, resulting in a highly effective and user-friendly platform.",
+      en: 'The app’s success was largely driven by a user-centric process. The team ran research and testing to make sure the product matched user expectations.',
     },
     showcaseMain: bentoImages.cashless,
   },

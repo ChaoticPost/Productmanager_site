@@ -28,7 +28,7 @@ export const resourcesCopy: Record<
     freeLabel: 'Бесплатно',
     getForFree: 'Получить бесплатно',
     livePreview: 'Live preview',
-    backToResources: 'Resources',
+    backToResources: 'Проекты',
     galleryPrev: 'Предыдущий слайд',
     galleryNext: 'Следующий слайд',
   },

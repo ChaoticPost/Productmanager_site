@@ -49,6 +49,6 @@ export const caseStudyCopy: Record<
     valueFor: 'For whom',
     solution: 'Solution',
     metrics: 'Metrics',
-    keyInsights: 'Key Insights',
+    keyInsights: 'Key takeaways',
   },
 };

@@ -11,11 +11,21 @@ import Education from './sections/Education/Education';
 import License from './sections/License/License';
 import Contact from './sections/Contact/Contact';
 import { SectionId } from './types/sections';
+import { bentoCopy, Lang } from './sections/BentoHome/bentoCopy';
 
 interface BackConfig {
   target: SectionId;
   label: string;
 }
+
+const getStoredLang = (): Lang => {
+  if (typeof window === 'undefined') {
+    return 'ru';
+  }
+
+  const saved = window.localStorage.getItem('lang');
+  return saved === 'en' ? 'en' : 'ru';
+};
 
 const App: React.FC = () => {
   const [view, setView] = useState<SectionId>('intro');
@@ -34,18 +44,31 @@ const App: React.FC = () => {
     setView('project-case');
   };
 
-  const backConfig: BackConfig | undefined =
-    view === 'project-case'
-      ? {
+  const lang = getStoredLang();
+  const navCopy = bentoCopy[lang];
+
+  const backConfig: BackConfig | undefined = (() => {
+    switch (view) {
+      case 'about':
+        return { target: 'intro', label: navCopy.backHome };
+      case 'resources':
+        return { target: 'intro', label: navCopy.backHome };
+      case 'resource-detail':
+        return { target: 'resources', label: navCopy.backProjects };
+      case 'project-case':
+        return {
           target: projectCaseOrigin,
           label:
             projectCaseOrigin === 'intro'
-              ? 'Home'
+              ? navCopy.backHome
               : projectCaseOrigin === 'resources'
-                ? 'Projects'
-                : 'About',
-        }
-      : undefined;
+                ? navCopy.backProjects
+                : navCopy.backAbout,
+        };
+      default:
+        return undefined;
+    }
+  })();
 
   const renderView = () => {
     switch (view) {

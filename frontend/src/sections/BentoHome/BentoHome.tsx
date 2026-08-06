@@ -38,8 +38,8 @@ const stackTools = stackIconMap;
 const stackStripItems = [...stackTools, ...stackTools, ...stackTools, ...stackTools];
 
 const projectPreviews = [
-  { id: 'campus-care', title: 'Campus Care', image: 'campusCare' as const },
-  { id: 'sorting-center', title: 'Sorting Center', image: 'sortingCenterProjects' as const },
+  { id: 'campus-care' as const, image: 'campusCare' as const },
+  { id: 'sorting-center' as const, image: 'sortingCenterProjects' as const },
 ];
 
 const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Open' }) => (
@@ -143,6 +143,8 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
 
         {projectPreviews.map((project, index) => {
           const imageSrc = bentoImages[project.image];
+          const projectCase = getProjectCase(project.id);
+          const projectTitle = projectCase?.title[lang] ?? project.id;
 
           return (
             <SkeletonBackground
@@ -151,10 +153,10 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
               src={imageSrc}
               className={`${styles.tile} ${styles.project} ${index === 0 ? styles.projectOne : styles.projectTwo}`}
               onClick={() => onOpenProjectCase(project.id)}
-              ariaLabel={project.title}
+              ariaLabel={projectTitle}
             >
               <span className={styles.projectOverlay}>
-                <span className={styles.projectTitle}>{project.title}</span>
+                <span className={styles.projectTitle}>{projectTitle}</span>
                 <span className={styles.projectArrow} aria-hidden="true">
                   →
                 </span>
