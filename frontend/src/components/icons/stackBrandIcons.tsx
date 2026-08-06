@@ -2,7 +2,7 @@ import React from 'react';
 import { FormIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
-interface BrandIconProps {
+export interface BrandIconProps {
   size?: number;
   className?: string;
 }

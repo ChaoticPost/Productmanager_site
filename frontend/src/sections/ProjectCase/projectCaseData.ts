@@ -32,6 +32,8 @@ export interface ProjectCase {
   context: Record<Lang, string>;
   /** Omit or leave empty for concept / unreleased projects */
   appUrl?: string;
+  /** Case study is not ready yet — show "in development" state instead of opening */
+  inDevelopment?: boolean;
   heroImage: string;
   problem: Record<Lang, string>;
   problemImage: string;
@@ -264,12 +266,12 @@ export const projectCases: ProjectCase[] = [
       ru: 'Сервис позволяет собрать схему сортировочного центра из готовых технологических блоков, настроить параметры оборудования и товарных потоков, запустить расчёт или симуляцию и изучить результаты в едином интерфейсе. Пользователь может проверить, справится ли выбранная конфигурация с целевым потоком, где появятся очереди и сколько потребуется оборудования, площади и персонала.',
       en: 'The service lets users assemble a sorting-center scheme from ready technological blocks, configure equipment and goods-flow parameters, run a calculation or simulation, and review results in one interface. Users can check whether a configuration handles the target flow, where queues form, and how much equipment, floor space, and staff are required.',
     },
-    heroImage: bentoImages.jobPortal,
+    heroImage: bentoImages.sortingCenterProjects,
     problem: {
       ru: 'Проектирование сортировочного центра требует большого количества взаимосвязанных расчётов. Специалистам сложно быстро оценивать разные конфигурации, находить узкие места и сравнивать сценарии без разрозненных таблиц и специализированного программного обеспечения.',
       en: 'Designing a sorting center involves many interdependent calculations. Specialists struggle to quickly evaluate configurations, find bottlenecks, and compare scenarios without scattered spreadsheets and specialized software.',
     },
-    problemImage: bentoImages.jobPortal,
+    problemImage: bentoImages.sortingCenterEditor,
     processIntro: {
       ru: 'Команда выстроила работу вокруг полного сценария инженера: от создания проекта и сборки технологической схемы до запуска модели, анализа результатов и выбора оптимальной конфигурации.',
       en: 'The team structured the work around the full engineer journey: from creating a project and assembling the process scheme to running the model, analyzing results, and choosing the optimal configuration.',
@@ -328,12 +330,13 @@ export const projectCases: ProjectCase[] = [
       ru: 'Наибольшую ценность для пользователя дают не отдельные расчёты, а возможность пройти весь путь в одном интерфейсе: собрать модель, проверить её корректность, увидеть узкие места и сравнить альтернативные сценарии. Визуальный редактор делает сложную инженерную модель понятнее, а единый формат результатов ускоряет принятие решений по конфигурации сортировочного центра.',
       en: 'The highest value is not isolated calculations, but walking the full path in one interface: build a model, validate it, spot bottlenecks, and compare alternatives. A visual editor makes a complex engineering model clearer, and a unified results format speeds decisions on sorting-center configuration.',
     },
-    showcaseMain: bentoImages.jobPortal,
+    showcaseMain: bentoImages.sortingCenterCreate,
   },
   {
     id: 'laptop',
     title: { ru: 'BoostPro', en: 'BoostPro' },
     subtitle: { ru: 'Маркетинговый сайт', en: 'Marketing Website' },
+    inDevelopment: true,
     company: { ru: 'BoostPro', en: 'BoostPro' },
     role: { ru: 'Lead Designer', en: 'Lead Designer' },
     tools: sharedTools,

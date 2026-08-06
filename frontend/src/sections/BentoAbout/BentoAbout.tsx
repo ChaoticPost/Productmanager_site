@@ -10,6 +10,7 @@ import { bentoImages } from '../BentoHome/bentoImages';
 import { aboutCopy } from './aboutCopy';
 import { aboutBlog } from './aboutBlog';
 import SkillBricks from './SkillBricks';
+import { featureFlags } from '../../config/featureFlags';
 import { isProjectCaseId } from '../ProjectCase/projectCaseData';
 import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import styles from './BentoAbout.module.css';
@@ -237,40 +238,42 @@ const BentoAbout: React.FC<BentoAboutProps> = ({ onOpenProjectCase }) => {
           </div>
         </div>
 
-        <div className={styles.personalSection}>
-          <article className={`${styles.personalTile} ${styles.personalPhotosTile}`}>
-            <div className={styles.photoStrip}>
-              <div className={styles.photoFan}>
-                {copy.personalPhotos.map((photo, index) => {
-                  const image = personalPhotoImages[photo.id as keyof typeof personalPhotoImages];
+        {featureFlags.aboutPersonalPhotos ? (
+          <div className={styles.personalSection}>
+            <article className={`${styles.personalTile} ${styles.personalPhotosTile}`}>
+              <div className={styles.photoStrip}>
+                <div className={styles.photoFan}>
+                  {copy.personalPhotos.map((photo, index) => {
+                    const image = personalPhotoImages[photo.id as keyof typeof personalPhotoImages];
 
-                  return (
-                    <div
-                      key={photo.id}
-                      className={styles.photoItem}
-                      style={{ zIndex: index + 1 }}
-                    >
-                      <div className={styles.photoItemInner}>
-                        <button
-                          type="button"
-                          className={styles.photoCard}
-                          onClick={() => handlePhotoClick(photo.id)}
-                          aria-label={isProjectCaseId(photo.id) ? photo.title : copy.viewPhoto}
-                        >
-                          <SkeletonImage src={image.src} alt={image.alt} />
-                        </button>
-                        <div className={styles.photoCaption} aria-hidden="true">
-                          <p className={styles.photoCaptionTitle}>{photo.title}</p>
-                          <p className={styles.photoCaptionSubtitle}>{photo.subtitle}</p>
+                    return (
+                      <div
+                        key={photo.id}
+                        className={styles.photoItem}
+                        style={{ zIndex: index + 1 }}
+                      >
+                        <div className={styles.photoItemInner}>
+                          <button
+                            type="button"
+                            className={styles.photoCard}
+                            onClick={() => handlePhotoClick(photo.id)}
+                            aria-label={isProjectCaseId(photo.id) ? photo.title : copy.viewPhoto}
+                          >
+                            <SkeletonImage src={image.src} alt={image.alt} />
+                          </button>
+                          <div className={styles.photoCaption} aria-hidden="true">
+                            <p className={styles.photoCaptionTitle}>{photo.title}</p>
+                            <p className={styles.photoCaptionSubtitle}>{photo.subtitle}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </article>
-        </div>
+            </article>
+          </div>
+        ) : null}
       </div>
 
       {activePhoto && (

@@ -4,6 +4,7 @@ import { ArrowRight01Icon, ArrowUpRight01Icon } from '../../components/icons/ico
 import { SectionId } from '../../types/sections';
 import { Lang } from '../BentoHome/bentoCopy';
 import { caseToolIconMap } from '../../components/icons/stackBrandIcons';
+import { BrandToolIcon } from '../../components/icons/BrandToolIcon';
 import { caseStudyCopy } from './caseStudyCopy';
 import { getProjectCase } from './projectCaseData';
 import SkeletonImage from '../../components/Skeleton/SkeletonImage';
@@ -12,9 +13,14 @@ import styles from './ProjectCaseStudy.module.css';
 interface ProjectCaseStudyProps {
   projectId: string;
   onNavigate: (sectionId: SectionId) => void;
+  fallbackView?: SectionId;
 }
 
-const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNavigate }) => {
+const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
+  projectId,
+  onNavigate,
+  fallbackView = 'about',
+}) => {
   const [lang] = useState<Lang>(() => {
     if (typeof window === 'undefined') {
       return 'ru';
@@ -32,10 +38,10 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
   const copy = caseStudyCopy[lang];
 
   useEffect(() => {
-    if (!project) {
-      onNavigate('about');
+    if (!project || project.inDevelopment) {
+      onNavigate(fallbackView);
     }
-  }, [onNavigate, project]);
+  }, [fallbackView, onNavigate, project]);
 
   if (!project) {
     return null;
@@ -81,9 +87,12 @@ const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({ projectId, onNaviga
               const Icon = caseToolIconMap[tool.id];
 
               return (
-                <li key={tool.id} className={styles.toolIcon} title={tool.label}>
-                  {Icon ? <Icon size={18} /> : <span className={styles.toolFallback}>{tool.label}</span>}
-                  <span className={styles.srOnly}>{tool.label}</span>
+                <li key={tool.id} className={styles.toolIcon}>
+                  {Icon ? (
+                    <BrandToolIcon label={tool.label} Icon={Icon} size={18} />
+                  ) : (
+                    <span className={styles.toolFallback}>{tool.label}</span>
+                  )}
                 </li>
               );
             })}

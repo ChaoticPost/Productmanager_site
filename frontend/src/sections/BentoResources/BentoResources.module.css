@@ -16,6 +16,7 @@
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -107,6 +108,69 @@
 .card:focus-visible .preview {
   outline: 2px solid rgba(255, 255, 255, 0.18);
   outline-offset: 2px;
+}
+
+.card.inDevelopment {
+  cursor: default;
+}
+
+.card.inDevelopment:hover,
+.card.inDevelopment:focus-visible {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.06);
+  background: #151515;
+}
+
+.card.inDevelopment:hover .preview,
+.card.inDevelopment:focus-visible .preview {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.card.inDevelopment::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  aspect-ratio: 16 / 10.5;
+  border-radius: 18px;
+  background: rgba(120, 120, 120, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card.inDevelopment:hover::after,
+.card.inDevelopment:focus-visible::after {
+  opacity: 1;
+}
+
+.inDevelopmentLabel {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  aspect-ratio: 16 / 10.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 3;
+  pointer-events: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+}
+
+.card.inDevelopment:hover .inDevelopmentLabel,
+.card.inDevelopment:focus-visible .inDevelopmentLabel {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {

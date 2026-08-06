@@ -25,6 +25,7 @@ export const bentoCopy: Record<
     switchToDark: string;
     switchToEn: string;
     switchToRu: string;
+    inDevelopmentLabel: string;
   }
 > = {
   ru: {
@@ -52,6 +53,7 @@ export const bentoCopy: Record<
     switchToDark: 'Включить тёмную тему',
     switchToEn: 'Переключить на английский',
     switchToRu: 'Переключить на русский',
+    inDevelopmentLabel: 'В разработке',
   },
   en: {
     heroTitleBefore: "Hi, I'm",
@@ -77,5 +79,6 @@ export const bentoCopy: Record<
     switchToDark: 'Switch to dark theme',
     switchToEn: 'Switch to English',
     switchToRu: 'Switch to Russian',
+    inDevelopmentLabel: 'In development',
   },
 };

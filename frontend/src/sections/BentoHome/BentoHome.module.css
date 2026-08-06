@@ -465,6 +465,56 @@ a.underline {
   transform: translateY(0);
 }
 
+.inDevelopment {
+  cursor: default;
+}
+
+.inDevelopment::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(120, 120, 120, 0.48);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.inDevelopment:hover::after,
+.inDevelopment:focus-visible::after {
+  opacity: 1;
+}
+
+.inDevelopment:hover::before,
+.inDevelopment:focus-visible::before {
+  opacity: 0;
+}
+
+.inDevelopmentLabel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 3;
+  pointer-events: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+}
+
+.inDevelopment:hover .inDevelopmentLabel,
+.inDevelopment:focus-visible .inDevelopmentLabel {
+  opacity: 1;
+}
+
 /* Resources */
 .resources {
   grid-area: resources;

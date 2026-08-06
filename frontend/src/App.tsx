@@ -38,7 +38,12 @@ const App: React.FC = () => {
     view === 'project-case'
       ? {
           target: projectCaseOrigin,
-          label: projectCaseOrigin === 'intro' ? 'Home' : 'About',
+          label:
+            projectCaseOrigin === 'intro'
+              ? 'Home'
+              : projectCaseOrigin === 'resources'
+                ? 'Projects'
+                : 'About',
         }
       : undefined;
 
@@ -49,11 +54,17 @@ const App: React.FC = () => {
       case 'about':
         return <BentoAbout onOpenProjectCase={(id) => openProjectCase(id, 'about')} />;
       case 'resources':
-        return <BentoResources onOpenProject={openResourceProject} />;
+        return <BentoResources onOpenProjectCase={(id) => openProjectCase(id, 'resources')} />;
       case 'resource-detail':
         return <BentoResourceDetail projectId={resourceProjectId} onNavigate={setView} />;
       case 'project-case':
-        return <ProjectCaseStudy projectId={projectCaseId} onNavigate={setView} />;
+        return (
+          <ProjectCaseStudy
+            projectId={projectCaseId}
+            onNavigate={setView}
+            fallbackView={projectCaseOrigin}
+          />
+        );
       case 'work':
         return <Work />;
       case 'job':
