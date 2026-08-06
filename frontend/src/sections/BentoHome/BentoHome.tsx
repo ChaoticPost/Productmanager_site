@@ -15,8 +15,10 @@ import styles from './BentoHome.module.css';
 import { useBentoScale } from './useBentoScale';
 import { bentoCopy, Lang } from './bentoCopy';
 import { bentoImages } from './bentoImages';
+import { getProjectCase } from '../ProjectCase/projectCaseData';
 import SkeletonImage from '../../components/Skeleton/SkeletonImage';
 import SkeletonBackground from '../../components/Skeleton/SkeletonBackground';
+import { BrandToolIcon } from '../../components/icons/BrandToolIcon';
 
 interface BentoHomeProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -37,7 +39,7 @@ const stackStripItems = [...stackTools, ...stackTools, ...stackTools, ...stackTo
 
 const projectPreviews = [
   { id: 'campus-care', title: 'Campus Care', image: 'campusCare' as const },
-  { id: 'sorting-center', title: 'Sorting Center', image: 'jobPortal' as const },
+  { id: 'sorting-center', title: 'Sorting Center', image: 'sortingCenterProjects' as const },
 ];
 
 const ArrowButton: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Open' }) => (
@@ -76,6 +78,8 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
   });
   const email = 'dariachugu_work@inbox.ru';
   const copy = bentoCopy[lang];
+  const boostPro = getProjectCase('laptop');
+  const isBoostProInDev = boostPro?.inDevelopment ?? false;
 
   useEffect(() => {
     document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
@@ -222,18 +226,22 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
         </article>
 
         <SkeletonBackground
-          type="button"
+          type={isBoostProInDev ? 'div' : 'button'}
           src={bentoImages.laptop}
-          className={`${styles.tile} ${styles.laptop}`}
-          onClick={() => onOpenProjectCase('laptop')}
-          ariaLabel="BoostPro"
+          className={`${styles.tile} ${styles.laptop} ${isBoostProInDev ? styles.inDevelopment : ''}`}
+          onClick={isBoostProInDev ? undefined : () => onOpenProjectCase('laptop')}
+          ariaLabel={isBoostProInDev ? `${copy.inDevelopmentLabel}: BoostPro` : 'BoostPro'}
         >
-          <span className={styles.laptopOverlay}>
-            <span className={styles.laptopTitle}>BoostPro</span>
-            <span className={styles.laptopArrow} aria-hidden="true">
-              →
+          {isBoostProInDev ? (
+            <span className={styles.inDevelopmentLabel}>{copy.inDevelopmentLabel}</span>
+          ) : (
+            <span className={styles.laptopOverlay}>
+              <span className={styles.laptopTitle}>BoostPro</span>
+              <span className={styles.laptopArrow} aria-hidden="true">
+                →
+              </span>
             </span>
-          </span>
+          )}
         </SkeletonBackground>
 
         <article className={`${styles.tile} ${styles.resources}`}>
@@ -262,8 +270,8 @@ const BentoHome: React.FC<BentoHomeProps> = ({ onNavigate, onOpenProjectCase }) 
             <div className={styles.stackStrip} aria-hidden="true">
               <div className={styles.stackStripTrack}>
                 {stackStripItems.map((tool, index) => (
-                  <div key={`${tool.id}-${index}`} className={styles.stackIcon} title={tool.label}>
-                    <tool.Icon size={20} />
+                  <div key={`${tool.id}-${index}`} className={styles.stackIcon}>
+                    <BrandToolIcon label={tool.label} Icon={tool.Icon} size={20} />
                   </div>
                 ))}
               </div>

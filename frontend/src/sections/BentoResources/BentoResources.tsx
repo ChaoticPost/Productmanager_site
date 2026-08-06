@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Lang } from '../BentoHome/bentoCopy';
+import { Lang, bentoCopy } from '../BentoHome/bentoCopy';
 import SkeletonBackground from '../../components/Skeleton/SkeletonBackground';
-import { resourceProjects, resourcesCopy } from './resourcesData';
+import { projectCases } from '../ProjectCase/projectCaseData';
 import styles from './BentoResources.module.css';
 
 interface BentoResourcesProps {
-  onOpenProject: (projectId: string) => void;
+  onOpenProjectCase: (projectId: string) => void;
 }
 
-const BentoResources: React.FC<BentoResourcesProps> = ({ onOpenProject }) => {
+const BentoResources: React.FC<BentoResourcesProps> = ({ onOpenProjectCase }) => {
   const [lang] = useState<Lang>(() => {
     if (typeof window === 'undefined') {
       return 'ru';
@@ -22,28 +22,48 @@ const BentoResources: React.FC<BentoResourcesProps> = ({ onOpenProject }) => {
     return 'ru';
   });
 
-  const copy = resourcesCopy[lang];
+  const copy = bentoCopy[lang];
 
   return (
     <section id="resources" className={styles.section}>
       <div className={styles.grid}>
-        {resourceProjects.map((project) => (
-          <button
-            key={project.id}
-            type="button"
-            className={styles.card}
-            onClick={() => onOpenProject(project.id)}
-          >
-            <SkeletonBackground src={project.image} className={styles.preview} />
-            <div className={styles.meta}>
-              <div className={styles.metaTop}>
-                <h3 className={styles.title}>{project.title[lang]}</h3>
-                <span className={styles.badge}>{copy.freeLabel}</span>
+        {projectCases.map((project) => {
+          const isInDevelopment = project.inDevelopment ?? false;
+
+          return (
+            <button
+              key={project.id}
+              type="button"
+              className={`${styles.card} ${isInDevelopment ? styles.inDevelopment : ''}`}
+              onClick={() => {
+                if (!isInDevelopment) {
+                  onOpenProjectCase(project.id);
+                }
+              }}
+              aria-disabled={isInDevelopment}
+              aria-label={
+                isInDevelopment
+                  ? `${copy.inDevelopmentLabel}: ${project.title[lang]}`
+                  : project.title[lang]
+              }
+            >
+              <SkeletonBackground
+                src={project.heroImage}
+                className={styles.preview}
+                ariaLabel={project.title[lang]}
+              />
+              {isInDevelopment ? (
+                <span className={styles.inDevelopmentLabel}>{copy.inDevelopmentLabel}</span>
+              ) : null}
+              <div className={styles.meta}>
+                <div className={styles.metaTop}>
+                  <h3 className={styles.title}>{project.title[lang]}</h3>
+                </div>
+                <p className={styles.subtitle}>{project.subtitle[lang]}</p>
               </div>
-              <p className={styles.subtitle}>{project.subtitle[lang]}</p>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </section>
   );

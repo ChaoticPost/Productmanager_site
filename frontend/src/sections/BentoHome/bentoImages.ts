@@ -6,6 +6,9 @@ import campusCare from '../../assets/images/campus-care.png';
 import campusCareCreate from '../../assets/images/campus-care-create.png';
 import campusCareList from '../../assets/images/campus-care-list.png';
 import campusCareMap from '../../assets/images/campus-care-map.png';
+import sortingCenterProjects from '../../assets/images/sorting-center-projects.png';
+import sortingCenterEditor from '../../assets/images/sorting-center-editor.png';
+import sortingCenterCreate from '../../assets/images/sorting-center-create.png';
 
 export const bentoImages = {
   cashless,
@@ -16,4 +19,7 @@ export const bentoImages = {
   campusCareCreate,
   campusCareList,
   campusCareMap,
+  sortingCenterProjects,
+  sortingCenterEditor,
+  sortingCenterCreate,
 } as const;
